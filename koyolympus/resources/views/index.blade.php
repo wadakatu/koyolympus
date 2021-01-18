@@ -17,7 +17,7 @@
 <body>
   <div id="app">
     <background-image-component>
-
+        <header-component></header-component>
     </background-image-component>
   </div>
 <!-- Script -->

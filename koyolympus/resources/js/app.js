@@ -8,6 +8,7 @@ require('./bootstrap');
 
 import VueRouter from "vue-router";
 import BackgroundImage from "./components/BackgroundImageComponent";
+import HeaderComponent from "./components/HeaderComponent";
 
 window.Vue = require('vue');
 
@@ -31,6 +32,7 @@ const router = new VueRouter({
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('background-image-component', BackgroundImage)
+Vue.component('header-component', HeaderComponent)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
