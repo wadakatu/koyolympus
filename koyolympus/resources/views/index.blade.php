@@ -9,13 +9,17 @@
 
   <title> {{ config('app.name', 'Koyolympus') }}</title>
 
-  <!-- Styles -->
-  <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+{{--  <!-- Styles -->--}}
+{{--  <link href="{{ mix('/css/app.css') }}" rel="stylesheet">--}}
+  <link href="{{ asset('/css/index.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-  <example-component></example-component>
-</div>
+  <div id="app">
+    <background-image-component>
+
+    </background-image-component>
+  </div>
 <!-- Script -->
 <script src="{{ mix('/js/app.js') }}" defer></script>
 </body>
