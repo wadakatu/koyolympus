@@ -15,8 +15,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
+  <div id="app">
+    <background-image-component>
 
+    </background-image-component>
   </div>
 <!-- Script -->
 <script src="{{ mix('/js/app.js') }}" defer></script>
