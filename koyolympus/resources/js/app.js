@@ -15,7 +15,7 @@ window.Vue = require('vue');
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-
+    mode: "history",
 })
 
 
@@ -41,6 +41,6 @@ Vue.component('header-component', HeaderComponent)
  */
 
 const app = new Vue({
-  el: '#app',
-  router
+    el: '#app',
+    router
 });

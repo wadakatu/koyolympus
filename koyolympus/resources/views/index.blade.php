@@ -7,7 +7,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title> {{ config('app.name', 'Koyolympus') }}</title>
+  <title>koyolympus</title>
 
 {{--  <!-- Styles -->--}}
 {{--  <link href="{{ mix('/css/app.css') }}" rel="stylesheet">--}}
@@ -17,7 +17,7 @@
 <body>
   <div id="app">
     <background-image-component>
-        <header-component></header-component>
+
     </background-image-component>
   </div>
 <!-- Script -->
