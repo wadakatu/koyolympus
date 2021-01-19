@@ -13,6 +13,6 @@ indent_style = space
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{blade.php,css,js,json,scss,styl}]
-indent_size = 2
+[*.{blade.php,css,js,json,scss,styl,vue}]
+indent_size = 4
 indent_style = space
