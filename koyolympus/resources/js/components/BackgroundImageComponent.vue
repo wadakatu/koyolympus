@@ -1,15 +1,19 @@
 <template>
     <div class="container">
         <header-component></header-component>
+
+        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
 import HeaderComponent from "./HeaderComponent.vue";
+import FooterComponent from "./FooterComponent";
 
 export default {
     components: {
-        'header-component': HeaderComponent
+        'header-component': HeaderComponent,
+        'footer-component': FooterComponent,
     }
 }
 </script>
