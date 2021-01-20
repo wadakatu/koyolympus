@@ -6,19 +6,14 @@
 
 require('./bootstrap');
 
-import VueRouter from "vue-router";
+import Vue from 'vue';
+import router from './router';
 import BackgroundImage from "./components/BackgroundImageComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 
 
 window.Vue = require('vue');
-
-Vue.use(VueRouter);
-
-const router = new VueRouter({
-    mode: "history",
-})
 
 
 /**
@@ -45,5 +40,5 @@ Vue.component('footer-component', FooterComponent)
 
 const app = new Vue({
     el: '#app',
-    router
+    router: router
 });
