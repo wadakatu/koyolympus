@@ -1,7 +1,10 @@
 <template>
     <div class="container">
         <header-component></header-component>
-        <router-view></router-view>
+        <div class="row">
+            <router-view></router-view>
+            <router-view name="card"></router-view>
+        </div>
         <footer-component></footer-component>
     </div>
 </template>
@@ -29,5 +32,11 @@ export default {
     padding-left: 8%;
     padding-right: 8%;
     box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    height: 80%;
+    align-items: center;
 }
 </style>
