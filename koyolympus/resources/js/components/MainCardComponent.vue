@@ -72,6 +72,7 @@ h5 {
 p {
     color: #fff;
     font-size: 11px;
+    text-shadow: 0 0 15px #000;
 }
 
 </style>
