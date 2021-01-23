@@ -1,20 +1,20 @@
 <template>
     <div class="col">
-        <h1>About me</h1>
+        <h1>À propos de moi</h1>
         <language-select-component></language-select-component>
         <div class="intro">
-            <h4>My Name</h4>
-            <h5>Koyo Isono</h5>
-            <h4>My Address</h4>
-            <h5>Japan, between Tokyo and Saitama Pref.</h5>
-            <h4>My Age/Zodiac sign/Birthday</h4>
-            <h5>22-year-old / Aries / March 30th</h5>
-            <h4>My interest</h4>
-            <h5>Camera / Road Bike / Video game</h5>
-            <h4>My Camera</h4>
-            <h5>OLYMPUS PEN-F / OMD EM-1 MarkⅡ</h5>
-            <h4>My Motto</h4>
-            <h5>Fake it until you make it.</h5>
+            <h4>이름</h4>
+            <h5>코요 이소노</h5>
+            <h4>주소</h4>
+            <h5>일본, 도쿄와 사이타마 현 사이</h5>
+            <h4>나이/ 별자리/ 생일</h4>
+            <h5>22살 / 양자리 / 3월 30일</h5>
+            <h4>취미</h4>
+            <h5>사진 찍기 / 로드 바이킹 / 비디오 게임</h5>
+            <h4>내 카메라</h4>
+            <h5>올림푸스 PEN-F/ OMD EM-1 MarkⅡ</h5>
+            <h4>내 좌우명</h4>
+            <h5>될 때까지 부딫혀보자.</h5>
             <button class="button" @click="$router.push('/')">HOME</button>
         </div>
     </div>
@@ -24,7 +24,7 @@
 import LanguageSelectComponent from "./LanguageSelectComponent";
 
 export default {
-    name: "AboutMeEnglishComponent.vue",
+    name: "AboutMeKoreanComponent.vue",
     components: {
         'language-select-component': LanguageSelectComponent,
     }

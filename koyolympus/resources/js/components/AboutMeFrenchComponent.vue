@@ -1,20 +1,20 @@
 <template>
     <div class="col">
-        <h1>About me</h1>
+        <h1>À propos de moi</h1>
         <language-select-component></language-select-component>
         <div class="intro">
-            <h4>My Name</h4>
+            <h4>Mon Nom</h4>
             <h5>Koyo Isono</h5>
-            <h4>My Address</h4>
-            <h5>Japan, between Tokyo and Saitama Pref.</h5>
-            <h4>My Age/Zodiac sign/Birthday</h4>
-            <h5>22-year-old / Aries / March 30th</h5>
-            <h4>My interest</h4>
-            <h5>Camera / Road Bike / Video game</h5>
-            <h4>My Camera</h4>
+            <h4>Mon Adresse</h4>
+            <h5>Japan, entre Tokyo et Saitama.</h5>
+            <h4>Mon Âge/Signe du zodiaque/Anniversaire</h4>
+            <h5>22 ans / Le Bélier / Le 30 Mars</h5>
+            <h4>Mes centres d’intérêt</h4>
+            <h5>Caméra / Vélo de route / Jeu vidéo</h5>
+            <h4>Ma caméra</h4>
             <h5>OLYMPUS PEN-F / OMD EM-1 MarkⅡ</h5>
-            <h4>My Motto</h4>
-            <h5>Fake it until you make it.</h5>
+            <h4>Ma devise</h4>
+            <h5>Tout est dans l'attitude</h5>
             <button class="button" @click="$router.push('/')">HOME</button>
         </div>
     </div>
@@ -24,7 +24,7 @@
 import LanguageSelectComponent from "./LanguageSelectComponent";
 
 export default {
-    name: "AboutMeEnglishComponent.vue",
+    name: "AboutMeFrenchComponent.vue",
     components: {
         'language-select-component': LanguageSelectComponent,
     }
@@ -32,7 +32,6 @@ export default {
 </script>
 
 <style scoped>
-
 .col {
     flex-basis: 50%;
 }
@@ -71,5 +70,4 @@ button {
     outline: none;
     margin-top: 9px;
 }
-
 </style>

@@ -4,8 +4,8 @@
             <ul>
                 <li><a @click="$router.push('/aboutme')">日本語</a></li>
                 <li><a @click="$router.push('/aboutme/english')">English</a></li>
-                <li><a>French</a></li>
-                <li><a>한국말</a></li>
+                <li><a @click="$router.push('/aboutme/french')">French</a></li>
+                <li><a @click="$router.push('/aboutme/korean')">한국말</a></li>
                 <li><a>中文</a></li>
             </ul>
         </li>
