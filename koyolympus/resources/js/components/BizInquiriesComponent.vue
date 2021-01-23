@@ -1,0 +1,149 @@
+<template>
+    <section class="contact">
+        <div class="container">
+            <div class="contactForm">
+                <form>
+                    <h2>Biz Inquiries</h2>
+                    <div class="inputBox">
+                        <input type="text" name="" required>
+                        <span>Your name</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" name="" required>
+                        <span>Email</span>
+                    </div>
+                    <div class="inputBox">
+                        <textarea required></textarea>
+                        <span>Type your thoughts...</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" name="" value="Send">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+import MainCardComponent from "./MainCardComponent";
+
+export default {
+    name: "BizInquiriesComponent.vue",
+    components: {
+        'main-card-component': MainCardComponent
+    }
+}
+</script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;40;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact {
+    flex-basis: 50%;
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.contactForm {
+    width: 100%;
+    padding: 30px;
+    background: transparent;
+    margin-right: 50px;
+}
+
+.contactForm h2 {
+    font-size: 30px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.contactForm .inputBox {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.contactForm .inputBox input,
+.contactForm .inputBox textarea {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+.contactForm .inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #fff;
+}
+
+.contactForm .inputBox input:focus ~ span,
+.contactForm .inputBox input:valid ~ span,
+.contactForm .inputBox textarea:focus ~ span,
+.contactForm .inputBox textarea:valid ~ span {
+    color: #e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+
+.contactForm .inputBox input[type="submit"] {
+    width: 100px;
+    background: #1b4b72;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+
+@media (max-width: 991px) {
+    .contact {
+        padding: 50px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .container .contactInfo {
+        margin-bottom: 40px;
+    }
+
+    .container .contactInfo,
+    .contactForm {
+        width: 100%;
+    }
+}
+
+</style>

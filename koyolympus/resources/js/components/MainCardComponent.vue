@@ -37,7 +37,7 @@
     padding: 15px 25px;
     box-sizing: border-box;
     cursor: pointer;
-    margin: 10px 30px;
+    margin: 15px 0 15px 50px;
     background-position: center;
     background-size: cover;
     vertical-align: bottom;
