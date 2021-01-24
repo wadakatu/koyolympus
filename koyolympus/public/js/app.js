@@ -2137,11 +2137,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BizInquiriesComponent.vue",
   components: {
     'main-card-component': _MainCardComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      errors: {},
+      params: {
+        name: '',
+        email: '',
+        opinion: ''
+      },
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
+  methods: {
+    postInquiry: function postInquiry() {
+      this.errors = {};
+      var self = this;
+      axios.post('/api/bizinq/send', this.params).then(function (response) {})["catch"](function (error) {
+        var errors = {};
+
+        for (var key in error.response.data.errors) {
+          if (error.response.data.errors.hasOwnProperty(key)) {
+            errors[key] = error.response.data.errors[key].join('<br>');
+          }
+        }
+
+        self.errors = errors;
+      });
+    },
+    mounted: function mounted() {
+      this.postInquiry();
+    }
   }
 });
 
@@ -6852,10 +6887,10 @@ exports.push([module.i, "\n.container[data-v-16279a1b] {\n    width: 100%;\n    
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;40;500;600;700;800;900&display=swap);", ""]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n*[data-v-f7210520] {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n    font-family: 'Roboto', 'sans-serif';\n}\n.contact[data-v-f7210520] {\n    flex-basis: 50%;\n    position: relative;\n    min-height: 100vh;\n    padding: 40px 85px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.container[data-v-f7210520] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    margin-top: 30px;\n}\n.contactForm[data-v-f7210520] {\n    width: 100%;\n    padding: 30px;\n    background: transparent;\n    margin-right: 50px;\n}\n.contactForm h1[data-v-f7210520] {\n    font-size: 40px;\n    margin-bottom: 30px;\n    color: #fff;\n    font-weight: 500;\n    text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n    position: relative;\n    width: 100%;\n    margin-top: 30px;\n}\n.contactForm .inputBox input[data-v-f7210520],\n.contactForm .inputBox textarea[data-v-f7210520] {\n    width: 100%;\n    padding: 10px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    border: none;\n    border-bottom: 2px solid #1f6fb2;\n    outline: none;\n    background: transparent;\n    color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n    resize: none;\n    height: 100px;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n    position: absolute;\n    left: 0;\n    padding: 5px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    pointer-events: none;\n    transition: 0.5s;\n    color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n.contactForm .inputBox input:valid ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n    color: #e91e63;\n    font-size: 12px;\n    transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n    width: 100px;\n    background: #d1ffd3;\n    color: #000;\n    border: none;\n    cursor: pointer;\n    padding: 12px;\n    border-radius: 20px;\n    font-size: 13px;\n    margin-left: 30px;\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n    width: 100px;\n    background: #ffced1;\n    color: #000;\n    border: none;\n    cursor: pointer;\n    padding: 12px;\n    border-radius: 20px;\n    font-size: 13px;\n    margin-left: 30px;\n}\n@media (max-width: 991px) {\n.contact[data-v-f7210520] {\n        padding: 50px;\n}\n.container[data-v-f7210520] {\n        flex-direction: column;\n}\n.container .contactInfo[data-v-f7210520] {\n        margin-bottom: 40px;\n}\n.container .contactInfo[data-v-f7210520],\n    .contactForm[data-v-f7210520] {\n        width: 100%;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n*[data-v-f7210520] {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n    font-family: 'Roboto', 'sans-serif';\n}\n.contact[data-v-f7210520] {\n    flex-basis: 50%;\n    position: relative;\n    min-height: 100vh;\n    padding: 40px 85px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.container[data-v-f7210520] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    margin-top: 30px;\n}\n.contactForm[data-v-f7210520] {\n    width: 100%;\n    padding: 30px;\n    background: transparent;\n    margin-right: 50px;\n}\n.contactForm h1[data-v-f7210520] {\n    font-size: 40px;\n    margin-bottom: 30px;\n    color: #fff;\n    font-weight: 500;\n    text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n    position: relative;\n    width: 100%;\n    margin-top: 30px;\n}\n.contactForm .inputBox input[data-v-f7210520],\n.contactForm .inputBox textarea[data-v-f7210520] {\n    width: 100%;\n    padding: 10px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    border: none;\n    border-bottom: 2px solid #1f6fb2;\n    outline: none;\n    background: transparent;\n    color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n    resize: none;\n    height: 100px;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n    position: absolute;\n    left: 0;\n    padding: 5px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    pointer-events: none;\n    transition: 0.5s;\n    color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n.contactForm .inputBox input:valid ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n    color: #e91e63;\n    font-size: 12px;\n    transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n    width: 100px;\n    background: #d1ffd3;\n    color: #000;\n    border: none;\n    cursor: pointer;\n    padding: 12px;\n    border-radius: 20px;\n    font-size: 13px;\n    margin-left: 30px;\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n    width: 100px;\n    background: #ffced1;\n    color: #000;\n    border: none;\n    cursor: pointer;\n    padding: 12px;\n    border-radius: 20px;\n    font-size: 13px;\n    margin-left: 30px;\n}\n.error_text[data-v-f7210520] {\n    color: #f9ff17;\n}\n@media (max-width: 991px) {\n.contact[data-v-f7210520] {\n        padding: 50px;\n}\n.container[data-v-f7210520] {\n        flex-direction: column;\n}\n.container .contactInfo[data-v-f7210520] {\n        margin-bottom: 40px;\n}\n.container .contactInfo[data-v-f7210520],\n    .contactForm[data-v-f7210520] {\n        width: 100%;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -39382,64 +39417,150 @@ var render = function() {
   return _c("section", { staticClass: "contact" }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "contactForm" }, [
-        _c("form", [
-          _c("h1", [_vm._v("Biz Inquiries")]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _c("div", { staticClass: "inputBox" }, [
-            _c("input", { attrs: { type: "submit", name: "", value: "Send" } }),
-            _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: { action: "./api/bizinq/send", method: "post" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.postInquiry($event)
+              }
+            }
+          },
+          [
             _c("input", {
-              attrs: { type: "button", name: "", value: "Home" },
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.csrf,
+                  expression: "csrf"
+                }
+              ],
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf },
               on: {
-                click: function($event) {
-                  return _vm.$router.push("/")
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.csrf = $event.target.value
                 }
               }
-            })
-          ])
-        ])
+            }),
+            _vm._v(" "),
+            _c("h1", [_vm._v("Biz Inquiries")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputBox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.params.name,
+                    expression: "params.name"
+                  }
+                ],
+                attrs: { type: "text", name: "name", required: "" },
+                domProps: { value: _vm.params.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.params, "name", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Your name")])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "error_text",
+              domProps: { innerHTML: _vm._s(_vm.errors.name) }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputBox" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.params.email,
+                    expression: "params.email"
+                  }
+                ],
+                attrs: { type: "email", name: "email", required: "" },
+                domProps: { value: _vm.params.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.params, "email", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Email")])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "error_text",
+              domProps: { innerHTML: _vm._s(_vm.errors.email) }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputBox" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.params.opinion,
+                    expression: "params.opinion"
+                  }
+                ],
+                attrs: { name: "opinion", required: "" },
+                domProps: { value: _vm.params.opinion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.params, "opinion", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Type your thoughts...")])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "error_text",
+              domProps: { innerHTML: _vm._s(_vm.errors.opinion) }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputBox" }, [
+              _c("input", { attrs: { type: "submit", value: "Send" } }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "button", value: "Home" },
+                on: {
+                  click: function($event) {
+                    return _vm.$router.push("/")
+                  }
+                }
+              })
+            ])
+          ]
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inputBox" }, [
-      _c("input", { attrs: { type: "text", name: "", required: "" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Your name")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inputBox" }, [
-      _c("input", { attrs: { type: "text", name: "", required: "" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Email")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inputBox" }, [
-      _c("textarea", { attrs: { required: "" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Type your thoughts...")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

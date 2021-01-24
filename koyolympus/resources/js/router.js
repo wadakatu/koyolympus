@@ -61,6 +61,7 @@ const router = new VueRouter({
             },
             name: 'main.biz'
         },
+
     ]
 });
 

@@ -2,23 +2,27 @@
     <section class="contact">
         <div class="container">
             <div class="contactForm">
-                <form>
+                <form action="./api/bizinq/send" method="post" @submit.prevent="postInquiry">
+                    <input type="hidden" name="_token" v-model="csrf">
                     <h1>Biz Inquiries</h1>
                     <div class="inputBox">
-                        <input type="text" name="" required>
+                        <input type="text" name="name" v-model="params.name" required>
                         <span>Your name</span>
                     </div>
+                    <div class="error_text" v-html="errors.name"></div>
                     <div class="inputBox">
-                        <input type="email" name="" required>
+                        <input type="email" name="email" v-model="params.email" required>
                         <span>Email</span>
                     </div>
+                    <div class="error_text" v-html="errors.email"></div>
                     <div class="inputBox">
-                        <textarea required></textarea>
+                        <textarea name="opinion" v-model="params.opinion" required></textarea>
                         <span>Type your thoughts...</span>
                     </div>
+                    <div class="error_text" v-html="errors.opinion"></div>
                     <div class="inputBox">
-                        <input type="submit" name="" value="Send">
-                        <input type="button" name="" @click="$router.push('/')" value="Home">
+                        <input type="submit" value="Send">
+                        <input type="button" @click="$router.push('/')" value="Home">
                     </div>
                 </form>
             </div>
@@ -33,12 +37,47 @@ export default {
     name: "BizInquiriesComponent.vue",
     components: {
         'main-card-component': MainCardComponent
+    },
+    data() {
+        return {
+            errors: {},
+            params: {
+                name: '',
+                email: '',
+                opinion: '',
+            },
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+    },
+    methods: {
+        postInquiry() {
+            this.errors = {};
+            let self = this;
+            axios.post('/api/bizinq/send', this.params)
+                .then((response) => {
+
+                })
+                .catch((error) => {
+                    var errors = {};
+
+                    for (var key in error.response.data.errors) {
+                        if (error.response.data.errors.hasOwnProperty(key)) {
+                            errors[key] = error.response.data.errors[key].join('<br>');
+                        }
+                    }
+                    self.errors = errors;
+
+                });
+        },
+        mounted() {
+            this.postInquiry();
+        }
     }
 }
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;40;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
@@ -147,6 +186,10 @@ export default {
     border-radius: 20px;
     font-size: 13px;
     margin-left: 30px;
+}
+
+.error_text {
+    color: #f9ff17;
 }
 
 @media (max-width: 991px) {
