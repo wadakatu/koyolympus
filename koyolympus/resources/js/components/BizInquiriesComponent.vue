@@ -9,7 +9,7 @@
                         <span>Your name</span>
                     </div>
                     <div class="inputBox">
-                        <input type="text" name="" required>
+                        <input type="email" name="" required>
                         <span>Email</span>
                     </div>
                     <div class="inputBox">
