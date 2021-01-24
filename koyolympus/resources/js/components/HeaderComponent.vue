@@ -26,6 +26,7 @@ export default {
     height: 12%;
     display: flex;
     align-items: center;
+    padding-top: 20px;
 }
 
 .logo {
