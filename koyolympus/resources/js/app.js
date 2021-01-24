@@ -11,6 +11,8 @@ import router from './router';
 import BackgroundImage from "./components/BackgroundImageComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
+import MainCardComponent from "./components/MainCardComponent";
+import BizInquiriesComponent from "./components/BizInquiriesComponent";
 
 
 window.Vue = require('vue');
@@ -31,6 +33,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('background-image-component', BackgroundImage)
 Vue.component('header-component', HeaderComponent)
 Vue.component('footer-component', FooterComponent)
+Vue.component('main-card-component', MainCardComponent)
+Vue.component('biz-inquiries-component', BizInquiriesComponent)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

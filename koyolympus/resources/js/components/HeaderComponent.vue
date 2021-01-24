@@ -7,7 +7,9 @@
                     <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
                 </a></li>
                 <li><a href="">Photography</a></li>
-                <li><a href="">Biz Inquiries</a></li>
+                <li><a>
+                    <router-link v-bind:to="{name: 'main.biz'}">Biz Inquiries</router-link>
+                </a></li>
             </ul>
         </nav>
         <img src="/images/menu.png" class="menu-icon">
@@ -26,6 +28,7 @@ export default {
     height: 12%;
     display: flex;
     align-items: center;
+    padding-top: 20px;
 }
 
 .logo {
