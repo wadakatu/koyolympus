@@ -3,7 +3,7 @@
         <div class="container">
             <div class="contactForm">
                 <form>
-                    <h2>Biz Inquiries</h2>
+                    <h1>Biz Inquiries</h1>
                     <div class="inputBox">
                         <input type="text" name="" required>
                         <span>Your name</span>
@@ -18,6 +18,7 @@
                     </div>
                     <div class="inputBox">
                         <input type="submit" name="" value="Send">
+                        <input type="button" name="" @click="$router.push('/')" value="Home">
                     </div>
                 </form>
             </div>
@@ -43,14 +44,14 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', 'sans-serif';
 }
 
 .contact {
     flex-basis: 50%;
     position: relative;
     min-height: 100vh;
-    padding: 50px 100px;
+    padding: 40px 85px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,16 +73,18 @@ export default {
     margin-right: 50px;
 }
 
-.contactForm h2 {
-    font-size: 30px;
+.contactForm h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
     color: #fff;
     font-weight: 500;
+    text-align: center;
 }
 
 .contactForm .inputBox {
     position: relative;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .contactForm .inputBox input,
@@ -91,10 +94,15 @@ export default {
     font-size: 16px;
     margin: 10px 0;
     border: none;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #1f6fb2;
     outline: none;
     background: transparent;
     color: #fff;
+}
+
+.contactForm .inputBox textarea {
+    resize: none;
+    height: 100px;
 }
 
 .contactForm .inputBox span {
@@ -119,12 +127,26 @@ export default {
 
 .contactForm .inputBox input[type="submit"] {
     width: 100px;
-    background: #1b4b72;
-    color: #fff;
+    background: #d1ffd3;
+    color: #000;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    font-size: 18px;
+    padding: 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-left: 30px;
+}
+
+.contactForm .inputBox input[type="button"] {
+    width: 100px;
+    background: #ffced1;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-left: 30px;
 }
 
 @media (max-width: 991px) {

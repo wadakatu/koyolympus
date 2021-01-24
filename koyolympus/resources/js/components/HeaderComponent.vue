@@ -1,9 +1,11 @@
 <template>
     <div class="navbar">
-        <img src="/images/mylogo_white.png" class="logo">
+        <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png" class="logo"></router-link>
         <nav>
             <ul>
-                <li><a href="">About Me</a></li>
+                <li><a href="">
+                    <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
+                </a></li>
                 <li><a href="">Photography</a></li>
                 <li><a>
                     <router-link v-bind:to="{name: 'main.biz'}">Biz Inquiries</router-link>
