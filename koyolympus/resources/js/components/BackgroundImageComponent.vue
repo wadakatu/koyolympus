@@ -12,6 +12,7 @@
 <script>
 import HeaderComponent from "./HeaderComponent.vue";
 import FooterComponent from "./FooterComponent";
+import SidebarMenuComponent from "./SidebarMenuComponent";
 
 export default {
     components: {
