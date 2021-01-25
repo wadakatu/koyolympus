@@ -1,24 +1,42 @@
 <template>
-    <div class="navbar">
-        <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png" class="logo"></router-link>
-        <nav>
-            <ul>
-                <li><a href="">
-                    <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
-                </a></li>
-                <li><a href="">Photography</a></li>
-                <li><a>
-                    <router-link v-bind:to="{name: 'main.biz'}">Biz Inquiries</router-link>
-                </a></li>
-            </ul>
-        </nav>
-        <img src="/images/menu.png" class="menu-icon">
+    <div>
+        <div class="navbar">
+            <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png" class="logo"></router-link>
+            <nav>
+                <ul>
+                    <li><a href="">
+                        <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
+                    </a></li>
+                    <li><a href="">Photography</a></li>
+                    <li><a>
+                        <router-link v-bind:to="{name: 'main.biz'}">Biz Inquiries</router-link>
+                    </a></li>
+                </ul>
+            </nav>
+            <img src="/images/menu.png" class="menu-icon" @click="showNav">
+        </div>
+        <sidebar-menu-component v-bind:showSidebar="showSidebars"></sidebar-menu-component>
     </div>
 </template>
 
 <script>
+import SidebarMenuComponent from "./SidebarMenuComponent";
+
 export default {
-    name: "HeaderComponent.vue"
+    name: "HeaderComponent.vue",
+    components: {
+        'sidebar-menu-component': SidebarMenuComponent,
+    },
+    data: () => {
+        return {
+            showSidebars: false,
+        }
+    },
+    methods: {
+        showNav() {
+            this.showSidebars = this.showSidebars === false;
+        }
+    },
 }
 </script>
 
