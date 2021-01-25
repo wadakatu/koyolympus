@@ -20,8 +20,9 @@
                         <span>Type your thoughts...</span>
                     </div>
                     <div class="error_text" v-html="errors.opinion"></div>
+                    <div class="alert-success" v-if="sentEmail">Thank you for getting in touch!</div>
                     <div class="inputBox">
-                        <input type="submit" value="Send">
+                        <input type="submit" v-bind:disabled="isPush" value="Send">
                         <input type="button" @click="$router.push('/')" value="Home">
                     </div>
                 </form>
@@ -46,16 +47,20 @@ export default {
                 email: '',
                 opinion: '',
             },
+            isPush: false,
+            sentEmail: false,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     },
     methods: {
         postInquiry() {
+            this.isPush = true;
             this.errors = {};
             let self = this;
             axios.post('/api/bizinq/send', this.params)
                 .then((response) => {
-
+                    this.reset();
+                    self.sentEmail = true;
                 })
                 .catch((error) => {
                     var errors = {};
@@ -65,9 +70,12 @@ export default {
                             errors[key] = error.response.data.errors[key].join('<br>');
                         }
                     }
-                    self.errors = errors;
 
+                    self.errors = errors;
                 });
+        },
+        reset() {
+            Object.assign(this.$data, this.$options.data.call(this));
         },
         mounted() {
             this.postInquiry();
@@ -190,6 +198,11 @@ export default {
 
 .error_text {
     color: #f9ff17;
+}
+
+.alert-success {
+    color: #2eff18;
+    text-align: center;
 }
 
 @media (max-width: 991px) {
