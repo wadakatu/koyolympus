@@ -2409,6 +2409,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SidebarMenuComponent.vue",
   props: {
@@ -6863,7 +6868,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 45px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 20px;\n  padding: 10px;\n  float: left;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 50px;\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 60px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 30px;\n  padding: 10px;\n  float: left;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 80px;\n  cursor: pointer;\n}", ""]);
 
 // exports
 
@@ -7015,7 +7020,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n\n", ""]);
+exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n    z-index: 999;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n\n", ""]);
 
 // exports
 
@@ -40135,15 +40140,25 @@ var render = function() {
             _c("img", { attrs: { src: "/images/human.png" } })
           ]),
           _vm._v(" "),
+          _c("p", [_vm._v("About Me")]),
+          _vm._v(" "),
           _c("img", { attrs: { src: "/images/camera.png" } }),
+          _vm._v(" "),
+          _c("p", [_vm._v("Photo")]),
           _vm._v(" "),
           _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
             _c("img", { attrs: { src: "/images/mail.png" } })
           ]),
           _vm._v(" "),
+          _c("p", [_vm._v("Inquiry")]),
+          _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
-          _c("img", { attrs: { src: "/images/photo.png" } })
+          _c("p", [_vm._v("github")]),
+          _vm._v(" "),
+          _c("img", { attrs: { src: "/images/photo.png" } }),
+          _vm._v(" "),
+          _c("p", [_vm._v("upload")])
         ],
         1
       )

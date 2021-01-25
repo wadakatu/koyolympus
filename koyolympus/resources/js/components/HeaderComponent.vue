@@ -58,6 +58,7 @@ export default {
     width: 30px;
     cursor: pointer;
     margin-left: 40px;
+    z-index: 999;
 }
 
 nav {
