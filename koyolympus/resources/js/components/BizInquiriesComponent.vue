@@ -78,6 +78,7 @@ export default {
             Object.assign(this.$data, this.$options.data.call(this));
         },
         mounted() {
+            this.reset();
             this.postInquiry();
         }
     }
@@ -97,7 +98,7 @@ export default {
 .contact {
     flex-basis: 50%;
     position: relative;
-    min-height: 100vh;
+    min-height: 80vh;
     padding: 40px 85px;
     display: flex;
     justify-content: center;

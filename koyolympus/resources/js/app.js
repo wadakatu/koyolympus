@@ -3,16 +3,18 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-require('./bootstrap');
-
+import './bootstrap';
 import Vue from 'vue';
 import router from './router';
+import store from './store';
 import BackgroundImage from "./components/BackgroundImageComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import MainCardComponent from "./components/MainCardComponent";
+import PhotoUploadComponent from "./components/PhotoUploadComponent";
 import BizInquiriesComponent from "./components/BizInquiriesComponent";
+
+require('./bootstrap');
 
 
 window.Vue = require('vue');
@@ -35,6 +37,7 @@ Vue.component('header-component', HeaderComponent)
 Vue.component('footer-component', FooterComponent)
 Vue.component('main-card-component', MainCardComponent)
 Vue.component('biz-inquiries-component', BizInquiriesComponent)
+Vue.component('photo-upload-component', PhotoUploadComponent)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,7 +45,15 @@ Vue.component('biz-inquiries-component', BizInquiriesComponent)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-    router: router
-});
+const createApp = async () => {
+    await store.dispatch('auth/currentUser');
+
+
+    const app = new Vue({
+        el: '#app',
+        router: router,
+        store
+    })
+}
+
+createApp()

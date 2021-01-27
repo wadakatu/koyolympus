@@ -9,7 +9,7 @@
             <p>Inquiry</p>
             <a href="https://github.com/wadakatu/koyolympus"><img src="/images/github.png"></a>
             <p>github</p>
-            <img src="/images/photo.png">
+            <router-link v-bind:to="{name: 'login'}"><img src="/images/photo.png"></router-link>
             <p>upload</p>
         </div>
     </div>
