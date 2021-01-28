@@ -7,6 +7,7 @@ import AboutMeComponent from "./components/AboutMeComponent";
 import AboutMeEnglishComponent from "./components/AboutMeEnglishComponent";
 import AboutMeFrenchComponent from "./components/AboutMeFrenchComponent";
 import AboutMeKoreanComponent from "./components/AboutMeKoreanComponent";
+import AboutMeChineseComponent from "./components/AboutMeChineseComponent";
 import BizInquiriesComponent from "./components/BizInquiriesComponent";
 import PhotoUploadComponent from "./components/PhotoUploadComponent";
 import LoginComponent from "./components/LoginComponent";
@@ -55,6 +56,13 @@ const router = new VueRouter({
                 card: MainCardComponent,
             },
             name: 'about.me.korean',
+        },
+        {
+            path: '/aboutme/chinese',
+            components: {
+                default: AboutMeChineseComponent,
+                card: MainCardComponent,
+            }
         },
         {
             path: '/bizinq',
