@@ -1,13 +1,16 @@
 <template>
-    <form action="/api/login" method="post" class="wrapper" v-show="!isLogin" @submit.prevent="login">
-        <input type="hidden" name="_token" v-model="csrf">
+    <form action="/api/login" method="post" class="wrapper" @submit.prevent="login">
         <div class="contact-form">
             <div class="input-fields">
                 <input type="email" class="input" name="email" placeholder="Email" v-model="loginForm.email" required>
-                <div class="error_text" v-html="errors.email"></div>
+                <div v-if="loginErrors" class="errors">
+                    <div class="error_text" v-for="msg in loginErrors.email" :key="msg">{{ msg }}}</div>
+                </div>
                 <input type="password" class="input" name="password" placeholder="Password"
-                       v-model="loginForm.password">
-                <div class="error_text" v-html="errors.password"></div>
+                       v-model="loginForm.password" required>
+                <div v-if="loginErrors" class="errors">
+                    <div class="error_text" v-for="msg in loginErrors.password" :key="msg">{{ msg }}</div>
+                </div>
             </div>
             <button type="submit" class="btn">Send</button>
             <router-link v-bind:to="{name: 'main'}">
@@ -27,14 +30,15 @@ export default {
                 email: '',
                 password: '',
             },
-            isLogin: false,
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     },
     methods: {
         async login() {
             await this.$store.dispatch('auth/login', this.loginForm)
-            this.$router.push('/upload');
+
+            if (this.apiStatus) {
+                this.$router.push('/upload');
+            }
         },
         async logout() {
             await this.$store.dispatch('auth/logout');
@@ -44,10 +48,20 @@ export default {
             console.log('reset done.');
             Object.assign(this.$data, this.$options.data.call(this));
         },
-        mounted() {
-            this.reset();
-            this.isLogin = false;
+        clearError() {
+            this.$store.commit('auth/setLoginErrorMessages', null)
         },
+    },
+    created() {
+        this.clearError()
+    },
+    computed: {
+        apiStatus() {
+            return this.$store.state.auth.apiStatus;
+        },
+        loginErrors() {
+            return this.$store.state.auth.loginErrorMessages;
+        }
     }
 }
 </script>
@@ -67,14 +81,16 @@ export default {
     transform: translateY(-50%);
     width: 100%;
     padding: 0 20px;
-    margin-top: auto;
 }
 
 .contact-form {
     max-width: 70%;
     background: transparent;
     padding: 10px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 115px;
     border-radius: 5px;
     text-align: center;
 }
@@ -82,11 +98,12 @@ export default {
 .input-fields {
     display: flex;
     flex-direction: column;
-    margin-right: 4%;
+    margin-right: 10%;
 }
 
 .input-fields .input {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
+    margin-top: 25px;
     background: transparent;
     border: 0;
     border-bottom: 2px solid #c5ecfd;
@@ -111,13 +128,12 @@ export default {
     color: #fff;
     cursor: pointer;
     text-transform: uppercase;
-    margin-left: 15px;
+    margin-right: 10%;
 }
 
 .error_text {
     color: #f9ff17;
-    margin-bottom: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 15px;
 }
 
 </style>

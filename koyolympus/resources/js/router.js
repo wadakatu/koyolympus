@@ -11,6 +11,7 @@ import AboutMeChineseComponent from "./components/AboutMeChineseComponent";
 import BizInquiriesComponent from "./components/BizInquiriesComponent";
 import PhotoUploadComponent from "./components/PhotoUploadComponent";
 import LoginComponent from "./components/LoginComponent";
+import SystemError from './pages/errors/CommonErrorComponent';
 
 Vue.use(VueRouter);
 
@@ -101,6 +102,10 @@ const router = new VueRouter({
                     next();
                 }
             }
+        },
+        {
+            path: '/error',
+            component: SystemError,
         }
     ]
 });
