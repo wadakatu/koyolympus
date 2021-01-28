@@ -22,5 +22,19 @@ Route::get('/test', function () {
     return response()->json(['name' => 'koyo']);
 });
 
+// TODO: CSRFトークン生成メソッド(Postman用)　EC2デプロイ時に削除
+Route::get('/csrf', 'v1\ImageController@index');
+
 //Biz Inquiries送信処理
 Route::post('/bizinq/send', 'v1\BizInquiriesController@sendBizInquiries')->name('bizInq.send');
+//写真アップロードメソッド
+Route::post('/photo/upload', 'v1\ImageController@uploadPhoto')->name('upload.photo');
+//ログインメソッド
+Route::post('/login', 'Auth\LoginController@login')->name('login');
+//ログアウトメソッド
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+//ログインユーザー返却メソッド
+Route::get('/user', function () {
+    return Auth::user();
+})->name('user');
+
