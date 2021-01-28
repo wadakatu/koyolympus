@@ -1,6 +1,6 @@
 <template>
     <div class="col">
-        <h1>À propos de moi</h1>
+        <h1>자기소개</h1>
         <language-select-component></language-select-component>
         <div class="intro">
             <h4>이름</h4>
