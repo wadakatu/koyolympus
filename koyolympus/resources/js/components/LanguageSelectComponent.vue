@@ -26,10 +26,8 @@ export default {
     color: #fff;
     position: relative;
     list-style-type: none;
-    width: 80px;
+    width: 75px;
     height: 25px;
-    border-radius: 15px;
-    padding-left: 8px;
 }
 
 .language li {
@@ -61,7 +59,7 @@ export default {
 
 .language li ul li {
     overflow: hidden;
-    width: 80px;
+    width: 75px;
     height: 0;
     color: #fff;
     -moz-transition: .2s;
@@ -74,7 +72,7 @@ export default {
 .language li ul li a {
     padding: 13px 15px;
     background: #1a5293;
-    text-align: left;
+    text-align: center;
     font-size: 12px;
     font-weight: normal;
 }

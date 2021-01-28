@@ -42,8 +42,9 @@ export default {
 
 h1 {
     color: #fff;
-    font-size: 55px;
+    font-size: 40px;
     margin-bottom: 30px;
+    font-weight: 500;
     text-align: center;
 }
 
