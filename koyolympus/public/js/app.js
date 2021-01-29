@@ -7504,7 +7504,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    position: relative;\n    left: 22%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n}\nbutton[data-v-d5f427ea] {\n    margin-top: 15px;\n    text-align: center;\n    padding: 10px;\n    cursor: pointer;\n    border-radius: 8px;\n}\n\n", ""]);
 
 // exports
 
@@ -41829,36 +41829,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col" },
-    [
-      _c("h1", [_vm._v("Woops! Something went wrong.")]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "If you found some issue about this website, please let me know through "
-        ),
-        _vm._m(0),
-        _vm._v(" or "),
-        _c(
-          "span",
-          {
-            on: {
-              click: function($event) {
-                return _vm.$router.push("/bizinq")
-              }
+  return _c("div", { staticClass: "col" }, [
+    _c("h1", [_vm._v("Woops! Something went wrong.")]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "If you found some issue about this website, please let me know through "
+      ),
+      _vm._m(0),
+      _vm._v(" or "),
+      _c(
+        "span",
+        {
+          on: {
+            click: function($event) {
+              return _vm.$router.push("/bizinq")
             }
-          },
-          [_vm._v("Biz Inquries")]
-        ),
-        _vm._v(".\n    ")
-      ]),
-      _vm._v(" "),
-      _c("buttom", [_vm._v("HOME")])
-    ],
-    1
-  )
+          }
+        },
+        [_vm._v("Biz Inquries")]
+      ),
+      _vm._v(".\n    ")
+    ]),
+    _vm._v(" "),
+    _c("button", [_vm._v("HOME")])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -60152,8 +60147,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }
   }, {
-    path: '/error',
-    component: _pages_errors_CommonErrorComponent__WEBPACK_IMPORTED_MODULE_13__["default"]
+    path: '*',
+    components: {
+      "default": _pages_errors_CommonErrorComponent__WEBPACK_IMPORTED_MODULE_13__["default"]
+    }
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);

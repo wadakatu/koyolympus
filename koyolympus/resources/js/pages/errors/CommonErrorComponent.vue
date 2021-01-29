@@ -5,7 +5,7 @@
             href="https://github.com/wadakatu/koyolympus"><span>Github</span></a> or <span
             @click="$router.push('/bizinq')">Biz Inquries</span>.
         </p>
-        <buttom>HOME</buttom>
+        <button>HOME</button>
     </div>
 </template>
 
@@ -19,6 +19,26 @@ export default {
 
 .col {
     text-align: center;
+    color: #fff;
+    position: relative;
+    left: 22%;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+span {
+    color: #fff;
+    border-bottom: solid 3px white;
+}
+
+button {
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
 </style>

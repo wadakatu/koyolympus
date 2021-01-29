@@ -104,8 +104,10 @@ const router = new VueRouter({
             }
         },
         {
-            path: '/error',
-            component: SystemError,
+            path: '*',
+            components: {
+                default: SystemError,
+            },
         }
     ]
 });
