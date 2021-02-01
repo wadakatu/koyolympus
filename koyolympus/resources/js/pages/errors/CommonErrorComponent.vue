@@ -31,6 +31,7 @@ h1 {
 span {
     color: #fff;
     border-bottom: solid 3px white;
+    cursor: pointer;
 }
 
 button {

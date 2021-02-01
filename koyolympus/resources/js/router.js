@@ -9,7 +9,7 @@ import AboutMeFrenchComponent from "./components/AboutMeFrenchComponent";
 import AboutMeKoreanComponent from "./components/AboutMeKoreanComponent";
 import AboutMeChineseComponent from "./components/AboutMeChineseComponent";
 import BizInquiriesComponent from "./components/BizInquiriesComponent";
-import PhotoUploadComponent from "./components/PhotoUploadComponent";
+import PhotoUpComponent from "./components/PhotoUpComponent";
 import LoginComponent from "./components/LoginComponent";
 import SystemError from './pages/errors/CommonErrorComponent';
 
@@ -76,7 +76,7 @@ const router = new VueRouter({
         {
             path: '/upload',
             components: {
-                default: PhotoUploadComponent,
+                default: PhotoUpComponent,
                 card: MainCardComponent,
             },
             name: 'photo.upload',

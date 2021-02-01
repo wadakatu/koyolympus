@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\PhotoService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ImageController extends Controller
 {
 
-    public function __construct()
+    private $photoService;
+
+    public function __construct(PhotoService $photoService)
     {
+        $this->middleware('auth');
+        $this->photoService = $photoService;
     }
 
     public function index()
@@ -16,9 +26,35 @@ class ImageController extends Controller
         return csrf_token();
     }
 
-    public function uploadPhoto()
+    public function uploadPhoto(Request $request): JsonResponse
     {
+        $file = $request->file;
+        $fileName = $file->getClientOriginalName();
+        $genre = $request->input('genre');
 
+        $uniqueFileName = null;
+        DB::beginTransaction();
+
+        try {
+            $uniqueFileName = $this->photoService->uploadPhotoToS3($file, $fileName, $genre);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->removePhoto($request);
+            Log::error($e->getMessage());
+        }
+
+        return response()->json(['file' => $uniqueFileName]);
+    }
+
+    public function removePhoto(Request $request): JsonResponse
+    {
+        $file = $request->file;
+        $fileName = $file['custom'];
+        $genre = $request->input('genre');
+        $this->photoService->deletePhotoFromS3($fileName, $genre);
+
+        return response()->json([]);
     }
 
 }
