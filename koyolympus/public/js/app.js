@@ -2607,6 +2607,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2625,20 +2626,24 @@ __webpack_require__.r(__webpack_exports__);
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       },
-      genre: ''
+      genre: '',
+      fileName: []
     };
   },
   methods: {
     uploadSuccess: function uploadSuccess(file, response) {
       console.log('File Successfully Uploaded with file name: ' + response.file);
+      file.custom = response.file;
     },
     uploadError: function uploadError(file, message) {
       console.log('An Error Occurred');
     },
     fileRemoved: function fileRemoved(file) {
-      console.log(file.name);
+      console.log(file);
+      var genre = this.genre;
       var params = {
-        file: file
+        file: file,
+        genre: genre
       };
       axios.post('/api/photo/remove', params).then(function (response) {
         console.log('Your photo which is ' + file.name + ' is deleted completely');

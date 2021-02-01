@@ -20,6 +20,7 @@
             v-on:vdropzone-error="uploadError"
             v-on:vdropzone-removed-file="fileRemoved"
             v-on:vdropzone-sending="sendingEvent"
+
         >
             <div class="dropzone-custom-content">
                 <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
@@ -48,19 +49,23 @@ export default {
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             },
             genre: '',
+            fileName: [],
         };
     },
     methods: {
         uploadSuccess(file, response) {
             console.log('File Successfully Uploaded with file name: ' + response.file);
+            file.custom = response.file;
         },
         uploadError(file, message) {
             console.log('An Error Occurred');
         },
         fileRemoved(file) {
-            console.log(file.name);
+            console.log(file);
+            let genre = this.genre;
             let params = {
                 file,
+                genre,
             }
             axios.post('/api/photo/remove', params)
                 .then((response) => {
@@ -72,7 +77,7 @@ export default {
         },
         sendingEvent(file, xhr, formData) {
             formData.append('genre', this.genre);
-        }
+        },
     }
 };
 </script>
