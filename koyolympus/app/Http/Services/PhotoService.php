@@ -17,6 +17,11 @@ class PhotoService
         $this->photo = $photo;
     }
 
+    public function getAllPhoto()
+    {
+        return $this->photo->getAllPhoto();
+    }
+
     public function uploadPhotoToS3(UploadedFile $file, string $fileName, int $genre): string
     {
         $filePath = config("const.PHOTO.GENRE_FILE_URL.$genre");
