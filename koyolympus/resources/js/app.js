@@ -7,6 +7,8 @@ import './bootstrap';
 import Vue from 'vue';
 import router from './router';
 import store from './store';
+import VueStar from 'vue-star'
+import Lightbox from "luminous-lightbox/lib/Lightbox";
 import BackgroundImage from "./components/BackgroundImageComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
@@ -39,6 +41,8 @@ Vue.component('footer-component', FooterComponent)
 Vue.component('main-card-component', MainCardComponent)
 Vue.component('biz-inquiries-component', BizInquiriesComponent)
 Vue.component('photo-upload-component', PhotoUploadComponent)
+Vue.component('VueStar', VueStar);
+Vue.component('lightbox', Lightbox);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -53,11 +57,15 @@ const createApp = async () => {
     const app = new Vue({
         el: '#app',
         router: router,
-        store
+        store,
     })
 }
 
 export default {
+    mounted: function () {
+        this.$refs.ThumbsUp.$data.active = true;
+        console.log(this.$refs.ThumbsUp.$data);
+    },
     computed: {
         errorCode() {
             return this.$store.state.error.code;

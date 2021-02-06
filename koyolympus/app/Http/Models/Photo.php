@@ -14,9 +14,10 @@ class Photo extends Model
     ];
     protected $visible = [
         'id',
+        'genre',
         'url',
     ];
-    protected $perPage = 5;
+    protected $perPage = 9;
     protected $keyType = 'string';
     const ID_LENGTH = 12;
 
@@ -69,9 +70,11 @@ class Photo extends Model
 
         $uniqueFileName = $photo->id . '.' . $fileName;
 
+        $uniqueFilePath = $filePath . '/' . $uniqueFileName;
+
         $photo->fill([
             'file_name' => $uniqueFileName,
-            'file_path' => $filePath,
+            'file_path' => $uniqueFilePath,
             'genre' => $genre,
         ]);
 

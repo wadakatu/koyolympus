@@ -1,12 +1,10 @@
 <template>
     <div class="photo-list">
-        <div class="grid">
-            <PhotoComponent
-                class="grid_item"
-                v-for="photo in photos"
-                :key="photo.id"
-                :item="photo"
-            ></PhotoComponent>
+        <div class="images" v-viewer="{movable: false}">
+            <a class="luminous" v-for="photo in photos">
+                <img :src="photo.url" :key="photo.url"
+                     alt="This photo taken by Koyo Isono.">
+            </a>
         </div>
         <PaginateComponent :current-page="currentPage" :last-page="lastPage"></PaginateComponent>
     </div>
@@ -14,14 +12,19 @@
 
 <script>
 import {OK} from '../util';
+import 'viewerjs/dist/viewer.css'
+import Viewer from 'v-viewer'
+import Vue from 'vue'
 import PhotoComponent from "./PhotoComponent";
 import PaginateComponent from "./PaginateComponent";
+
+Vue.use(Viewer)
 
 export default {
     name: "PhotoListComponent.vue",
     components: {
         PhotoComponent,
-        PaginateComponent
+        PaginateComponent,
     },
     props: {
         page: {
@@ -48,7 +51,7 @@ export default {
             this.photos = response.data.data;
             this.currentPage = response.data.current_page;
             this.lastPage = response.data.last_page;
-        }
+        },
     },
     watch: {
         $route: {
@@ -57,7 +60,7 @@ export default {
             },
             immediate: true,
         }
-    }
+    },
 }
 </script>
 
@@ -66,5 +69,48 @@ export default {
 .photo-list {
     flex-basis: 50%;
 }
+
+img {
+    width: 220px;
+    height: auto;
+    padding: 10px;
+}
+
+.images {
+    padding: 20px;
+}
+
+.luminous {
+    display: inline-block;
+    position: relative;
+    transition: .3s ease-in-out;
+    border: 3px solid #ccc;
+}
+
+.luminous::before {
+    content: "クリック拡大";
+    opacity: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: .5em;
+    background: rgba(0, 0, 0, .6);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    transition: inherit;
+    transform: translateY(100%);
+}
+
+.luminous:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 </style>

@@ -39,6 +39,8 @@ class ImageController extends Controller
             abort(404);
         }
 
+        Log::debug($photo);
+
         return response(Storage::disk('s3')->get($photo->file_path), 200);
     }
 
