@@ -31,6 +31,8 @@ Route::post('/bizinq/send', 'v1\BizInquiriesController@sendBizInquiries')->name(
 Route::post('/photo/upload', 'v1\ImageController@uploadPhoto')->name('upload.photo');
 //写真削除メソッド
 Route::post('/photo/remove', 'v1\ImageController@removePhoto')->name('remove.photo');
+//写真取得メソッド
+Route::get('/photos', 'v1\ImageController@getPhoto')->name('get.photo');
 //ログインメソッド
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 //ログアウトメソッド

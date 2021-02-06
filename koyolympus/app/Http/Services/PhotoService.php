@@ -17,10 +17,15 @@ class PhotoService
         $this->photo = $photo;
     }
 
+    public function getAllPhoto()
+    {
+        return $this->photo->getAllPhoto();
+    }
+
     public function uploadPhotoToS3(UploadedFile $file, string $fileName, int $genre): string
     {
         $filePath = config("const.PHOTO.GENRE_FILE_URL.$genre");
-        $uniqueFileName = $this->photo->createPhotoInfo($fileName, $filePath . '/' . $fileName, $genre);
+        $uniqueFileName = $this->photo->createPhotoInfo($fileName, $filePath, $genre);
         Storage::disk('s3')->putFileAs($filePath, $file, $uniqueFileName, 'public');
 
         return $uniqueFileName;

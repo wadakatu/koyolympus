@@ -11,6 +11,7 @@ import AboutMeChineseComponent from "./components/AboutMeChineseComponent";
 import BizInquiriesComponent from "./components/BizInquiriesComponent";
 import PhotoUpComponent from "./components/PhotoUpComponent";
 import LoginComponent from "./components/LoginComponent";
+import PhotoListComponent from "./components/PhotoListComponent";
 import SystemError from './pages/errors/CommonErrorComponent';
 
 Vue.use(VueRouter);
@@ -108,6 +109,15 @@ const router = new VueRouter({
             components: {
                 default: SystemError,
             },
+        },
+        {
+            path: '/photo',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route.query.page);
+                const page = route.query.page
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            }
         }
     ]
 });

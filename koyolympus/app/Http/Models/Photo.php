@@ -4,10 +4,20 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
     protected $guarded = [];
+    protected $appends = [
+        'url',
+    ];
+    protected $visible = [
+        'id',
+        'genre',
+        'url',
+    ];
+    protected $perPage = 9;
     protected $keyType = 'string';
     const ID_LENGTH = 12;
 
@@ -43,15 +53,28 @@ class Photo extends Model
         return $id;
     }
 
+    public function getUrlAttribute()
+    {
+        return Storage::disk('s3')->url($this->attributes['file_path']);
+    }
+
+    public function getAllPhoto()
+    {
+        return Photo::query()
+            ->orderBy('created_at', 'desc')->paginate();
+    }
+
     public function createPhotoInfo(string $fileName, string $filePath, int $genre): string
     {
         $photo = new Photo();
 
         $uniqueFileName = $photo->id . '.' . $fileName;
 
+        $uniqueFilePath = $filePath . '/' . $uniqueFileName;
+
         $photo->fill([
             'file_name' => $uniqueFileName,
-            'file_path' => $filePath,
+            'file_path' => $uniqueFilePath,
             'genre' => $genre,
         ]);
 

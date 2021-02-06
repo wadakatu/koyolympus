@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/{any}', function(){
-   return view('index');
+Route::get('/{any}', function () {
+    return view('index');
 })->where('any', '.*');
 
 Auth::routes();
+
+Route::get('/photos/{photo}/download', 'v1\ImageController@downloadPhoto')->name('download.photo');
 
 Route::get('/home', 'HomeController@index')->name('home');
