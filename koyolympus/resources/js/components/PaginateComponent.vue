@@ -2,13 +2,13 @@
     <div class="pagination">
         <RouterLink
             v-if="! isFirstPage"
-            :to="`/photo/?page=${currentPage - 1}`"
+            :to="`${this.url}/?page=${currentPage - 1}`"
             class="button prev"
         >&laquo; prev
         </RouterLink>
         <RouterLink
             v-if="! isLastPage"
-            :to="`/photo/?page=${currentPage + 1}`"
+            :to="`${this.url}/?page=${currentPage + 1}`"
             class="button next"
         >next &raquo;
         </RouterLink>
@@ -26,7 +26,7 @@ export default {
         lastPage: {
             type: Number,
             required: true
-        }
+        },
     },
     computed: {
         isFirstPage() {
@@ -34,8 +34,11 @@ export default {
         },
         isLastPage() {
             return this.currentPage === this.lastPage;
+        },
+        url() {
+            return this.$store.state.photo.url;
         }
-    }
+    },
 }
 </script>
 
@@ -47,7 +50,7 @@ export default {
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    line-height: 45px;
+    line-height: 30px;
     width: 200px;
     position: fixed;
     text-decoration: none;
@@ -69,11 +72,13 @@ export default {
 }
 
 .button.next {
-    left: 15%;
+    margin-top: 10px;
+    left: 30%;
 }
 
 .button.prev {
-    left: 30%;
+    margin-top: 10px;
+    left: 11%;
 }
 
 </style>

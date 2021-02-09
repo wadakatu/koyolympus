@@ -2,6 +2,7 @@
 
 namespace App\Http\Models;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -53,14 +54,19 @@ class Photo extends Model
         return $id;
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return Storage::disk('s3')->url($this->attributes['file_path']);
     }
 
-    public function getAllPhoto()
+    public function getAllPhoto(?int $genre): LengthAwarePaginator
     {
-        return Photo::query()
+        $query = Photo::query();
+
+        if (isset($genre)) {
+            return $query->where('genre', $genre)->orderBy('created_at', 'desc')->paginate();
+        }
+        return $query
             ->orderBy('created_at', 'desc')->paginate();
     }
 

@@ -36,7 +36,7 @@ export default {
 
 .row {
     display: flex;
-    height: 80%;
+    height: 75%;
     align-items: center;
 }
 </style>
