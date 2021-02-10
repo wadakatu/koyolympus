@@ -3,7 +3,9 @@
 namespace App\Http\Services;
 
 use App\Http\Models\Photo;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
+use Log;
 use Storage;
 
 
@@ -17,9 +19,10 @@ class PhotoService
         $this->photo = $photo;
     }
 
-    public function getAllPhoto()
+    public function getAllPhoto(?int $genre): LengthAwarePaginator
     {
-        return $this->photo->getAllPhoto();
+        Log::debug($genre);
+        return $this->photo->getAllPhoto($genre);
     }
 
     public function uploadPhotoToS3(UploadedFile $file, string $fileName, int $genre): string

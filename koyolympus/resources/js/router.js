@@ -114,11 +114,72 @@ const router = new VueRouter({
             path: '/photo',
             component: PhotoListComponent,
             props: route => {
-                console.log(route.query.page);
-                const page = route.query.page
+                console.log(route);
+                const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
-            }
-        }
+            },
+            name: 'photo.all',
+        },
+        {
+            path: '/photo/landscape',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.landscape'
+        },
+        {
+            path: '/photo/animal',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.animal'
+        },
+        {
+            path: '/photo/portrait',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.portrait'
+        },
+        {
+            path: '/photo/others/snapshot',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.snapshot'
+        },
+        {
+            path: '/photo/others/livecomposite',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.livecomposite'
+        },
+        {
+            path: '/photo/others/pinfilm',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.pinfilm'
+        },
     ]
 });
 

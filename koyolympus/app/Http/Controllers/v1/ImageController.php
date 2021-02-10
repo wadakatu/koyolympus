@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Photo;
 use App\Http\Services\PhotoService;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,10 +29,12 @@ class ImageController extends Controller
         return csrf_token();
     }
 
-    public function getPhoto()
+    public function getPhoto(Request $request): LengthAwarePaginator
     {
-        return $this->photoService->getAllPhoto();
+        $genre = $request->input('genre');
+        return $this->photoService->getAllPhoto($genre);
     }
+
 
     public function downloadPhoto(Photo $photo)
     {

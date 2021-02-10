@@ -7,7 +7,7 @@
                     <li><a href="">
                         <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
                     </a></li>
-                    <li><a href="">
+                    <li><a href="" @click="this.photo">
                         <router-link v-bind:to="{}">Photography</router-link>
                     </a></li>
                     <li><a>
@@ -37,6 +37,12 @@ export default {
     methods: {
         showNav() {
             this.showSidebars = this.showSidebars === false;
+        },
+        photo() {
+            let url = '/photo';
+            this.$store.commit('photo/setUrl', url);
+            this.$store.commit('photo/setGenre', null);
+            this.$router.push({name: 'photo.all'}).catch(err => {});
         }
     },
 }
