@@ -1,5 +1,5 @@
 <template>
-    <div class="col">
+    <div class="col" v-if="this.card">
         <div class="card" v-model="genre">
             <div class="card_detail landscape" @click="searchLandscape">
                 <h5>Landscape</h5>
@@ -13,20 +13,26 @@
                 <h5>Portrait</h5>
                 <p>The whole point of taking portraits is so that I can see how far people have come.</p>
             </div>
-            <div class="card_detail others" @click="searchOthers">
+            <div class="card_detail others" @click="showOthers">
                 <h5>Others</h5>
                 <p>The Earth is art, The photographer is only a witness.</p>
             </div>
         </div>
     </div>
+    <other-card-component v-else-if="!this.card"></other-card-component>
 </template>
 
 <script>
+import OtherCardComponent from "./OtherCardComponent";
+
 export default {
+    components: {
+        OtherCardComponent,
+    },
     data() {
         return {
             genre: '',
-            url: ''
+            url: '',
         }
     },
     methods: {
@@ -51,10 +57,15 @@ export default {
             this.$store.commit('photo/setGenre', this.genre);
             this.$router.push({name: 'photo.portrait'});
         },
-        searchOthers() {
-            console.log('others!');
+        showOthers() {
+            this.$store.commit('photo/setCard', false);
         }
     },
+    computed: {
+        card() {
+            return this.$store.state.photo.card;
+        }
+    }
 }
 </script>
 

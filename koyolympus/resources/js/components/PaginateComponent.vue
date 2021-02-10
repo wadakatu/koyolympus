@@ -6,6 +6,9 @@
             class="button prev"
         >&laquo; prev
         </RouterLink>
+        <button class="button home" style="background-color: transparent;" @click="moveMainPage">&laquo; HOME
+            &raquo;
+        </button>
         <RouterLink
             v-if="! isLastPage"
             :to="`${this.url}/?page=${currentPage + 1}`"
@@ -27,6 +30,11 @@ export default {
             type: Number,
             required: true
         },
+    },
+    methods: {
+        moveMainPage() {
+            this.$router.push('/');
+        }
     },
     computed: {
         isFirstPage() {
@@ -72,13 +80,19 @@ export default {
 }
 
 .button.next {
-    margin-top: 10px;
-    left: 30%;
+    bottom: 12%;
+    right: 26%;
 }
 
 .button.prev {
-    margin-top: 10px;
-    left: 11%;
+    bottom: 12%;
+    left: 25%;
+}
+
+.button.home {
+    bottom: 12%;
+    right: 42.8%;
+    cursor: pointer;
 }
 
 </style>

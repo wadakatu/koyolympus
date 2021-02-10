@@ -21,6 +21,7 @@ const store = new Vuex.Store({
             paths: [
                 'photo.url',
                 'photo.genre',
+                'photo.card',
             ],
 
             // ストレージの種類を指定する。デフォルトではローカルストレージ

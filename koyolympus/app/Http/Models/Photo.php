@@ -18,7 +18,7 @@ class Photo extends Model
         'genre',
         'url',
     ];
-    protected $perPage = 9;
+    protected $perPage = 10;
     protected $keyType = 'string';
     const ID_LENGTH = 12;
 

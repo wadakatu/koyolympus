@@ -4,14 +4,6 @@
             <a class="luminous" v-for="photo in photos">
                 <img class="item" :src="photo.url" :key="photo.url"
                      alt="This photo taken by Koyo Isono.">
-                <div class="like">
-                    <button
-                        class="photo__action photo__action--like"
-                        title="Like photo" @click.prevent="like"
-                    >
-                        <i id="like" class="far fa-heart"></i>12
-                    </button>
-                </div>
             </a>
         </div>
         <PaginateComponent :current-page="currentPage" :last-page="lastPage"></PaginateComponent>
@@ -54,24 +46,14 @@ export default {
         async fetchPhotos() {
             console.log(this.genre);
             const response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}});
-
             if (response.status !== OK) {
                 this.$store.commit('error/setCode', response.status);
                 return false;
             }
+            console.log(response.data.data);
             this.photos = response.data.data;
             this.currentPage = response.data.current_page;
             this.lastPage = response.data.last_page;
-        },
-        like() {
-            console.log('click!!!');
-            const button = document.getElementById('like');
-            if (button.style.color === "red") {
-                button.style.color = "black";
-            } else {
-                button.style.color = "red";
-            }
-
         },
     },
     watch: {
@@ -93,37 +75,22 @@ export default {
 <style scoped>
 
 .photo-list {
-    flex-basis: 50%;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 img {
-    width: 170px;
-    height: 130px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
-}
-
-.like {
-    text-align: right;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
-
-.photo__action {
-    background-color: white;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 12px;
 }
 
 .luminous {
     position: relative;
     transition: .3s ease-in-out;
     border: 3px solid white;
-    width: 32%;
-    height: 27%;
     border-radius: 10px;
-    padding: 10px 10px;
+    padding: 10px;
     box-sizing: border-box;
     cursor: pointer;
     background-position: center;
@@ -134,11 +101,11 @@ img {
 .images {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .luminous::before {
-    content: "クリック拡大";
+    content: "クリックして拡大";
     opacity: 0;
     box-sizing: border-box;
     display: flex;

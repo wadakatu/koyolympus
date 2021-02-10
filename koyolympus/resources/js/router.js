@@ -150,6 +150,36 @@ const router = new VueRouter({
             },
             name: 'photo.portrait'
         },
+        {
+            path: '/photo/others/snapshot',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.snapshot'
+        },
+        {
+            path: '/photo/others/livecomposite',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.livecomposite'
+        },
+        {
+            path: '/photo/others/pinfilm',
+            component: PhotoListComponent,
+            props: route => {
+                console.log(route);
+                const page = route.query.page;
+                return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
+            },
+            name: 'photo.pinfilm'
+        },
     ]
 });
 

@@ -6,11 +6,24 @@
             That's why I cannot stop exploring the world with my camera gear to cut out the exact moment
             that I would like to keep as it is.
         </p>
-        <button class="button">Explore My Photo</button>
+        <button class="button" @click="this.photo">Explore My Photo</button>
     </div>
 </template>
 
 <script>
+
+export default {
+    name: "MainMessageComponent.vue",
+    methods: {
+        photo() {
+            let url = '/photo';
+            this.$store.commit('photo/setUrl', url);
+            this.$store.commit('photo/setGenre', null);
+            this.$router.push({name: 'photo.all'}).catch(err => {
+            });
+        }
+    },
+}
 
 </script>
 
@@ -41,6 +54,7 @@ button {
     border-radius: 20px;
     outline: none;
     margin-top: 30px;
+    cursor: pointer;
 }
 
 </style>

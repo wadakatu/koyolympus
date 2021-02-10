@@ -1,11 +1,13 @@
 const state = {
     url: null,
     genre: null,
+    card: true,
 }
 
 const getters = {
     url: state => state.url ? state.url : '/photo',
-    genre: state => state.genre ? state.url : 0,
+    genre: state => state.genre ? state.genre : 0,
+    card: state => state.card ? state.card : false
 }
 
 const mutations = {
@@ -14,7 +16,10 @@ const mutations = {
     },
     setGenre(state, genre) {
         state.genre = genre;
-    }
+    },
+    setCard(state, card) {
+        state.card = card;
+    },
 }
 
 const actions = {}
