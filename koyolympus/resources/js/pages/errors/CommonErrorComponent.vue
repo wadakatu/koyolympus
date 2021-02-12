@@ -5,7 +5,7 @@
             href="https://github.com/wadakatu/koyolympus"><span>Github</span></a> or <span
             @click="$router.push('/bizinq')">Biz Inquries</span>.
         </p>
-        <button>HOME</button>
+        <button class="button home" style="background-color: transparent;" @click="$router.push('/')">HOME</button>
     </div>
 </template>
 
@@ -34,12 +34,36 @@ span {
     cursor: pointer;
 }
 
-button {
-    margin-top: 15px;
+.button {
+    color: #FFF;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    width: 150px;
+    position: fixed;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    outline: rgba(255, 255, 255, 0.5) solid 1px;
+    outline-offset: 0;
     text-align: center;
-    padding: 10px;
+    text-shadow: none;
+    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.button:hover {
+    border-color: #FFF;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    outline-color: transparent;
+    outline-offset: 12px;
+    text-shadow: 2px 2px 3px #000;
+}
+
+.button.home {
+    bottom: 35%;
+    right: 45%;
     cursor: pointer;
-    border-radius: 8px;
 }
 
 </style>

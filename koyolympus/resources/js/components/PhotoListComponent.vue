@@ -1,5 +1,6 @@
 <template>
     <div class="photo-list">
+        <h2 v-show="noPhoto">There are no photos in this page.</h2>
         <div class="images" v-viewer="{movable: false}">
             <a class="luminous" v-for="photo in photos">
                 <img class="item" :src="photo.url" :key="photo.url"
@@ -40,6 +41,7 @@ export default {
             photos: [],
             currentPage: 0,
             lastPage: 0,
+            noPhoto: false,
         }
     },
     methods: {
@@ -60,6 +62,8 @@ export default {
         $route: {
             async handler() {
                 await this.fetchPhotos();
+
+                this.noPhoto = this.photos.length === 0;
             },
             immediate: true,
         }
@@ -77,6 +81,14 @@ export default {
 .photo-list {
     text-align: center;
     margin-bottom: 10px;
+}
+
+h2 {
+    color: #fff;
+    position: absolute;
+    font-size: 40px;
+    top: 50%;
+    left: 30%;
 }
 
 img {
