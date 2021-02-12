@@ -2883,6 +2883,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2909,7 +2910,8 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.use(v_viewer__WEBPACK_IMPORTED_MODULE
     return {
       photos: [],
       currentPage: 0,
-      lastPage: 0
+      lastPage: 0,
+      noPhoto: false
     };
   },
   methods: {
@@ -2971,6 +2973,9 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.use(v_viewer__WEBPACK_IMPORTED_MODULE
                   return _this2.fetchPhotos();
 
                 case 2:
+                  _this2.noPhoto = _this2.photos.length === 0;
+
+                case 3:
                 case "end":
                   return _context2.stop();
               }
@@ -8122,7 +8127,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.photo-list[data-v-260a1c18] {\n    text-align: center;\n    margin-bottom: 10px;\n}\nimg[data-v-260a1c18] {\n    width: 200px;\n    height: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n    position: relative;\n    transition: .3s ease-in-out;\n    border: 3px solid white;\n    border-radius: 10px;\n    padding: 10px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n    content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n    opacity: 0;\n    box-sizing: border-box;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    padding: 0.8em;\n    background: rgba(0, 0, 0, .6);\n    color: white;\n    font-size: 12px;\n    text-align: center;\n    transition: inherit;\n    transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n    opacity: 1;\n    transform: translateY(0);\n}\n\n\n", ""]);
+exports.push([module.i, "\n.photo-list[data-v-260a1c18] {\n    text-align: center;\n    margin-bottom: 10px;\n}\nh2[data-v-260a1c18] {\n    color: #fff;\n    position: absolute;\n    font-size: 40px;\n    top: 50%;\n    left: 30%;\n}\nimg[data-v-260a1c18] {\n    width: 200px;\n    height: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n    position: relative;\n    transition: .3s ease-in-out;\n    border: 3px solid white;\n    border-radius: 10px;\n    padding: 10px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n    content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n    opacity: 0;\n    box-sizing: border-box;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    padding: 0.8em;\n    background: rgba(0, 0, 0, .6);\n    color: white;\n    font-size: 12px;\n    text-align: center;\n    transition: inherit;\n    transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n    opacity: 1;\n    transform: translateY(0);\n}\n\n\n", ""]);
 
 // exports
 
@@ -8179,7 +8184,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    position: relative;\n    left: 22%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n    cursor: pointer;\n}\nbutton[data-v-d5f427ea] {\n    margin-top: 15px;\n    text-align: center;\n    padding: 10px;\n    cursor: pointer;\n    border-radius: 8px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    position: relative;\n    left: 22%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n    cursor: pointer;\n}\n.button[data-v-d5f427ea] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 150px;\n    position: fixed;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-d5f427ea]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.home[data-v-d5f427ea] {\n    bottom: 35%;\n    right: 45%;\n    cursor: pointer;\n}\n\n", ""]);
 
 // exports
 
@@ -47462,6 +47467,21 @@ var render = function() {
     { staticClass: "photo-list" },
     [
       _c(
+        "h2",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.noPhoto,
+              expression: "noPhoto"
+            }
+          ]
+        },
+        [_vm._v("There are no photos in this page.")]
+      ),
+      _vm._v(" "),
+      _c(
         "div",
         {
           directives: [
@@ -47832,7 +47852,19 @@ var render = function() {
       _vm._v(".\n    ")
     ]),
     _vm._v(" "),
-    _c("button", [_vm._v("HOME")])
+    _c(
+      "button",
+      {
+        staticClass: "button home",
+        staticStyle: { "background-color": "transparent" },
+        on: {
+          click: function($event) {
+            return _vm.$router.push("/")
+          }
+        }
+      },
+      [_vm._v("HOME")]
+    )
   ])
 }
 var staticRenderFns = [
@@ -65741,14 +65773,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/components/MainCardComponent.vue ***!
   \*******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MainCardComponent_vue_vue_type_template_id_3ef095b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainCardComponent.vue?vue&type=template&id=3ef095b9&scoped=true& */ "./resources/js/components/MainCardComponent.vue?vue&type=template&id=3ef095b9&scoped=true&");
 /* harmony import */ var _MainCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainCardComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MainCardComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _MainCardComponent_vue_vue_type_style_index_0_id_3ef095b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainCardComponent.vue?vue&type=style&index=0&id=3ef095b9&scoped=true&lang=css& */ "./resources/js/components/MainCardComponent.vue?vue&type=style&index=0&id=3ef095b9&scoped=true&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _MainCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _MainCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _MainCardComponent_vue_vue_type_style_index_0_id_3ef095b9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainCardComponent.vue?vue&type=style&index=0&id=3ef095b9&scoped=true&lang=css& */ "./resources/js/components/MainCardComponent.vue?vue&type=style&index=0&id=3ef095b9&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -65780,7 +65813,7 @@ component.options.__file = "resources/js/components/MainCardComponent.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/components/MainCardComponent.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
