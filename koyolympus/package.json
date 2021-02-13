@@ -28,6 +28,7 @@
     "dependencies": {
         "luminous-lightbox": "^2.3.3",
         "v-viewer": "^1.5.1",
+        "vue-loading-overlay": "^3.4.2",
         "vue-product-zoomer": "^3.0.1",
         "vue-router": "^3.4.9",
         "vue-star": "0.0.4",

@@ -1,5 +1,10 @@
-<template>
+<template xmlns:loading="http://www.w3.org/1999/html">
     <div class="photo-list">
+        <loading
+            :active.sync="isLoading"
+            :is-full-page="fullPage"
+            :can-cancel="true"
+        ></loading>
         <h2 v-show="noPhoto">There are no photos in this page.</h2>
         <div class="images" v-viewer="{movable: false}">
             <a class="luminous" v-for="photo in photos">
@@ -15,6 +20,8 @@
 import {OK} from '../util';
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import Vue from 'vue'
 import PhotoComponent from "./PhotoComponent";
 import PaginateComponent from "./PaginateComponent";
@@ -27,7 +34,8 @@ export default {
     components: {
         PhotoComponent,
         PaginateComponent,
-        LikeComponent
+        LikeComponent,
+        Loading,
     },
     props: {
         page: {
@@ -42,20 +50,22 @@ export default {
             currentPage: 0,
             lastPage: 0,
             noPhoto: false,
+            isLoading: false,
+            fullPage: true,
         }
     },
     methods: {
         async fetchPhotos() {
-            console.log(this.genre);
+            this.isLoading = true;
             const response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}});
             if (response.status !== OK) {
                 this.$store.commit('error/setCode', response.status);
                 return false;
             }
-            console.log(response.data.data);
             this.photos = response.data.data;
             this.currentPage = response.data.current_page;
             this.lastPage = response.data.last_page;
+            this.isLoading = false;
         },
     },
     watch: {

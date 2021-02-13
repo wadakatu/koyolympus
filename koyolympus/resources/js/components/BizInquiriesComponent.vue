@@ -88,18 +88,10 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', 'sans-serif';
-}
-
 .contact {
     flex-basis: 50%;
     position: relative;
     min-height: 80vh;
-    padding: 40px 85px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,19 +103,20 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
 }
 
 .contactForm {
     width: 100%;
+    height: 65vh;
     padding: 30px;
     background: transparent;
-    margin-right: 50px;
+    margin-right: 30px;
+    margin-left: 40px;
 }
 
 .contactForm h1 {
     font-size: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     color: #fff;
     font-weight: 500;
     text-align: center;
@@ -137,7 +130,7 @@ export default {
 
 .contactForm .inputBox input,
 .contactForm .inputBox textarea {
-    width: 100%;
+    width: 32vw;
     padding: 10px 0;
     font-size: 16px;
     margin: 10px 0;
@@ -150,7 +143,7 @@ export default {
 
 .contactForm .inputBox textarea {
     resize: none;
-    height: 100px;
+    height: 15vh;
 }
 
 .contactForm .inputBox span {
@@ -174,27 +167,58 @@ export default {
 }
 
 .contactForm .inputBox input[type="submit"] {
-    width: 100px;
-    background: #d1ffd3;
-    color: #000;
-    border: none;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-left: 30px;
+    color: #FFF;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+    width: 9vw;
+    position: fixed;
+    left: 18vw;
+    justify-content: space-evenly;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    outline: rgb(50, 230, 0) solid 2px;
+    outline-offset: 0;
+    text-align: center;
+    text-shadow: none;
+    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
 .contactForm .inputBox input[type="button"] {
-    width: 100px;
-    background: #ffced1;
-    color: #000;
-    border: none;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-left: 30px;
+    color: #FFF;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+    width: 9vw;
+    position: fixed;
+    right: 60vw;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    outline: rgb(233, 8, 0) solid 2px;
+    outline-offset: 0;
+    text-align: center;
+    text-shadow: none;
+    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.contactForm .inputBox input[type="button"]:hover {
+    border-color: #ffced1;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    outline-color: transparent;
+    outline-offset: 12px;
+    text-shadow: 2px 2px 3px #000;
+}
+
+.contactForm .inputBox input[type="submit"]:hover {
+    border-color: #d1ffd3;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    outline-color: transparent;
+    outline-offset: 12px;
+    text-shadow: 2px 2px 3px #000;
 }
 
 .error_text {

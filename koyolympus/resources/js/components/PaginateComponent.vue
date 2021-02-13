@@ -53,13 +53,12 @@ export default {
 <style scoped>
 
 .button {
-    margin-left: 20px;
     color: #FFF;
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
     line-height: 30px;
-    width: 200px;
+    width: 10vw;
     position: fixed;
     text-decoration: none;
     text-transform: uppercase;
@@ -86,12 +85,12 @@ export default {
 
 .button.prev {
     bottom: 12%;
-    left: 25%;
+    left: 26%;
 }
 
 .button.home {
     bottom: 12%;
-    right: 42.8%;
+    right: 45%;
     cursor: pointer;
 }
 

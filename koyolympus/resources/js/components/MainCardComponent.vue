@@ -83,8 +83,8 @@ export default {
 
 .card_detail {
     position: relative;
-    width: 40%;
-    height: 250px;
+    width: 30vh;
+    height: 32vh;
     border-radius: 10px;
     padding: 15px 25px;
     box-sizing: border-box;
