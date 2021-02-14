@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Photo;
+use App\Http\Requests\GetPhotoRequest;
 use App\Http\Services\PhotoService;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -20,7 +21,6 @@ class ImageController extends Controller
 
     public function __construct(PhotoService $photoService)
     {
-        $this->middleware('auth')->except(['getPhoto', 'downloadPhoto']);
         $this->photoService = $photoService;
     }
 
@@ -29,7 +29,7 @@ class ImageController extends Controller
         return csrf_token();
     }
 
-    public function getPhoto(Request $request): LengthAwarePaginator
+    public function getPhoto(GetPhotoRequest $request): LengthAwarePaginator
     {
         $genre = $request->input('genre');
         return $this->photoService->getAllPhoto($genre);
@@ -39,10 +39,9 @@ class ImageController extends Controller
     public function downloadPhoto(Photo $photo)
     {
         if (!Storage::disk('s3')->exists($photo->file_path)) {
-            abort(404);
+            Log::debug('画像が見つかりませんでした。');
+            return response(['error' => 'no image found'], 404);
         }
-
-        Log::debug($photo);
 
         return response(Storage::disk('s3')->get($photo->file_path), 200);
     }
@@ -57,12 +56,16 @@ class ImageController extends Controller
         DB::beginTransaction();
 
         try {
+            Log::debug('ファイルのアップロード開始');
             $uniqueFileName = $this->photoService->uploadPhotoToS3($file, $fileName, $genre);
             DB::commit();
+            Log::debug('ファイルのアップロード終了');
         } catch (Exception $e) {
+            Log::debug('ファイルのアップロードに失敗しました。');
             DB::rollBack();
             $this->removePhoto($request);
             Log::error($e->getMessage());
+            return response()->json([], 500);
         }
 
         return response()->json(['file' => $uniqueFileName]);

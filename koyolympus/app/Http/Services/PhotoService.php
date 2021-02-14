@@ -37,7 +37,7 @@ class PhotoService
     public function deletePhotoFromS3(string $fileName, int $genre)
     {
         $filePath = config("const.PHOTO.GENRE_FILE_URL.$genre");
-        $this->photo->deletePhotoInfo($fileName, $filePath, $genre);
+        $this->photo->deletePhotoInfo($fileName);
         Storage::disk('s3')->delete($filePath . '/' . $fileName);
     }
 }
