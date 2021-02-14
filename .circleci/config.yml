@@ -37,8 +37,8 @@ jobs:
             - ./vendor
 
       - run: echo "APP_KEY=" > .env.testing
-      - run: pwd
-      - run: php koyolympus/artisan key:generate
-      - run: php koyolympus/artisan migrate
+      - run: ls
+      - run: php artisan key:generate
+      - run: php artisan migrate
 
       - run: ./vendor/bin/phpunit
