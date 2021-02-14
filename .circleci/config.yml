@@ -37,8 +37,7 @@ jobs:
             - ./vendor
 
       - run: echo "APP_KEY=" > .env.testing
-      - run: cd koyolympus
-      - run: ls
+      - run: cd koyolympus/koyolympus
       - run: php artisan key:generate
       - run: php artisan migrate
 
