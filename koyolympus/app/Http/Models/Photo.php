@@ -89,7 +89,7 @@ class Photo extends Model
         return $uniqueFileName;
     }
 
-    public function deletePhotoInfo(string $fileName, string $filePath, int $genre)
+    public function deletePhotoInfo(string $fileName)
     {
         $fileIdAndName = explode('.', $fileName);
 
