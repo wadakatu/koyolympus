@@ -36,9 +36,14 @@ jobs:
           paths:
             - ./vendor
 
-      - run: echo "APP_KEY=" > .env.testing
-      - run: cd /home/circleci/project/koyolympus
-      - run: php artisan key:generate
-      - run: php artisan migrate
+      - run:
+         working_directory: koyolympus
+         command: echo "APP_KEY=" > .env.testing
+      - run:
+         working_directory: koyolympus
+         command: php artisan key:generate
+      - run:
+         working_directory: koyolympus 
+         command: php artisan migrate
 
       - run: ./vendor/bin/phpunit
