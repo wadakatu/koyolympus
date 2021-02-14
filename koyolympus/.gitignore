@@ -10,6 +10,7 @@
 /public/image
 .env
 .env.backup
+.env.testing
 .env.example
 .gitattributes
 .phpunit.result.cache
