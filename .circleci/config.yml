@@ -7,6 +7,7 @@ jobs:
           - APP_DEBUG: true
           - APP_ENV: testing
           - DB_CONNECTION: mysql
+          - DB_HOST: mysql
           - DB_DATABASE: koyolympus_test
           - DB_USERNAME: koyo
           - DB_PASSWORD: olympus
