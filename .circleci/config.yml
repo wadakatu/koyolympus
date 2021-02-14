@@ -24,13 +24,15 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-{{ checksum "koyolympus/composer.json" }}
             - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run: 
+        working_directory: koyolympus
+        command: composer install -n --prefer-dist
 
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
+          key: v1-dependencies-{{ checksum "koyolympus/composer.json" }}
           paths:
             - ./vendor
 
