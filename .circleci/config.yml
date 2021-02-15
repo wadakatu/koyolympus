@@ -44,7 +44,10 @@ jobs:
          working_directory: koyolympus
          command: php artisan key:generate
       - run:
+         working_directory: koyolympus
+         command: php artisan config:clear
+      - run:
          working_directory: koyolympus 
-         command: php artisan migrate --env=testing
+         command: php artisan migrate 
 
       - run: ./vendor/bin/phpunit
