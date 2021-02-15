@@ -42,6 +42,9 @@ jobs:
          working_directory: koyolympus
          command: php artisan key:generate
       - run:
+         working_directory: laradock
+         command: docker-compose exec --user=laradock workspace bash
+      - run:
          working_directory: koyolympus 
          command: php artisan migrate 
 
