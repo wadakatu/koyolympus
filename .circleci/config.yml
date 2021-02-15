@@ -9,6 +9,7 @@ jobs:
           - DB_CONNECTION: mysql
           - DB_DATABASE: koyolympus_test
           - DB_USERNAME: koyo
+          - DB_PASSWORD: olympus
 
       - image: circleci/mysql:5.7-ram
           - MYSQL_ALLOW_EMPTY_PASSWORD: true
