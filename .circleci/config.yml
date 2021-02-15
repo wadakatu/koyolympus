@@ -9,7 +9,6 @@ jobs:
           - DB_CONNECTION: mysql
           - DB_DATABASE: koyolympus_test
           - DB_USERNAME: koyo
-          - DB_PASSWORD: olympus
 
       - image: circleci/mysql:5.7-ram
         environment:
@@ -41,11 +40,5 @@ jobs:
       - run:
          working_directory: koyolympus
          command: php artisan key:generate
-      - run:
-         working_directory: laradock
-         command: docker-compose exec --user=laradock workspace bash
-      - run:
-         working_directory: koyolympus 
-         command: php artisan migrate 
 
       - run: ./vendor/bin/phpunit
