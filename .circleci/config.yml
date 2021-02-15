@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+      - image: circleci/mysql:5.7
         environment:
           - APP_DEBUG: true
           - APP_ENV: testing
@@ -10,12 +11,7 @@ jobs:
           - DB_HOST: mysql
           - DB_DATABASE: koyolympus_test
           - DB_USERNAME: koyo
-          - DB_PASSWORD: olympus
-
-      - image: circleci/mysql:5.7-ram
-        environment:
-          - MYSQL_DATABASE: koyolympus_test
-
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps:
       - checkout
@@ -43,9 +39,6 @@ jobs:
       - run:
          working_directory: koyolympus
          command: php artisan key:generate
-      - run:
-         working_directory: koyolympus
-         command: php artisan config:clear
       - run:
          working_directory: koyolympus 
          command: php artisan migrate 
