@@ -11,6 +11,7 @@ jobs:
           - DB_USERNAME: koyo
 
       - image: circleci/mysql:5.7-ram
+        environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: true
           - DB_DATABASE: koyolympus_test
     steps:
