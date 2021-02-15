@@ -43,11 +43,8 @@ jobs:
       - run:
          working_directory: koyolympus
          command: php artisan key:generate
-      - run: 
-         working_directory: koyolympus
-         command: config('database.mysql_testing')
       - run:
          working_directory: koyolympus 
-         command: php artisan migrate
+         command: php artisan migrate --env=testing
 
       - run: ./vendor/bin/phpunit
