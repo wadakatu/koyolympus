@@ -45,5 +45,9 @@ jobs:
          working_directory: koyolympus
          command: php artisan command:checkdb
 
+      - run:
+         working_directory: koyolympus
+         command: php artisan migrate
+
       - run: 
          command: ./vendor/bin/phpunit  
