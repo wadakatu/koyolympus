@@ -42,5 +42,8 @@ jobs:
          command: php artisan key:generate
 
       - run: 
-         working_directory: koylympus
-         command: vendor/bin/phpunit  
+         working_directory: koyolympus
+         command: php artisan command:checkdb
+
+      - run: 
+         command: ./vendor/bin/phpunit  
