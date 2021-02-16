@@ -8,7 +8,7 @@ jobs:
           - APP_ENV: testing
           - DB_CONNECTION: mysql
           - DB_DATABASE: koyolympus_test
-          - DB_USERNAME: koyo
+          - DB_USERNAME: root
 
       - image: circleci/mysql:5.7-ram
         environment:
