@@ -12,6 +12,7 @@
     {{--  <!-- Styles -->--}}
     {{--  <link href="{{ mix('/css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/reset.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>

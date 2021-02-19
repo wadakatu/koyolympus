@@ -1,7 +1,7 @@
 .idea/
 /node_modules
 /public/js
-/public/css
+index.css
 /public/hot
 /public/storage
 /public/image/portrait.jpeg
