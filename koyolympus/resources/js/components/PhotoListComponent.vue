@@ -96,9 +96,9 @@ export default {
 h2 {
     color: #fff;
     position: absolute;
-    font-size: 35px;
+    font-size: 40px;
     top: 50%;
-    left: 25%;
+    left: 30%;
 }
 
 img {
