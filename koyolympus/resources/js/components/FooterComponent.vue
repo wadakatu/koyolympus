@@ -37,4 +37,31 @@ nav ul li {
     margin-right: 35px;
 }
 
+@media screen and (max-width: 950px) {
+    footer {
+        display: inline-block;
+        width: 100%;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    footer {
+        display: inline-block;
+        width: 100vw;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 5px;
+    }
+}
+
 </style>

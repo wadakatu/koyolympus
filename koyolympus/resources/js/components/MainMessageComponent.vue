@@ -1,12 +1,14 @@
 <template>
     <div class="col">
-        <h1>Koyolympus</h1>
-        <p>
-            Photography is a means of capturing and preserving the instant that doesn't come twice.
-            That's why I cannot stop exploring the world with my camera gear to cut out the exact moment
-            that I would like to keep as it is.
-        </p>
-        <button class="button" @click="this.photo">Explore My Photo</button>
+        <div class="profile">
+            <h1>Koyolympus</h1>
+            <p>
+                Photography is a means of capturing and preserving the instant that doesn't come twice.
+                That's why I cannot stop exploring the world with my camera gear to cut out the exact moment
+                that I would like to keep as it is.
+            </p>
+            <button class="button" @click="this.photo">Explore My Photo</button>
+        </div>
     </div>
 </template>
 
@@ -55,6 +57,86 @@ button {
     outline: none;
     margin-top: 30px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1150px) {
+    .col {
+        flex-basis: 50%;
+    }
+
+    .profile h1 {
+        color: #fff;
+        font-size: 80px;
+    }
+
+    .profile p {
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .profile {
+        text-align: center;
+    }
+
+    .profile h1 {
+        color: #fff;
+        font-size: 60px;
+        margin-top: 20px;
+    }
+
+    .profile p {
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .profile button {
+        width: 180px;
+        color: #000;
+        font-size: 12px;
+        padding: 12px 0;
+        background: #fff;
+        border: 0;
+        border-radius: 20px;
+        outline: none;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .profile {
+        text-align: center;
+    }
+
+    .profile h1 {
+        color: #fff;
+        font-size: 50px;
+    }
+
+    .profile p {
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .profile button {
+        width: 180px;
+        color: #000;
+        font-size: 12px;
+        padding: 12px 0;
+        background: #fff;
+        border: 0;
+        border-radius: 20px;
+        outline: none;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
 }
 
 </style>

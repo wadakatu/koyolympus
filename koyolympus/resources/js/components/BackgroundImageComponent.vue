@@ -39,4 +39,36 @@ export default {
     height: 75%;
     align-items: center;
 }
+
+@media screen and (max-width: 950px) {
+    .container {
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
+        background-position: center;
+        background-repeat: repeat;
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100vw;
+        height: 100vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
+        background-position: center;
+        background-size: cover;
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+}
 </style>

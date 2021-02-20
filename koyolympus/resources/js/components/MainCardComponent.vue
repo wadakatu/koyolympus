@@ -126,4 +126,51 @@ p {
     text-shadow: 0 0 15px #000;
 }
 
+@media screen and (max-width: 1150px) {
+    .col {
+        flex-basis: 50%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 950px) {
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 25px;
+    }
+
+    .card_detail {
+        height: 10vh;
+        width: 60vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10vh;
+    }
+
+    .card_detail {
+        height: 8vh;
+        width: 45vh;
+        margin-top: 2vh;
+    }
+}
+
 </style>

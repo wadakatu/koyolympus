@@ -2652,6 +2652,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MainMessageComponent.vue",
   methods: {
@@ -3281,6 +3283,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SidebarMenuComponent.vue",
   props: {
@@ -3289,6 +3305,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showNav: function showNav() {
       this.showSidebar = !this.showSidebar;
+    },
+    photo: function photo() {
+      var url = '/photo';
+      this.$store.commit('photo/setUrl', url);
+      this.$store.commit('photo/setGenre', null);
+      this.$router.push({
+        name: 'photo.all'
+      })["catch"](function (err) {});
+      this.showSidebar = false;
+    },
+    noneNav: function noneNav() {
+      this.showSidebar = false;
     }
   }
 });
@@ -7761,7 +7789,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 60px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 30px;\n  padding: 10px;\n  float: left;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 80px;\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 55px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 25px;\n  padding: 10px;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 70px;\n  cursor: pointer;\n  padding-left: 5px;\n}\n@media screen and (max-width: 950px) {\n.container[data-v-7063ac4d] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 5vw;\n    padding: 5px;\n    min-height: calc(100vh - 20px);\n    background-color: transparent;\n    border: solid #fff;\n    border-width: 0 1px 0 0;\n    transition: all 0.5s ease-in-out;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 12px;\n    text-align: center;\n}\nimg[data-v-7063ac4d] {\n    width: 25px;\n    margin-top: 80px;\n    cursor: pointer;\n}\n}\n@media screen and (max-width: 760px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    justify-content: center;\n    align-items: center;\n    width: 25px;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 16vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    margin-top: 20px;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -7837,7 +7865,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-5acd839a] {\n    flex-basis: 50%;\n}\n.intro[data-v-5acd839a] {\n    text-align: center;\n}\nh1[data-v-5acd839a] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    text-align: center;\n}\nh4[data-v-5acd839a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-5acd839a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-5acd839a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-5acd839a] {\n    flex-basis: 50%;\n}\n.intro[data-v-5acd839a] {\n    text-align: center;\n}\nh1[data-v-5acd839a] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    text-align: center;\n}\nh4[data-v-5acd839a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-5acd839a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-5acd839a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-5acd839a] {\n        flex-basis: 50%;\n        height: 35vh;\n        width: 70vw;\n        overflow: scroll;\n}\n.intro[data-v-5acd839a] {\n        text-align: center;\n}\nh1[data-v-5acd839a] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 10px;\n        text-align: center;\n}\nh4[data-v-5acd839a] {\n        color: #fff;\n        font-size: 12px;\n}\nh5[data-v-5acd839a] {\n        color: #fff;\n        font-size: 17px;\n        border-bottom: solid 2px #1f6fb2;\n        margin-bottom: 10px;\n}\nbutton[data-v-5acd839a] {\n        width: 100px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7856,7 +7884,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-6f1d6a3a] {\n    flex-basis: 50%;\n}\n.intro[data-v-6f1d6a3a] {\n    text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 40px;\n    font-weight: 500;\n    margin-bottom: 15px;\n    text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-6f1d6a3a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-6f1d6a3a] {\n    flex-basis: 50%;\n}\n.intro[data-v-6f1d6a3a] {\n    text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 40px;\n    font-weight: 500;\n    margin-bottom: 15px;\n    text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-6f1d6a3a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-6f1d6a3a] {\n        flex-basis: 50%;\n        height: 35vh;\n        width: 70vw;\n        overflow: scroll;\n}\n.intro[data-v-6f1d6a3a] {\n        text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 10px;\n        text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 12px;\n}\nh5[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 17px;\n        border-bottom: solid 2px #1f6fb2;\n        margin-bottom: 10px;\n}\nbutton[data-v-6f1d6a3a] {\n        width: 100px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7875,7 +7903,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-050e6212] {\n    flex-basis: 50%;\n}\n.intro[data-v-050e6212] {\n    text-align: center;\n}\nh1[data-v-050e6212] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 15px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-050e6212] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-050e6212] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-050e6212] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-050e6212] {\n    flex-basis: 50%;\n}\n.intro[data-v-050e6212] {\n    text-align: center;\n}\nh1[data-v-050e6212] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 15px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-050e6212] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-050e6212] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-050e6212] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-050e6212] {\n        flex-basis: 50%;\n        height: 35vh;\n        width: 70vw;\n        overflow: scroll;\n}\n.intro[data-v-050e6212] {\n        text-align: center;\n}\nh1[data-v-050e6212] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 10px;\n        text-align: center;\n}\nh4[data-v-050e6212] {\n        color: #fff;\n        font-size: 12px;\n}\nh5[data-v-050e6212] {\n        color: #fff;\n        font-size: 17px;\n        border-bottom: solid 2px #1f6fb2;\n        margin-bottom: 10px;\n}\nbutton[data-v-050e6212] {\n        width: 100px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7894,7 +7922,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-71def8e9] {\n    flex-basis: 50%;\n}\n.intro[data-v-71def8e9] {\n    text-align: center;\n}\nh1[data-v-71def8e9] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-71def8e9] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-71def8e9] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-71def8e9] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n", ""]);
+exports.push([module.i, "\n.col[data-v-71def8e9] {\n    flex-basis: 50%;\n}\n.intro[data-v-71def8e9] {\n    text-align: center;\n}\nh1[data-v-71def8e9] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-71def8e9] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-71def8e9] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-71def8e9] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-71def8e9] {\n        flex-basis: 50%;\n        height: 35vh;\n        width: 70vw;\n        overflow: scroll;\n}\n.intro[data-v-71def8e9] {\n        text-align: center;\n}\nh1[data-v-71def8e9] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 10px;\n        text-align: center;\n}\nh4[data-v-71def8e9] {\n        color: #fff;\n        font-size: 12px;\n}\nh5[data-v-71def8e9] {\n        color: #fff;\n        font-size: 17px;\n        border-bottom: solid 2px #1f6fb2;\n        margin-bottom: 10px;\n}\nbutton[data-v-71def8e9] {\n        width: 100px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 5px;\n}\n}\n", ""]);
 
 // exports
 
@@ -7913,7 +7941,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-2b0ecc82] {\n    flex-basis: 50%;\n}\n.intro[data-v-2b0ecc82] {\n    text-align: center;\n}\nh1[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-2b0ecc82] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-2b0ecc82] {\n    flex-basis: 50%;\n}\n.intro[data-v-2b0ecc82] {\n    text-align: center;\n}\nh1[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-2b0ecc82] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-2b0ecc82] {\n        flex-basis: 50%;\n        height: 35vh;\n        width: 70vw;\n        overflow: scroll;\n}\n.intro[data-v-2b0ecc82] {\n        text-align: center;\n}\nh1[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 10px;\n        text-align: center;\n}\nh4[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 12px;\n}\nh5[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 17px;\n        border-bottom: solid 2px #1f6fb2;\n        margin-bottom: 10px;\n}\nbutton[data-v-2b0ecc82] {\n        width: 100px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7932,7 +7960,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-16279a1b] {\n    width: 100%;\n    height: 100vh;\n    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n    background-position: center;\n    background-size: cover;\n    padding-left: 8%;\n    padding-right: 8%;\n    box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n    display: flex;\n    height: 75%;\n    align-items: center;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-16279a1b] {\n    width: 100%;\n    height: 100vh;\n    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n    background-position: center;\n    background-size: cover;\n    padding-left: 8%;\n    padding-right: 8%;\n    box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n    display: flex;\n    height: 75%;\n    align-items: center;\n}\n@media screen and (max-width: 950px) {\n.container[data-v-16279a1b] {\n        width: 100%;\n        height: 100vh;\n        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n        background-position: center;\n        background-repeat: repeat;\n        box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n        display: flex;\n        flex-direction: column;\n}\n}\n@media screen and (max-width: 480px) {\n.container[data-v-16279a1b] {\n        width: 100vw;\n        height: 100vh;\n        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n        background-position: center;\n        background-size: cover;\n        box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n        display: flex;\n        flex-direction: column;\n}\n}\n", ""]);
 
 // exports
 
@@ -7970,7 +7998,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nimg[data-v-abfbddf2] {\n    width: 35px;\n}\nfooter[data-v-abfbddf2] {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    width: 100%;\n    text-align: center;\n}\nnav ul li[data-v-abfbddf2] {\n    display: inline-block;\n    margin-left: 35px;\n    margin-right: 35px;\n}\n\n", ""]);
+exports.push([module.i, "\nimg[data-v-abfbddf2] {\n    width: 35px;\n}\nfooter[data-v-abfbddf2] {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    width: 100%;\n    text-align: center;\n}\nnav ul li[data-v-abfbddf2] {\n    display: inline-block;\n    margin-left: 35px;\n    margin-right: 35px;\n}\n@media screen and (max-width: 950px) {\nfooter[data-v-abfbddf2] {\n        display: inline-block;\n        width: 100%;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 35px;\n        margin-right: 35px;\n}\n}\n@media screen and (max-width: 480px) {\nfooter[data-v-abfbddf2] {\n        display: inline-block;\n        width: 100vw;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 20px;\n        margin-right: 20px;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7989,7 +8017,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n    z-index: 999;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n\n", ""]);
+exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n    z-index: 999;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n@media screen and (max-width: 760px) {\n.logo[data-v-153bfd55] {\n        width: 150px;\n        text-align: center;\n}\nnav[data-v-153bfd55] {\n        display: none;\n}\n.menu-icon[data-v-153bfd55] {\n        position: fixed;\n        right: 20%;\n}\n.sidebar[data-v-153bfd55] {\n        position: fixed;\n        right: 0;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8008,7 +8036,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.language[data-v-38313fce] {\n    margin-left: 85%;\n    background-color: #1a5293;\n    color: #fff;\n    position: relative;\n    list-style-type: none;\n    width: 75px;\n    height: 25px;\n}\n.language li[data-v-38313fce] {\n    width: 25%;\n    margin: 0;\n    padding: 0;\n    text-align: center;\n}\n.language ul a[data-v-38313fce] {\n    display: block;\n    margin: 0;\n    padding: 13px 0;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 1;\n    text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n    list-style: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    margin: 0;\n    padding: 0;\n}\n.language li ul li[data-v-38313fce] {\n    overflow: hidden;\n    width: 75px;\n    height: 0;\n    color: #fff;\n    transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n    padding: 13px 15px;\n    background: #1a5293;\n    text-align: center;\n    font-size: 12px;\n    font-weight: normal;\n}\n.language li:hover > a[data-v-38313fce] {\n    background: #1a5293;\n    color: #e0dc62;\n}\n.language li:hover ul li[data-v-38313fce] {\n    overflow: visible;\n    height: 38px;\n    border-bottom: 1px solid #fff;\n}\n.language li:hover ul li[data-v-38313fce]:first-child {\n    border-top: 0;\n}\n.language li:hover ul li[data-v-38313fce]:last-child {\n    border-bottom: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n.language[data-v-38313fce] {\n    margin-left: 85%;\n    background-color: #1a5293;\n    color: #fff;\n    position: relative;\n    list-style-type: none;\n    width: 75px;\n    height: 25px;\n    z-index: 990;\n}\n.language li[data-v-38313fce] {\n    width: 25%;\n    margin: 0;\n    padding: 0;\n    text-align: center;\n}\n.language ul a[data-v-38313fce] {\n    display: block;\n    margin: 0;\n    padding: 13px 0;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 1;\n    text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n    list-style: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    margin: 0;\n    padding: 0;\n}\n.language li ul li[data-v-38313fce] {\n    overflow: hidden;\n    width: 75px;\n    height: 0;\n    color: #fff;\n    transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n    padding: 13px 15px;\n    background: #1a5293;\n    text-align: center;\n    font-size: 12px;\n    font-weight: normal;\n}\n.language li:hover > a[data-v-38313fce] {\n    background: #1a5293;\n    color: #e0dc62;\n}\n.language li:hover ul li[data-v-38313fce] {\n    overflow: visible;\n    height: 38px;\n    border-bottom: 1px solid #fff;\n}\n.language li:hover ul li[data-v-38313fce]:first-child {\n    border-top: 0;\n}\n.language li:hover ul li[data-v-38313fce]:last-child {\n    border-bottom: 0;\n}\n@media screen and (max-width: 950px) {\n.language[data-v-38313fce] {\n        margin-left: 45vw;\n        background-color: #1a5293;\n        color: #fff;\n        position: relative;\n        list-style-type: none;\n        width: 20vw;\n        height: 3vh;\n        z-index: 900;\n}\n.language li[data-v-38313fce] {\n        width: 20vw;\n        margin: 0;\n        padding: 0;\n        text-align: center;\n}\n.language ul a[data-v-38313fce] {\n        display: block;\n        margin: 0;\n        padding: 13px 0;\n        color: #fff;\n        font-size: 25px;\n        font-weight: bold;\n        line-height: 1;\n        text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n        list-style: none;\n        position: relative;\n        top: 100%;\n        left: 0;\n        margin: 0;\n        padding: 0;\n        z-index: 900;\n}\n.language li ul li[data-v-38313fce] {\n        overflow: hidden;\n        width: 20vw;\n        height: 0;\n        color: #fff;\n        transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n        padding: 13px 15px;\n        background: #1a5293;\n        text-align: center;\n        font-size: 16px;\n        font-weight: normal;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8065,7 +8093,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-3ef095b9] {\n    flex-basis: 50%;\n}\n.card[data-v-3ef095b9] {\n    display: flex;\n    justify-content: center;\n    flex-wrap: wrap;\n}\n.card_detail[data-v-3ef095b9] {\n    position: relative;\n    width: 30vh;\n    height: 32vh;\n    border-radius: 10px;\n    padding: 15px 25px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n    transition: transform 0.5s;\n}\n.landscape[data-v-3ef095b9] {\n    background-image: url('/images/yellow.jpeg');\n}\n.animal[data-v-3ef095b9] {\n    background-image: url('/images/cat.jpeg');\n}\n.portrait[data-v-3ef095b9] {\n    background-image: url('/images/portrait.jpeg');\n}\n.others[data-v-3ef095b9] {\n    background-image: url('/images/wine.jpeg');\n}\n.card_detail[data-v-3ef095b9]:hover {\n    transform: translateY(-10px);\n}\nh5[data-v-3ef095b9] {\n    color: #fff;\n    text-shadow: 0 0 5px #999;\n}\np[data-v-3ef095b9] {\n    color: #fff;\n    font-size: 11px;\n    text-shadow: 0 0 15px #000;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-3ef095b9] {\n    flex-basis: 50%;\n}\n.card[data-v-3ef095b9] {\n    display: flex;\n    justify-content: center;\n    flex-wrap: wrap;\n}\n.card_detail[data-v-3ef095b9] {\n    position: relative;\n    width: 30vh;\n    height: 32vh;\n    border-radius: 10px;\n    padding: 15px 25px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n    transition: transform 0.5s;\n}\n.landscape[data-v-3ef095b9] {\n    background-image: url('/images/yellow.jpeg');\n}\n.animal[data-v-3ef095b9] {\n    background-image: url('/images/cat.jpeg');\n}\n.portrait[data-v-3ef095b9] {\n    background-image: url('/images/portrait.jpeg');\n}\n.others[data-v-3ef095b9] {\n    background-image: url('/images/wine.jpeg');\n}\n.card_detail[data-v-3ef095b9]:hover {\n    transform: translateY(-10px);\n}\nh5[data-v-3ef095b9] {\n    color: #fff;\n    text-shadow: 0 0 5px #999;\n}\np[data-v-3ef095b9] {\n    color: #fff;\n    font-size: 11px;\n    text-shadow: 0 0 15px #000;\n}\n@media screen and (max-width: 1150px) {\n.col[data-v-3ef095b9] {\n        flex-basis: 50%;\n}\n.card[data-v-3ef095b9] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n}\n.card_detail[data-v-3ef095b9] {\n        height: 15vh;\n        width: 30vw;\n}\n}\n@media screen and (max-width: 950px) {\n.card[data-v-3ef095b9] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding-bottom: 25px;\n}\n.card_detail[data-v-3ef095b9] {\n        height: 10vh;\n        width: 60vh;\n}\n}\n@media screen and (max-width: 480px) {\n.card[data-v-3ef095b9] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding-bottom: 10vh;\n}\n.card_detail[data-v-3ef095b9] {\n        height: 8vh;\n        width: 45vh;\n        margin-top: 2vh;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8084,7 +8112,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-23d29dfa] {\n    flex-basis: 50%;\n}\nh1[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 95px;\n}\np[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 13px;\n    line-height: 18px;\n}\nbutton[data-v-23d29dfa] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 30px;\n    cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-23d29dfa] {\n    flex-basis: 50%;\n}\nh1[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 95px;\n}\np[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 13px;\n    line-height: 18px;\n}\nbutton[data-v-23d29dfa] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 30px;\n    cursor: pointer;\n}\n@media screen and (max-width: 1150px) {\n.col[data-v-23d29dfa] {\n        flex-basis: 50%;\n}\n.profile h1[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 80px;\n}\n.profile p[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 13px;\n        line-height: 20px;\n}\n}\n@media screen and (max-width: 950px) {\n.profile[data-v-23d29dfa] {\n        text-align: center;\n}\n.profile h1[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 60px;\n        margin-top: 20px;\n}\n.profile p[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 13px;\n        line-height: 20px;\n}\n.profile button[data-v-23d29dfa] {\n        width: 180px;\n        color: #000;\n        font-size: 12px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 20px;\n        margin-bottom: 10px;\n        cursor: pointer;\n}\n}\n@media screen and (max-width: 480px) {\n.profile[data-v-23d29dfa] {\n        text-align: center;\n}\n.profile h1[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 50px;\n}\n.profile p[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 13px;\n        line-height: 20px;\n}\n.profile button[data-v-23d29dfa] {\n        width: 180px;\n        color: #000;\n        font-size: 12px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 20px;\n        margin-bottom: 10px;\n        cursor: pointer;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -46859,7 +46887,10 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("sidebar-menu-component", { attrs: { showSidebar: _vm.showSidebars } })
+      _c("sidebar-menu-component", {
+        staticClass: "sidebar",
+        attrs: { showSidebar: _vm.showSidebars }
+      })
     ],
     1
   )
@@ -47266,16 +47297,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col" }, [
-    _c("h1", [_vm._v("Koyolympus")]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(
-        "\n        Photography is a means of capturing and preserving the instant that doesn't come twice.\n        That's why I cannot stop exploring the world with my camera gear to cut out the exact moment\n        that I would like to keep as it is.\n    "
-      )
-    ]),
-    _vm._v(" "),
-    _c("button", { staticClass: "button", on: { click: this.photo } }, [
-      _vm._v("Explore My Photo")
+    _c("div", { staticClass: "profile" }, [
+      _c("h1", [_vm._v("Koyolympus")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n            Photography is a means of capturing and preserving the instant that doesn't come twice.\n            That's why I cannot stop exploring the world with my camera gear to cut out the exact moment\n            that I would like to keep as it is.\n        "
+        )
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "button", on: { click: this.photo } }, [
+        _vm._v("Explore My Photo")
+      ])
     ])
   ])
 }
@@ -47807,38 +47840,58 @@ var render = function() {
       staticClass: "container"
     },
     [
-      _c(
-        "div",
-        { staticClass: "navigation-icons" },
-        [
-          _c("router-link", { attrs: { to: { name: "about.me" } } }, [
-            _c("img", { attrs: { src: "/images/human.png" } })
+      _c("div", { staticClass: "navigation-icons" }, [
+        _c("ul", { on: { click: _vm.noneNav } }, [
+          _c(
+            "li",
+            [
+              _c("router-link", { attrs: { to: { name: "about.me" } } }, [
+                _c("img", { attrs: { src: "/images/human.png" } })
+              ]),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: { name: "about.me" } } }, [
+                _c("p", [_vm._v("About Me")])
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("li", [
+            _c("img", { attrs: { src: "/images/camera.png" } }),
+            _vm._v(" "),
+            _c("p", { on: { click: _vm.photo } }, [_vm._v("Photo")])
           ]),
           _vm._v(" "),
-          _c("p", [_vm._v("About Me")]),
-          _vm._v(" "),
-          _c("img", { attrs: { src: "/images/camera.png" } }),
-          _vm._v(" "),
-          _c("p", [_vm._v("Photo")]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
-            _c("img", { attrs: { src: "/images/mail.png" } })
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Inquiry")]),
+          _c(
+            "li",
+            [
+              _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
+                _c("img", { attrs: { src: "/images/mail.png" } })
+              ]),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
+                _c("p", [_vm._v("Inquiry")])
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
-          _c("p", [_vm._v("github")]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "login" } } }, [
-            _c("img", { attrs: { src: "/images/photo.png" } })
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("upload")])
-        ],
-        1
-      )
+          _c(
+            "li",
+            { staticClass: "upload" },
+            [
+              _c("router-link", { attrs: { to: { name: "login" } } }, [
+                _c("img", { attrs: { src: "/images/photo.png" } })
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("upload")])
+            ],
+            1
+          )
+        ])
+      ])
     ]
   )
 }
@@ -47847,11 +47900,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { attrs: { href: "https://github.com/wadakatu/koyolympus" } },
-      [_c("img", { attrs: { src: "/images/github.png" } })]
-    )
+    return _c("li", [
+      _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [
+        _c("img", { attrs: { src: "/images/github.png" } })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [
+        _c("p", [_vm._v("github")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

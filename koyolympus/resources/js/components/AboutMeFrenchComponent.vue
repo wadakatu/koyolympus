@@ -71,4 +71,49 @@ button {
     outline: none;
     margin-top: 9px;
 }
+
+@media screen and (max-width: 950px) {
+    .col {
+        flex-basis: 50%;
+        height: 35vh;
+        width: 70vw;
+        overflow: scroll;
+    }
+
+    .intro {
+        text-align: center;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 30px;
+        font-weight: 400;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    h4 {
+        color: #fff;
+        font-size: 12px;
+    }
+
+    h5 {
+        color: #fff;
+        font-size: 17px;
+        border-bottom: solid 2px #1f6fb2;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100px;
+        color: #000;
+        font-size: 11px;
+        padding: 12px 0;
+        background: #fff;
+        border: 0;
+        border-radius: 20px;
+        outline: none;
+        margin-top: 5px;
+    }
+}
 </style>

@@ -17,7 +17,7 @@
             </nav>
             <img src="/images/menu.png" class="menu-icon" @click="showNav">
         </div>
-        <sidebar-menu-component v-bind:showSidebar="showSidebars"></sidebar-menu-component>
+        <sidebar-menu-component v-bind:showSidebar="showSidebars" class="sidebar"></sidebar-menu-component>
     </div>
 </template>
 
@@ -42,8 +42,9 @@ export default {
             let url = '/photo';
             this.$store.commit('photo/setUrl', url);
             this.$store.commit('photo/setGenre', null);
-            this.$router.push({name: 'photo.all'}).catch(err => {});
-        }
+            this.$router.push({name: 'photo.all'}).catch(err => {
+            });
+        },
     },
 }
 </script>
@@ -55,6 +56,7 @@ export default {
     display: flex;
     align-items: center;
     padding-top: 20px;
+    z-index: 999;
 }
 
 .logo {
@@ -66,7 +68,6 @@ export default {
     width: 30px;
     cursor: pointer;
     margin-left: 40px;
-    z-index: 999;
 }
 
 nav {
@@ -84,6 +85,27 @@ nav ul li a {
     text-decoration: none;
     color: #fff;
     font-size: 15px;
+}
+
+@media screen and (max-width: 760px) {
+    .logo {
+        width: 150px;
+        text-align: center;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .menu-icon {
+        position: fixed;
+        right: 20%;
+    }
+
+    .sidebar {
+        position: fixed;
+        right: 0;
+    }
 }
 
 </style>
