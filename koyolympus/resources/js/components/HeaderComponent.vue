@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="navbar">
-            <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png" class="logo"></router-link>
+            <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png"
+                                                                                 class="logo"></router-link>
             <nav>
                 <ul>
                     <li><a href="">
@@ -17,7 +18,8 @@
             </nav>
             <img src="/images/menu.png" class="menu-icon" @click="showNav">
         </div>
-        <sidebar-menu-component v-bind:showSidebar="showSidebars" class="sidebar"></sidebar-menu-component>
+        <sidebar-menu-component v-bind:showSidebar="showSidebars" @close="showSidebars = false"
+                                class="sidebar"></sidebar-menu-component>
     </div>
 </template>
 
@@ -100,6 +102,7 @@ nav ul li a {
     .menu-icon {
         position: fixed;
         right: 20%;
+        width: 40px;
     }
 
     .sidebar {

@@ -116,7 +116,7 @@ export default {
 
 .contactForm h1 {
     font-size: 40px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     color: #fff;
     font-weight: 500;
     text-align: center;
@@ -125,7 +125,7 @@ export default {
 .contactForm .inputBox {
     position: relative;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .contactForm .inputBox input,

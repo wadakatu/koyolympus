@@ -45,7 +45,7 @@ h1 {
     color: #fff;
     font-size: 40px;
     font-weight: 500;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
@@ -58,7 +58,7 @@ h5 {
     color: #fff;
     font-size: 19px;
     border-bottom: solid 2px #1f6fb2;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 button {
@@ -70,15 +70,15 @@ button {
     border: 0;
     border-radius: 20px;
     outline: none;
-    margin-top: 9px;
+    margin-top: 1vh;
 }
 
 @media screen and (max-width: 950px) {
     .col {
         flex-basis: 50%;
-        height: 35vh;
+        height: 100vh;
         width: 70vw;
-        overflow: scroll;
+        padding: 2vh;
     }
 
     .intro {
@@ -89,24 +89,23 @@ button {
         color: #fff;
         font-size: 30px;
         font-weight: 400;
-        margin-bottom: 10px;
+        margin-bottom: 2vh;
         text-align: center;
     }
 
     h4 {
         color: #fff;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     h5 {
         color: #fff;
-        font-size: 17px;
+        font-size: 19px;
         border-bottom: solid 2px #1f6fb2;
-        margin-bottom: 10px;
     }
 
     button {
-        width: 100px;
+        width: 130px;
         color: #000;
         font-size: 11px;
         padding: 12px 0;
@@ -114,7 +113,51 @@ button {
         border: 0;
         border-radius: 20px;
         outline: none;
-        margin-top: 5px;
+        margin-top: 1vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .col {
+        flex-basis: 50%;
+        height: 100vh;
+        width: 70vw;
+        padding: 3vh;
+    }
+
+    .intro {
+        text-align: center;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 30px;
+        font-weight: 400;
+        margin-bottom: 2vh;
+        text-align: center;
+    }
+
+    h4 {
+        color: #fff;
+        font-size: 14px;
+    }
+
+    h5 {
+        color: #fff;
+        font-size: 19px;
+        border-bottom: solid 2px #1f6fb2;
+    }
+
+    button {
+        width: 130px;
+        color: #000;
+        font-size: 11px;
+        padding: 12px 0;
+        background: #fff;
+        border: 0;
+        border-radius: 20px;
+        outline: none;
+        margin-top: 3vh;
     }
 }
 

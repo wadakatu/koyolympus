@@ -2,7 +2,7 @@
 <template>
     <div class="container" v-show="showSidebar">
         <div class="navigation-icons">
-            <ul @click="noneNav">
+            <ul @click="$emit('close')">
                 <li>
                     <router-link v-bind:to="{name: 'about.me'}"><img src="/images/human.png">
                     </router-link>
@@ -45,11 +45,7 @@ export default {
             this.$store.commit('photo/setGenre', null);
             this.$router.push({name: 'photo.all'}).catch(err => {
             });
-            this.showSidebar = false;
         },
-        noneNav() {
-            this.showSidebar = false;
-        }
     },
 }
 </script>
@@ -135,7 +131,7 @@ img {
 
     .navigation-icons ul {
         position: fixed;
-        top: 16vh;
+        top: 15vh;
         right: 0;
         width: 100vw;
         background: #1b1e21;
@@ -144,7 +140,59 @@ img {
 
     .navigation-icons li {
         border-bottom: solid 1px #fff;
-        margin-top: 20px;
+        padding: 1vh;
+        margin-top: 1vh;
+    }
+
+    .navigation-icons li a {
+        text-decoration: none;
+    }
+
+    .navigation-icons p {
+        color: #fff;
+        font-size: 33px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    img {
+        display: none;
+    }
+
+    .upload {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        border: 0 solid #fff;
+        padding: 5px;
+        transition: all .5s ease-in-out;
+        z-index: 999;
+    }
+
+    .navigation-icons {
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        padding: 10px;
+    }
+
+    .navigation-icons ul {
+        position: fixed;
+        top: 13vh;
+        right: 0;
+        width: 100vw;
+        background: #1b1e21;
+        opacity: 0.9;
+    }
+
+    .navigation-icons li {
+        border-bottom: solid 1px #fff;
+        padding: 1vh;
+        margin-top: 1vh;
     }
 
     .navigation-icons li a {
@@ -155,6 +203,7 @@ img {
         color: #fff;
         font-size: 30px;
         text-align: center;
+        font-weight: bold;
     }
 
     img {
