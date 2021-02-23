@@ -381,7 +381,7 @@ export default {
 @media screen and (max-width: 480px) {
     .contact {
         position: relative;
-        min-height: 85vh;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -397,7 +397,7 @@ export default {
 
     .contactForm {
         width: 100vw;
-        height: 75vh;
+        height: 100%;
         padding: 30px;
         background: transparent;
         text-align: center;
@@ -437,11 +437,8 @@ export default {
     }
 
     .contactForm .inputBox span {
-        position: absolute;
-        left: 0;
-        padding: 5px 0;
+        position: static;
         font-size: 16px;
-        margin: 10px 0;
         pointer-events: none;
         transition: 0.5s;
         color: #fff;
