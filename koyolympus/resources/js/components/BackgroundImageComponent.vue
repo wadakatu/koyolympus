@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
     background-position: center;
     background-size: cover;
@@ -43,7 +43,7 @@ export default {
 @media screen and (max-width: 950px) {
     .container {
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
         background-position: center;
         background-repeat: repeat;
@@ -59,7 +59,7 @@ export default {
 @media screen and (max-width: 480px) {
     .container {
         width: 100vw;
-        height: 100vh;
+        height: 100%;
         background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
         background-position: center;
         background-size: cover;
