@@ -101,7 +101,7 @@ nav ul li a {
 
     .menu-icon {
         width: 40px;
-        margin-left: 70px;
+        margin-left: 80px;
     }
 
     .sidebar {
