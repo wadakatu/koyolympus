@@ -52,7 +52,7 @@ nav ul li {
 
 @media screen and (max-width: 480px) {
     footer {
-        display: inline-block;
+        display: none;
         width: 100vw;
     }
 

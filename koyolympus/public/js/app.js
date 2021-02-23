@@ -2222,21 +2222,27 @@ __webpack_require__.r(__webpack_exports__);
       this.isPush = true;
       this.errors = {};
       var self = this;
-      axios.post('/api/bizinq/send', this.params).then(function (response) {
-        _this.reset();
+      var confirm = window.confirm('Would it be okay to send this inquiry?\nこの内容で送信してよろしいですか？');
 
-        self.sentEmail = true;
-      })["catch"](function (error) {
-        var errors = {};
+      if (!confirm) {
+        this.isPush = false;
+      } else {
+        axios.post('/api/bizinq/send', this.params).then(function (response) {
+          _this.reset();
 
-        for (var key in error.response.data.errors) {
-          if (error.response.data.errors.hasOwnProperty(key)) {
-            errors[key] = error.response.data.errors[key].join('<br>');
+          self.sentEmail = true;
+        })["catch"](function (error) {
+          var errors = {};
+
+          for (var key in error.response.data.errors) {
+            if (error.response.data.errors.hasOwnProperty(key)) {
+              errors[key] = error.response.data.errors[key].join('<br>');
+            }
           }
-        }
 
-        self.errors = errors;
-      });
+          self.errors = errors;
+        });
+      }
     },
     reset: function reset() {
       Object.assign(this.$data, this.$options.data.call(this));
@@ -3304,6 +3310,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7823,7 +7844,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 55px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 25px;\n  padding: 10px;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 70px;\n  cursor: pointer;\n  padding-left: 5px;\n}\n@media screen and (max-width: 950px) {\n.container[data-v-7063ac4d] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 5vw;\n    padding: 5px;\n    min-height: calc(100vh - 20px);\n    background-color: transparent;\n    border: solid #fff;\n    border-width: 0 1px 0 0;\n    transition: all 0.5s ease-in-out;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 12px;\n    text-align: center;\n}\nimg[data-v-7063ac4d] {\n    width: 25px;\n    margin-top: 80px;\n    cursor: pointer;\n}\n}\n@media screen and (max-width: 760px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    justify-content: center;\n    align-items: center;\n    width: 25px;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 15vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    padding: 1vh;\n    margin-top: 1vh;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 33px;\n    text-align: center;\n    font-weight: bold;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n}\n@media screen and (max-width: 480px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    justify-content: center;\n    align-items: center;\n    width: 25px;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 13vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    padding: 1vh;\n    margin-top: 1vh;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    font-weight: bold;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 55px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 25px;\n  padding: 10px;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 70px;\n  cursor: pointer;\n  padding-left: 5px;\n}\n.insta[data-v-7063ac4d] {\n  display: none;\n}\n.facebook[data-v-7063ac4d] {\n  display: none;\n}\n.twitter[data-v-7063ac4d] {\n  display: none;\n}\n@media screen and (max-width: 950px) {\n.container[data-v-7063ac4d] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 5vw;\n    padding: 5px;\n    min-height: calc(100vh - 20px);\n    background-color: transparent;\n    border: solid #fff;\n    border-width: 0 1px 0 0;\n    transition: all 0.5s ease-in-out;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 12px;\n    text-align: center;\n}\nimg[data-v-7063ac4d] {\n    width: 25px;\n    margin-top: 80px;\n    cursor: pointer;\n}\n}\n@media screen and (max-width: 760px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    justify-content: center;\n    align-items: center;\n    width: 25px;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 15vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    padding: 1vh;\n    margin-top: 1vh;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 33px;\n    text-align: center;\n    font-weight: bold;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n}\n@media screen and (max-width: 480px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 15vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    padding: 1vh;\n    margin-top: 1vh;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    font-weight: bold;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n.insta[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n}\n.facebook[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n}\n.twitter[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n}\n}", ""]);
 
 // exports
 
@@ -8013,7 +8034,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n.contact[data-v-f7210520] {\n    flex-basis: 50%;\n    position: relative;\n    min-height: 80vh;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.container[data-v-f7210520] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.contactForm[data-v-f7210520] {\n    width: 100%;\n    height: 65vh;\n    padding: 30px;\n    background: transparent;\n    margin-right: 30px;\n    margin-left: 40px;\n}\n.contactForm h1[data-v-f7210520] {\n    font-size: 40px;\n    margin-bottom: 20px;\n    color: #fff;\n    font-weight: 500;\n    text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n    position: relative;\n    width: 100%;\n    margin-top: 20px;\n}\n.contactForm .inputBox input[data-v-f7210520],\n.contactForm .inputBox textarea[data-v-f7210520] {\n    width: 32vw;\n    padding: 10px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    border: none;\n    border-bottom: 2px solid #1f6fb2;\n    outline: none;\n    background: transparent;\n    color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n    resize: none;\n    height: 15vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n    position: absolute;\n    left: 0;\n    padding: 5px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    pointer-events: none;\n    transition: 0.5s;\n    color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n.contactForm .inputBox input:valid ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n    color: #e91e63;\n    font-size: 12px;\n    transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    left: 18vw;\n    justify-content: space-evenly;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(50, 230, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    right: 60vw;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(233, 8, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n    border-color: #ffced1;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n    border-color: #d1ffd3;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n    color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n    color: #2eff18;\n    text-align: center;\n}\n@media (max-width: 991px) {\n.contact[data-v-f7210520] {\n        padding: 50px;\n}\n.container[data-v-f7210520] {\n        flex-direction: column;\n}\n.container .contactInfo[data-v-f7210520] {\n        margin-bottom: 40px;\n}\n.container .contactInfo[data-v-f7210520],\n    .contactForm[data-v-f7210520] {\n        width: 100%;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.contact[data-v-f7210520] {\n    flex-basis: 50%;\n    position: relative;\n    min-height: 80vh;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.container[data-v-f7210520] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.contactForm[data-v-f7210520] {\n    width: 100%;\n    height: 65vh;\n    padding: 30px;\n    background: transparent;\n    margin-right: 30px;\n    margin-left: 40px;\n}\n.contactForm h1[data-v-f7210520] {\n    font-size: 40px;\n    margin-bottom: 20px;\n    color: #fff;\n    font-weight: 500;\n    text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n    position: relative;\n    width: 100%;\n    margin-top: 20px;\n}\n.contactForm .inputBox input[data-v-f7210520],\n.contactForm .inputBox textarea[data-v-f7210520] {\n    width: 32vw;\n    padding: 10px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    border: none;\n    border-bottom: 2px solid #1f6fb2;\n    outline: none;\n    background: transparent;\n    color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n    resize: none;\n    height: 15vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n    position: absolute;\n    left: 0;\n    padding: 5px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    pointer-events: none;\n    transition: 0.5s;\n    color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n.contactForm .inputBox input:valid ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n    color: #e91e63;\n    font-size: 12px;\n    transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    left: 18vw;\n    justify-content: space-evenly;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(50, 230, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    right: 60vw;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(233, 8, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n    border-color: #ffced1;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n    border-color: #d1ffd3;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n    color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n    color: #2eff18;\n    text-align: center;\n}\n@media screen and (max-width: 950px) {\n.contact[data-v-f7210520] {\n\n        position: relative;\n        min-height: 80vh;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        flex-direction: column;\n}\n.container[data-v-f7210520] {\n        width: 100vw;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\n.contactForm[data-v-f7210520] {\n        width: 100vw;\n        height: 75vh;\n        padding: 30px;\n        background: transparent;\n        text-align: center;\n}\n.contactForm h1[data-v-f7210520] {\n        font-size: 40px;\n        margin-bottom: 20px;\n        color: #fff;\n        font-weight: 500;\n        text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n        position: relative;\n        width: 100%;\n        margin-top: 20px;\n        text-align: center;\n}\n.contactForm .inputBox input[data-v-f7210520],\n    .contactForm .inputBox textarea[data-v-f7210520] {\n        width: 60vw;\n        padding: 10px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        border: none;\n        border-bottom: 2px solid #1f6fb2;\n        outline: none;\n        background: transparent;\n        color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n        resize: none;\n        height: 15vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n        position: absolute;\n        left: 12vw;\n        padding: 5px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        pointer-events: none;\n        transition: 0.5s;\n        color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox input:valid ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n        color: #e91e63;\n        font-size: 12px;\n        transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 18vw;\n        position: fixed;\n        left: 28vw;\n        justify-content: space-evenly;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(50, 230, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 18vw;\n        position: fixed;\n        right: 28vw;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(233, 8, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n        border-color: #ffced1;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n        border-color: #d1ffd3;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n        color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n        color: #2eff18;\n        text-align: center;\n}\n}\n@media screen and (max-width: 480px) {\n.contact[data-v-f7210520] {\n        position: relative;\n        min-height: 85vh;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        flex-direction: column;\n}\n.container[data-v-f7210520] {\n        width: 100vw;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\n.contactForm[data-v-f7210520] {\n        width: 100vw;\n        height: 75vh;\n        padding: 30px;\n        background: transparent;\n        text-align: center;\n}\n.contactForm h1[data-v-f7210520] {\n        font-size: 40px;\n        margin-bottom: 2vh;\n        color: #fff;\n        font-weight: 500;\n        text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n        position: relative;\n        width: 100%;\n        margin-top: 20px;\n        text-align: center;\n}\n.contactForm .inputBox input[data-v-f7210520],\n    .contactForm .inputBox textarea[data-v-f7210520] {\n        width: 80vw;\n        padding: 10px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        border: none;\n        border-bottom: 2px solid #1f6fb2;\n        outline: none;\n        background: transparent;\n        color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n        resize: none;\n        height: 18vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n        position: absolute;\n        left: 0;\n        padding: 5px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        pointer-events: none;\n        transition: 0.5s;\n        color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox input:valid ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n        color: #e91e63;\n        font-size: 12px;\n        transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 25vw;\n        position: relative;\n        left: -5vw;\n        justify-content: space-evenly;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(50, 230, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 25vw;\n        position: relative;\n        right: -5vw;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(233, 8, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n        border-color: #ffced1;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n        border-color: #d1ffd3;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n        color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n        color: #2eff18;\n        text-align: center;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8032,7 +8053,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nimg[data-v-abfbddf2] {\n    width: 35px;\n}\nfooter[data-v-abfbddf2] {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    width: 100%;\n    text-align: center;\n}\nnav ul li[data-v-abfbddf2] {\n    display: inline-block;\n    margin-left: 35px;\n    margin-right: 35px;\n}\n@media screen and (max-width: 950px) {\nfooter[data-v-abfbddf2] {\n        display: inline-block;\n        width: 100%;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 35px;\n        margin-right: 35px;\n}\n}\n@media screen and (max-width: 480px) {\nfooter[data-v-abfbddf2] {\n        display: inline-block;\n        width: 100vw;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 20px;\n        margin-right: 20px;\n        margin-top: 5px;\n}\n}\n\n", ""]);
+exports.push([module.i, "\nimg[data-v-abfbddf2] {\n    width: 35px;\n}\nfooter[data-v-abfbddf2] {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    width: 100%;\n    text-align: center;\n}\nnav ul li[data-v-abfbddf2] {\n    display: inline-block;\n    margin-left: 35px;\n    margin-right: 35px;\n}\n@media screen and (max-width: 950px) {\nfooter[data-v-abfbddf2] {\n        display: inline-block;\n        width: 100%;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 35px;\n        margin-right: 35px;\n}\n}\n@media screen and (max-width: 480px) {\nfooter[data-v-abfbddf2] {\n        display: none;\n        width: 100vw;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 20px;\n        margin-right: 20px;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -47937,7 +47958,13 @@ var render = function() {
                 _c("p", [_vm._v("upload")])
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3)
           ]
         )
       ])
@@ -47956,6 +47983,44 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [
         _c("p", [_vm._v("github")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "insta" }, [
+      _c(
+        "a",
+        { attrs: { href: "https://www.instagram.com/wadakatu1234/?hl=ja" } },
+        [_c("p", [_vm._v("Instagram")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "facebook" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.facebook.com/people/Koyo-Isono/100006224742543"
+          }
+        },
+        [_c("p", [_vm._v("Facebook")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "twitter" }, [
+      _c("a", { attrs: { href: "https://twitter.com/ktwdwdwd" } }, [
+        _c("p", [_vm._v("Twitter")])
       ])
     ])
   }

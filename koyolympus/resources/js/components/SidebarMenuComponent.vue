@@ -24,6 +24,21 @@
                     <router-link v-bind:to="{name: 'login'}"><img src="/images/photo.png"></router-link>
                     <p>upload</p>
                 </li>
+                <li class="insta">
+                    <a href="https://www.instagram.com/wadakatu1234/?hl=ja">
+                        <p>Instagram</p>
+                    </a>
+                </li>
+                <li class="facebook">
+                    <a href="https://www.facebook.com/people/Koyo-Isono/100006224742543">
+                        <p>Facebook</p>
+                    </a>
+                </li>
+                <li class="twitter">
+                    <a href="https://twitter.com/ktwdwdwd">
+                        <p>Twitter</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -85,6 +100,18 @@ img {
     margin-top: 70px;
     cursor: pointer;
     padding-left: 5px;
+}
+
+.insta {
+    display: none;
+}
+
+.facebook {
+    display: none;
+}
+
+.twitter {
+    display: none;
 }
 
 @media screen and (max-width: 950px) {
@@ -174,15 +201,13 @@ img {
 
     .navigation-icons {
         display: inline-block;
-        justify-content: center;
-        align-items: center;
-        width: 25px;
+        text-align: center;
         padding: 10px;
     }
 
     .navigation-icons ul {
         position: fixed;
-        top: 13vh;
+        top: 15vh;
         right: 0;
         width: 100vw;
         background: #1b1e21;
@@ -212,6 +237,21 @@ img {
 
     .upload {
         display: none;
+    }
+
+    .insta {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .facebook {
+        display: inline-block;
+        text-align: center
+    }
+
+    .twitter {
+        display: inline-block;
+        text-align: center;
     }
 }
 
