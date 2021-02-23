@@ -2,7 +2,7 @@
     <div>
         <div class="navbar">
             <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png"
-                                                                                 class="logo"></router-link>
+                                                         class="logo"></router-link>
             <nav>
                 <ul>
                     <li><a href="">
@@ -100,9 +100,8 @@ nav ul li a {
     }
 
     .menu-icon {
-        position: fixed;
-        right: 20%;
         width: 40px;
+        margin-left: 70px;
     }
 
     .sidebar {
