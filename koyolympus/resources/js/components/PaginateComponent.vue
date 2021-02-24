@@ -196,7 +196,7 @@ export default {
 
 @media screen and (max-width: 480px) {
     .button {
-        color: #FFF;
+        color: #fff;
         display: inline-block;
         font-size: 16px;
         font-weight: bold;
@@ -241,9 +241,9 @@ export default {
     }
 
     .button.home {
-        bottom: 80vh;
-        left: 23%;
-        width: 200px;
+        bottom: 10vh;
+        left: 43%;
+        width: 50px;
         height: 30px;
         cursor: pointer;
     }
@@ -251,9 +251,9 @@ export default {
 
 @media screen and (max-height: 680px) {
     .button {
-        color: #FFF;
+        color: #fff;
         display: inline-block;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         line-height: 30px;
         width: 10vw;
@@ -269,7 +269,7 @@ export default {
     }
 
     .button:hover {
-        border-color: #FFF;
+        border-color: #fff;
         box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
         outline-color: transparent;
         outline-offset: 12px;
@@ -296,9 +296,9 @@ export default {
     }
 
     .button.home {
-        bottom: 77vh;
-        left: 23%;
-        width: 200px;
+        bottom: 6vh;
+        left: 43%;
+        width: 50px;
         height: 30px;
         cursor: pointer;
     }

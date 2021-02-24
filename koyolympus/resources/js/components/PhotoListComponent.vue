@@ -414,6 +414,72 @@ img {
     }
 }
 
+@media screen and (max-width: 530px) {
+    .photo-list {
+        text-align: center;
+        margin-top: 3vh;
+    }
+
+    h2 {
+        color: #fff;
+        position: fixed;
+        top: 50vh;
+        left: 20vw;
+        font-size: 25px;
+    }
+
+    img {
+        width: 15vw;
+        height: 15vh;
+        object-fit: cover;
+    }
+
+    .luminous {
+        position: relative;
+        transition: .3s ease-in-out;
+        border: 3px solid white;
+        border-radius: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+        background-position: center;
+        background-size: cover;
+        vertical-align: bottom;
+    }
+
+    .images {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 3vh;
+    }
+
+    .luminous::before {
+        content: "クリックして拡大";
+        opacity: 0;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 0.8em;
+        background: rgba(0, 0, 0, .6);
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        transition: inherit;
+        transform: translateY(0%);
+    }
+
+    .luminous:hover::before {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media screen and (max-width: 480px) {
     .photo-list {
         text-align: center;
