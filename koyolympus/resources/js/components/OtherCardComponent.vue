@@ -173,6 +173,10 @@ p {
         width: 40vh;
         margin-top: 2vh;
     }
+
+    p {
+        display: none;
+    }
 }
 
 
