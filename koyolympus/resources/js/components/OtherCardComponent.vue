@@ -4,15 +4,15 @@
         <div class="card" v-model="genre">
             <div class="card_detail snapshot" @click="searchSnapshot">
                 <h5>SnapShot</h5>
-                <p>The landscape are there, and I just take them.</p>
+                <p>It is more important to click with people than to click the shutter.</p>
             </div>
             <div class="card_detail livecomp" @click="searchLivecomp">
                 <h5>Live Composite</h5>
-                <p>If you want to be a better animal photographer, stand in front of more animals.</p>
+                <p>Since I’m inarticulate, I express myself with images.</p>
             </div>
             <div class="card_detail pinfilm" @click="searchPinfilm">
                 <h5>Pinhole/Film</h5>
-                <p>The whole point of taking portraits is so that I can see how far people have come.</p>
+                <p>Seeing is not enough; you have to feel what you photograph</p>
             </div>
             <div class="card_detail back" @click="showMain">
                 <h5>->Back</h5>
@@ -104,7 +104,8 @@ export default {
 }
 
 .back {
-    background-color: #0b5c8c;
+    background-color: #000;
+    opacity: 0.7;
 }
 
 .card_detail:hover {
@@ -126,5 +127,57 @@ p {
     font-size: 25px;
     position: relative;
 }
+
+@media screen and (max-width: 1150px) {
+    .col {
+        flex-basis: 50%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 950px) {
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 25px;
+    }
+
+    .card_detail {
+        height: 10vh;
+        width: 60vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3vh;
+    }
+
+    .card_detail {
+        height: 8vh;
+        width: 40vh;
+        margin-top: 2vh;
+    }
+
+    p {
+        display: none;
+    }
+}
+
 
 </style>

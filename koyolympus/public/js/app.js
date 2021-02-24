@@ -2222,21 +2222,27 @@ __webpack_require__.r(__webpack_exports__);
       this.isPush = true;
       this.errors = {};
       var self = this;
-      axios.post('/api/bizinq/send', this.params).then(function (response) {
-        _this.reset();
+      var confirm = window.confirm('Would it be okay to send this inquiry?\nこの内容で送信してよろしいですか？');
 
-        self.sentEmail = true;
-      })["catch"](function (error) {
-        var errors = {};
+      if (!confirm) {
+        this.isPush = false;
+      } else {
+        axios.post('/api/bizinq/send', this.params).then(function (response) {
+          _this.reset();
 
-        for (var key in error.response.data.errors) {
-          if (error.response.data.errors.hasOwnProperty(key)) {
-            errors[key] = error.response.data.errors[key].join('<br>');
+          self.sentEmail = true;
+        })["catch"](function (error) {
+          var errors = {};
+
+          for (var key in error.response.data.errors) {
+            if (error.response.data.errors.hasOwnProperty(key)) {
+              errors[key] = error.response.data.errors[key].join('<br>');
+            }
           }
-        }
 
-        self.errors = errors;
-      });
+          self.errors = errors;
+        });
+      }
     },
     reset: function reset() {
       Object.assign(this.$data, this.$options.data.call(this));
@@ -2341,6 +2347,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HeaderComponent.vue",
@@ -2393,7 +2401,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "LanguageSelectComponent.vue"
+  name: "LanguageSelectComponent.vue",
+  methods: {
+    changeLang: function changeLang(redirectToURL) {
+      var currentPath = this.$route.path;
+
+      if (currentPath !== redirectToURL) {
+        this.$router.push(redirectToURL);
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -2587,7 +2604,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       genre: '',
-      url: ''
+      url: '',
+      cardStatus: true,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      currentPath: this.$route.path
     };
   },
   methods: {
@@ -2620,12 +2641,35 @@ __webpack_require__.r(__webpack_exports__);
     },
     showOthers: function showOthers() {
       this.$store.commit('photo/setCard', false);
+    },
+    handleResize: function handleResize() {
+      // resizeのたびにこいつが発火するので、ここでやりたいことをやる
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      var currentPath = this.$route.path;
+      this.cardStatus = !(this.width < 950 && (currentPath.match("aboutme") || currentPath === '/bizinq'));
     }
   },
   computed: {
     card: function card() {
       return this.$store.state.photo.card;
     }
+  },
+  watch: {
+    $route: function $route() {
+      var currentPath = this.$route.path;
+      this.cardStatus = currentPath === "/" || 950 < this.width;
+    }
+  },
+  created: function created() {
+    var currentPath = this.$route.path;
+    this.cardStatus = currentPath === "/" || 950 < this.width;
+  },
+  mounted: function mounted() {
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
   }
 });
 
@@ -2640,6 +2684,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2763,7 +2809,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -3281,6 +3326,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SidebarMenuComponent.vue",
   props: {
@@ -3289,6 +3363,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showNav: function showNav() {
       this.showSidebar = !this.showSidebar;
+    },
+    photo: function photo() {
+      var url = '/photo';
+      this.$store.commit('photo/setUrl', url);
+      this.$store.commit('photo/setGenre', null);
+      this.$router.push({
+        name: 'photo.all'
+      })["catch"](function (err) {});
     }
   }
 });
@@ -7761,7 +7843,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 60px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 30px;\n  padding: 10px;\n  float: left;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 80px;\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".container[data-v-7063ac4d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 55px;\n  padding: 10px;\n  min-height: calc(100vh - 20px);\n  background-color: transparent;\n  border: solid #fff;\n  border-width: 0 1px 0 0;\n  transition: all 0.5s ease-in-out;\n}\n.navigation-icons[data-v-7063ac4d] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  width: 25px;\n  padding: 10px;\n}\n.navigation-icons p[data-v-7063ac4d] {\n  color: #fff;\n  text-align: center;\n  font-size: 14px;\n}\nimg[data-v-7063ac4d] {\n  width: 35px;\n  margin-top: 70px;\n  cursor: pointer;\n  padding-left: 5px;\n}\n.insta[data-v-7063ac4d] {\n  display: none;\n}\n.facebook[data-v-7063ac4d] {\n  display: none;\n}\n.twitter[data-v-7063ac4d] {\n  display: none;\n}\n@media screen and (max-width: 950px) {\n.container[data-v-7063ac4d] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 5vw;\n    padding: 5px;\n    min-height: calc(100vh - 20px);\n    background-color: transparent;\n    border: solid #fff;\n    border-width: 0 1px 0 0;\n    transition: all 0.5s ease-in-out;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 12px;\n    text-align: center;\n}\nimg[data-v-7063ac4d] {\n    width: 25px;\n    margin-top: 80px;\n    cursor: pointer;\n}\n}\n@media screen and (max-width: 760px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    justify-content: center;\n    align-items: center;\n    width: 25px;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 15vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    padding: 1vh;\n    margin-top: 1vh;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 33px;\n    text-align: center;\n    font-weight: bold;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n}\n@media screen and (max-width: 480px) {\n.container[data-v-7063ac4d] {\n    border: 0 solid #fff;\n    padding: 5px;\n    transition: all 0.5s ease-in-out;\n    z-index: 999;\n}\n.navigation-icons[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n    padding: 10px;\n}\n.navigation-icons ul[data-v-7063ac4d] {\n    position: fixed;\n    top: 15vh;\n    right: 0;\n    width: 100vw;\n    background: #1b1e21;\n    opacity: 0.9;\n}\n.navigation-icons li[data-v-7063ac4d] {\n    border-bottom: solid 1px #fff;\n    padding: 1vh;\n    margin-top: 1vh;\n}\n.navigation-icons li a[data-v-7063ac4d] {\n    text-decoration: none;\n}\n.navigation-icons p[data-v-7063ac4d] {\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    font-weight: bold;\n}\nimg[data-v-7063ac4d] {\n    display: none;\n}\n.upload[data-v-7063ac4d] {\n    display: none;\n}\n.insta[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n}\n.facebook[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n}\n.twitter[data-v-7063ac4d] {\n    display: inline-block;\n    text-align: center;\n}\n}", ""]);
 
 // exports
 
@@ -7837,7 +7919,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-5acd839a] {\n    flex-basis: 50%;\n}\n.intro[data-v-5acd839a] {\n    text-align: center;\n}\nh1[data-v-5acd839a] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    text-align: center;\n}\nh4[data-v-5acd839a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-5acd839a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-5acd839a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-5acd839a] {\n    flex-basis: 50%;\n}\n.intro[data-v-5acd839a] {\n    text-align: center;\n}\nh1[data-v-5acd839a] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    text-align: center;\n}\nh4[data-v-5acd839a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-5acd839a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-5acd839a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-5acd839a] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 1vh;\n}\n.intro[data-v-5acd839a] {\n        text-align: center;\n}\nh1[data-v-5acd839a] {\n        color: #fff;\n        font-size: 28px;\n        font-weight: 400;\n        margin-bottom: 1vh;\n        text-align: center;\n}\nh4[data-v-5acd839a] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-5acd839a] {\n        color: #fff;\n        font-size: 18px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-5acd839a] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 1vh;\n}\n}\n@media screen and (max-width: 480px) {\n.col[data-v-5acd839a] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-5acd839a] {\n        text-align: center;\n}\nh1[data-v-5acd839a] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-5acd839a] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-5acd839a] {\n        color: #fff;\n        font-size: 19px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-5acd839a] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 3vh;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7856,7 +7938,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-6f1d6a3a] {\n    flex-basis: 50%;\n}\n.intro[data-v-6f1d6a3a] {\n    text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 40px;\n    font-weight: 500;\n    margin-bottom: 15px;\n    text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-6f1d6a3a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-6f1d6a3a] {\n    flex-basis: 50%;\n}\n.intro[data-v-6f1d6a3a] {\n    text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 40px;\n    font-weight: 500;\n    margin-bottom: 5px;\n    text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 14px;\n}\nh5[data-v-6f1d6a3a] {\n    color: #fff;\n    font-size: 19px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 10px;\n}\nbutton[data-v-6f1d6a3a] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 1vh;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-6f1d6a3a] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 2vh;\n}\n.intro[data-v-6f1d6a3a] {\n        text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 19px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-6f1d6a3a] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 1vh;\n}\n}\n@media screen and (max-width: 480px) {\n.col[data-v-6f1d6a3a] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-6f1d6a3a] {\n        text-align: center;\n}\nh1[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-6f1d6a3a] {\n        color: #fff;\n        font-size: 19px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-6f1d6a3a] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 3vh;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7875,7 +7957,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-050e6212] {\n    flex-basis: 50%;\n}\n.intro[data-v-050e6212] {\n    text-align: center;\n}\nh1[data-v-050e6212] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 15px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-050e6212] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-050e6212] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-050e6212] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-050e6212] {\n    flex-basis: 50%;\n}\n.intro[data-v-050e6212] {\n    text-align: center;\n}\nh1[data-v-050e6212] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 15px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-050e6212] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-050e6212] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-050e6212] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-050e6212] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-050e6212] {\n        text-align: center;\n}\nh1[data-v-050e6212] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-050e6212] {\n        color: #fff;\n        font-size: 15px;\n}\nh5[data-v-050e6212] {\n        color: #fff;\n        font-size: 20px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-050e6212] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 1vh;\n}\n}\n@media screen and (max-width: 480px) {\n.col[data-v-050e6212] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-050e6212] {\n        text-align: center;\n}\nh1[data-v-050e6212] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-050e6212] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-050e6212] {\n        color: #fff;\n        font-size: 19px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-050e6212] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 3vh;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7894,7 +7976,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-71def8e9] {\n    flex-basis: 50%;\n}\n.intro[data-v-71def8e9] {\n    text-align: center;\n}\nh1[data-v-71def8e9] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-71def8e9] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-71def8e9] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-71def8e9] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n", ""]);
+exports.push([module.i, "\n.col[data-v-71def8e9] {\n    flex-basis: 50%;\n}\n.intro[data-v-71def8e9] {\n    text-align: center;\n}\nh1[data-v-71def8e9] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-71def8e9] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-71def8e9] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-71def8e9] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-71def8e9] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-71def8e9] {\n        text-align: center;\n}\nh1[data-v-71def8e9] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-71def8e9] {\n        color: #fff;\n        font-size: 15px;\n}\nh5[data-v-71def8e9] {\n        color: #fff;\n        font-size: 20px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-71def8e9] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 1vh;\n}\n}\n@media screen and (max-width: 480px) {\n.col[data-v-71def8e9] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-71def8e9] {\n        text-align: center;\n}\nh1[data-v-71def8e9] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-71def8e9] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-71def8e9] {\n        color: #fff;\n        font-size: 19px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-71def8e9] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 3vh;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -7913,7 +7995,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-2b0ecc82] {\n    flex-basis: 50%;\n}\n.intro[data-v-2b0ecc82] {\n    text-align: center;\n}\nh1[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-2b0ecc82] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-2b0ecc82] {\n    flex-basis: 50%;\n}\n.intro[data-v-2b0ecc82] {\n    text-align: center;\n}\nh1[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 40px;\n    margin-bottom: 30px;\n    font-weight: 500;\n    text-align: center;\n}\nh4[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 16px;\n}\nh5[data-v-2b0ecc82] {\n    color: #fff;\n    font-size: 22px;\n    border-bottom: solid 2px #1f6fb2;\n    margin-bottom: 14px;\n}\nbutton[data-v-2b0ecc82] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 9px;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-2b0ecc82] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-2b0ecc82] {\n        text-align: center;\n}\nh1[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 15px;\n}\nh5[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 20px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-2b0ecc82] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 1vh;\n}\n}\n@media screen and (max-width: 480px) {\n.col[data-v-2b0ecc82] {\n        flex-basis: 50%;\n        height: 100vh;\n        width: 70vw;\n        padding: 3vh;\n}\n.intro[data-v-2b0ecc82] {\n        text-align: center;\n}\nh1[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 30px;\n        font-weight: 400;\n        margin-bottom: 2vh;\n        text-align: center;\n}\nh4[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 14px;\n}\nh5[data-v-2b0ecc82] {\n        color: #fff;\n        font-size: 19px;\n        border-bottom: solid 2px #1f6fb2;\n}\nbutton[data-v-2b0ecc82] {\n        width: 130px;\n        color: #000;\n        font-size: 11px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 3vh;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7932,7 +8014,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.container[data-v-16279a1b] {\n    width: 100%;\n    height: 100vh;\n    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n    background-position: center;\n    background-size: cover;\n    padding-left: 8%;\n    padding-right: 8%;\n    box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n    display: flex;\n    height: 75%;\n    align-items: center;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-16279a1b] {\n    width: 100%;\n    height: 100vh;\n    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n    background-position: center;\n    background-size: cover;\n    padding-left: 8%;\n    padding-right: 8%;\n    box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n    display: flex;\n    height: 75%;\n    align-items: center;\n}\n@media screen and (max-width: 950px) {\n.container[data-v-16279a1b] {\n        width: 100%;\n        height: 100vh;\n        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n        background-position: center;\n        background-repeat: repeat;\n        box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n        display: flex;\n        flex-direction: column;\n}\n}\n@media screen and (max-width: 480px) {\n.container[data-v-16279a1b] {\n        width: 100vw;\n        height: 100%;\n        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(\"/images/PC280455.jpeg\");\n        background-position: center;\n        background-size: cover;\n        box-sizing: border-box;\n}\n.row[data-v-16279a1b] {\n        display: flex;\n        flex-direction: column;\n}\n}\n", ""]);
 
 // exports
 
@@ -7951,7 +8033,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap);", ""]);
 
 // module
-exports.push([module.i, "\n.contact[data-v-f7210520] {\n    flex-basis: 50%;\n    position: relative;\n    min-height: 80vh;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.container[data-v-f7210520] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.contactForm[data-v-f7210520] {\n    width: 100%;\n    height: 65vh;\n    padding: 30px;\n    background: transparent;\n    margin-right: 30px;\n    margin-left: 40px;\n}\n.contactForm h1[data-v-f7210520] {\n    font-size: 40px;\n    margin-bottom: 25px;\n    color: #fff;\n    font-weight: 500;\n    text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n    position: relative;\n    width: 100%;\n    margin-top: 30px;\n}\n.contactForm .inputBox input[data-v-f7210520],\n.contactForm .inputBox textarea[data-v-f7210520] {\n    width: 32vw;\n    padding: 10px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    border: none;\n    border-bottom: 2px solid #1f6fb2;\n    outline: none;\n    background: transparent;\n    color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n    resize: none;\n    height: 15vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n    position: absolute;\n    left: 0;\n    padding: 5px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    pointer-events: none;\n    transition: 0.5s;\n    color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n.contactForm .inputBox input:valid ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n    color: #e91e63;\n    font-size: 12px;\n    transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    left: 18vw;\n    justify-content: space-evenly;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(50, 230, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    right: 60vw;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(233, 8, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n    border-color: #ffced1;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n    border-color: #d1ffd3;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n    color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n    color: #2eff18;\n    text-align: center;\n}\n@media (max-width: 991px) {\n.contact[data-v-f7210520] {\n        padding: 50px;\n}\n.container[data-v-f7210520] {\n        flex-direction: column;\n}\n.container .contactInfo[data-v-f7210520] {\n        margin-bottom: 40px;\n}\n.container .contactInfo[data-v-f7210520],\n    .contactForm[data-v-f7210520] {\n        width: 100%;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.contact[data-v-f7210520] {\n    flex-basis: 50%;\n    position: relative;\n    min-height: 80vh;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.container[data-v-f7210520] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.contactForm[data-v-f7210520] {\n    width: 100%;\n    height: 65vh;\n    padding: 30px;\n    background: transparent;\n    margin-right: 30px;\n    margin-left: 40px;\n}\n.contactForm h1[data-v-f7210520] {\n    font-size: 40px;\n    margin-bottom: 20px;\n    color: #fff;\n    font-weight: 500;\n    text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n    position: relative;\n    width: 100%;\n    margin-top: 20px;\n}\n.contactForm .inputBox input[data-v-f7210520],\n.contactForm .inputBox textarea[data-v-f7210520] {\n    width: 32vw;\n    padding: 10px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    border: none;\n    border-bottom: 2px solid #1f6fb2;\n    outline: none;\n    background: transparent;\n    color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n    resize: none;\n    height: 15vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n    position: absolute;\n    left: 0;\n    padding: 5px 0;\n    font-size: 16px;\n    margin: 10px 0;\n    pointer-events: none;\n    transition: 0.5s;\n    color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n.contactForm .inputBox input:valid ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n.contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n    color: #e91e63;\n    font-size: 12px;\n    transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    left: 18vw;\n    justify-content: space-evenly;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(50, 230, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 15px;\n    font-weight: bold;\n    line-height: 20px;\n    width: 9vw;\n    position: fixed;\n    right: 60vw;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgb(233, 8, 0) solid 2px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n    border-color: #ffced1;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n    border-color: #d1ffd3;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n    color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n    color: #2eff18;\n    text-align: center;\n}\n@media screen and (max-width: 950px) {\n.contact[data-v-f7210520] {\n\n        position: relative;\n        min-height: 80vh;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        flex-direction: column;\n}\n.container[data-v-f7210520] {\n        width: 100vw;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\n.contactForm[data-v-f7210520] {\n        width: 100vw;\n        height: 75vh;\n        padding: 30px;\n        background: transparent;\n        text-align: center;\n}\n.contactForm h1[data-v-f7210520] {\n        font-size: 40px;\n        margin-bottom: 20px;\n        color: #fff;\n        font-weight: 500;\n        text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n        position: relative;\n        width: 100%;\n        margin-top: 20px;\n        text-align: center;\n}\n.contactForm .inputBox input[data-v-f7210520],\n    .contactForm .inputBox textarea[data-v-f7210520] {\n        width: 60vw;\n        padding: 10px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        border: none;\n        border-bottom: 2px solid #1f6fb2;\n        outline: none;\n        background: transparent;\n        color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n        resize: none;\n        height: 15vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n        position: absolute;\n        left: 12vw;\n        padding: 5px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        pointer-events: none;\n        transition: 0.5s;\n        color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox input:valid ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n        color: #e91e63;\n        font-size: 12px;\n        transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 18vw;\n        position: fixed;\n        left: 28vw;\n        justify-content: space-evenly;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(50, 230, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 18vw;\n        position: fixed;\n        right: 28vw;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(233, 8, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n        border-color: #ffced1;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n        border-color: #d1ffd3;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n        color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n        color: #2eff18;\n        text-align: center;\n}\n}\n@media screen and (max-width: 480px) {\n.contact[data-v-f7210520] {\n        position: relative;\n        height: 100%;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        flex-direction: column;\n}\n.container[data-v-f7210520] {\n        width: 100vw;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\n.contactForm[data-v-f7210520] {\n        width: 100vw;\n        height: 100%;\n        padding: 30px;\n        background: transparent;\n        text-align: center;\n}\n.contactForm h1[data-v-f7210520] {\n        font-size: 40px;\n        margin-bottom: 2vh;\n        color: #fff;\n        font-weight: 500;\n        text-align: center;\n}\n.contactForm .inputBox[data-v-f7210520] {\n        position: relative;\n        width: 100%;\n        margin-top: 20px;\n        text-align: center;\n}\n.contactForm .inputBox input[data-v-f7210520],\n    .contactForm .inputBox textarea[data-v-f7210520] {\n        width: 80vw;\n        padding: 10px 0;\n        font-size: 16px;\n        margin: 10px 0;\n        border: none;\n        border-bottom: 2px solid #1f6fb2;\n        outline: none;\n        background: transparent;\n        color: #fff;\n}\n.contactForm .inputBox textarea[data-v-f7210520] {\n        resize: none;\n        height: 18vh;\n}\n.contactForm .inputBox span[data-v-f7210520] {\n        position: static;\n        font-size: 16px;\n        pointer-events: none;\n        transition: 0.5s;\n        color: #fff;\n}\n.contactForm .inputBox input:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox input:valid ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:focus ~ span[data-v-f7210520],\n    .contactForm .inputBox textarea:valid ~ span[data-v-f7210520] {\n        color: #e91e63;\n        font-size: 12px;\n        transform: translateY(-20px);\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 25vw;\n        position: relative;\n        left: -5vw;\n        justify-content: space-evenly;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(50, 230, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 15px;\n        font-weight: bold;\n        line-height: 20px;\n        width: 25vw;\n        position: relative;\n        right: -5vw;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgb(233, 8, 0) solid 2px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.contactForm .inputBox input[type=\"button\"][data-v-f7210520]:hover {\n        border-color: #ffced1;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.contactForm .inputBox input[type=\"submit\"][data-v-f7210520]:hover {\n        border-color: #d1ffd3;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.error_text[data-v-f7210520] {\n        color: #f9ff17;\n}\n.alert-success[data-v-f7210520] {\n        color: #2eff18;\n        text-align: center;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7970,7 +8052,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nimg[data-v-abfbddf2] {\n    width: 35px;\n}\nfooter[data-v-abfbddf2] {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    width: 100%;\n    text-align: center;\n}\nnav ul li[data-v-abfbddf2] {\n    display: inline-block;\n    margin-left: 35px;\n    margin-right: 35px;\n}\n\n", ""]);
+exports.push([module.i, "\nimg[data-v-abfbddf2] {\n    width: 35px;\n}\nfooter[data-v-abfbddf2] {\n    position: fixed;\n    bottom: 20px;\n    left: 0;\n    width: 100%;\n    text-align: center;\n}\nnav ul li[data-v-abfbddf2] {\n    display: inline-block;\n    margin-left: 35px;\n    margin-right: 35px;\n}\n@media screen and (max-width: 950px) {\nfooter[data-v-abfbddf2] {\n        display: inline-block;\n        width: 100%;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 35px;\n        margin-right: 35px;\n}\n}\n@media screen and (max-width: 480px) {\nfooter[data-v-abfbddf2] {\n        display: none;\n        width: 100vw;\n}\nnav ul li[data-v-abfbddf2] {\n        display: inline-block;\n        margin-left: 20px;\n        margin-right: 20px;\n        margin-top: 5px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -7989,7 +8071,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n    z-index: 999;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n\n", ""]);
+exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n    z-index: 999;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n@media screen and (max-width: 760px) {\n.logo[data-v-153bfd55] {\n        width: 150px;\n        text-align: center;\n}\nnav[data-v-153bfd55] {\n        display: none;\n}\n.menu-icon[data-v-153bfd55] {\n        width: 40px;\n        position: fixed;\n        top: 7%;\n        right: 20vw;\n}\n.sidebar[data-v-153bfd55] {\n        position: fixed;\n        right: 0;\n}\n}\n@media screen and (max-width: 480px) {\n.navbar[data-v-153bfd55] {\n        height: 12%;\n        display: flex;\n        align-items: center;\n        padding-top: 20px;\n        z-index: 999;\n}\n.logo[data-v-153bfd55] {\n        width: 150px;\n        text-align: center;\n}\nnav[data-v-153bfd55] {\n        display: none;\n}\n.menu-icon[data-v-153bfd55] {\n        width: 40px;\n        position: static;\n        padding-left: 10%;\n}\n.sidebar[data-v-153bfd55] {\n        position: fixed;\n        right: 0;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8008,7 +8090,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.language[data-v-38313fce] {\n    margin-left: 85%;\n    background-color: #1a5293;\n    color: #fff;\n    position: relative;\n    list-style-type: none;\n    width: 75px;\n    height: 25px;\n}\n.language li[data-v-38313fce] {\n    width: 25%;\n    margin: 0;\n    padding: 0;\n    text-align: center;\n}\n.language ul a[data-v-38313fce] {\n    display: block;\n    margin: 0;\n    padding: 13px 0;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 1;\n    text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n    list-style: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    margin: 0;\n    padding: 0;\n}\n.language li ul li[data-v-38313fce] {\n    overflow: hidden;\n    width: 75px;\n    height: 0;\n    color: #fff;\n    transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n    padding: 13px 15px;\n    background: #1a5293;\n    text-align: center;\n    font-size: 12px;\n    font-weight: normal;\n}\n.language li:hover > a[data-v-38313fce] {\n    background: #1a5293;\n    color: #e0dc62;\n}\n.language li:hover ul li[data-v-38313fce] {\n    overflow: visible;\n    height: 38px;\n    border-bottom: 1px solid #fff;\n}\n.language li:hover ul li[data-v-38313fce]:first-child {\n    border-top: 0;\n}\n.language li:hover ul li[data-v-38313fce]:last-child {\n    border-bottom: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n.language[data-v-38313fce] {\n    margin-left: 85%;\n    background-color: #1a5293;\n    color: #fff;\n    position: relative;\n    list-style-type: none;\n    width: 75px;\n    height: 25px;\n    z-index: 990;\n}\n.language li[data-v-38313fce] {\n    width: 25%;\n    margin: 0;\n    padding: 0;\n    text-align: center;\n}\n.language ul a[data-v-38313fce] {\n    display: block;\n    margin: 0;\n    padding: 13px 0;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 1;\n    text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n    list-style: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    margin: 0;\n    padding: 0;\n}\n.language li ul li[data-v-38313fce] {\n    overflow: hidden;\n    width: 75px;\n    height: 0;\n    color: #fff;\n    transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n    padding: 13px 15px;\n    background: #1a5293;\n    text-align: center;\n    font-size: 12px;\n    font-weight: normal;\n}\n.language li:hover > a[data-v-38313fce] {\n    background: #1a5293;\n    color: #e0dc62;\n}\n.language li:hover ul li[data-v-38313fce] {\n    overflow: visible;\n    height: 38px;\n    border-bottom: 1px solid #fff;\n}\n.language li:hover ul li[data-v-38313fce]:first-child {\n    border-top: 0;\n}\n.language li:hover ul li[data-v-38313fce]:last-child {\n    border-bottom: 0;\n}\n@media screen and (max-width: 950px) {\n.language[data-v-38313fce] {\n        margin-left: 45vw;\n        background-color: #1a5293;\n        color: #fff;\n        position: relative;\n        list-style-type: none;\n        width: 20vw;\n        height: 3vh;\n        z-index: 900;\n}\n.language li[data-v-38313fce] {\n        width: 20vw;\n        margin: 0;\n        padding: 0;\n        text-align: center;\n}\n.language ul a[data-v-38313fce] {\n        display: block;\n        margin: 0;\n        padding: 13px 0;\n        color: #fff;\n        font-size: 25px;\n        font-weight: bold;\n        line-height: 1;\n        text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n        list-style: none;\n        position: relative;\n        top: 100%;\n        left: 0;\n        margin: 0;\n        padding: 0;\n        z-index: 900;\n}\n.language li ul li[data-v-38313fce] {\n        overflow: hidden;\n        width: 20vw;\n        height: 0;\n        color: #fff;\n        transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n        padding: 13px 15px;\n        background: #1a5293;\n        text-align: center;\n        font-size: 16px;\n        font-weight: normal;\n}\n}\n@media screen and (max-width: 480px) {\n.language[data-v-38313fce] {\n        background-color: #1a5293;\n        color: #fff;\n        position: relative;\n        list-style-type: none;\n        width: 23vw;\n        height: 3vh;\n        z-index: 900;\n}\n.language li[data-v-38313fce] {\n        width: 23vw;\n        text-align: center;\n}\n.language ul a[data-v-38313fce] {\n        display: block;\n        padding: 1vh;\n        color: #fff;\n        font-size: 30px;\n        font-weight: bold;\n        text-decoration: none;\n}\n.language li ul[data-v-38313fce] {\n        list-style: none;\n        position: relative;\n        top: 0;\n        left: 0;\n        z-index: 900;\n}\n.language li ul li[data-v-38313fce] {\n        overflow: hidden;\n        width: 23vw;\n        height: 0;\n        color: #fff;\n        transition: .2s;\n}\n.language li ul li a[data-v-38313fce] {\n        padding: 15px;\n        background: #1a5293;\n        text-align: center;\n        font-size: 15px;\n        font-weight: normal;\n}\n.language li:hover > a[data-v-38313fce] {\n        background: #1a5293;\n        color: #e0dc62;\n}\n.language li:hover ul li[data-v-38313fce] {\n        overflow: visible;\n        height: 5vh;\n        border-bottom: 2px solid #fff;\n}\n.language li:hover ul li[data-v-38313fce]:first-child {\n        border-top: 0;\n}\n.language li:hover ul li[data-v-38313fce]:last-child {\n        border-bottom: 0;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -8065,7 +8147,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-3ef095b9] {\n    flex-basis: 50%;\n}\n.card[data-v-3ef095b9] {\n    display: flex;\n    justify-content: center;\n    flex-wrap: wrap;\n}\n.card_detail[data-v-3ef095b9] {\n    position: relative;\n    width: 30vh;\n    height: 32vh;\n    border-radius: 10px;\n    padding: 15px 25px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n    transition: transform 0.5s;\n}\n.landscape[data-v-3ef095b9] {\n    background-image: url('/images/yellow.jpeg');\n}\n.animal[data-v-3ef095b9] {\n    background-image: url('/images/cat.jpeg');\n}\n.portrait[data-v-3ef095b9] {\n    background-image: url('/images/portrait.jpeg');\n}\n.others[data-v-3ef095b9] {\n    background-image: url('/images/wine.jpeg');\n}\n.card_detail[data-v-3ef095b9]:hover {\n    transform: translateY(-10px);\n}\nh5[data-v-3ef095b9] {\n    color: #fff;\n    text-shadow: 0 0 5px #999;\n}\np[data-v-3ef095b9] {\n    color: #fff;\n    font-size: 11px;\n    text-shadow: 0 0 15px #000;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-3ef095b9] {\n    flex-basis: 50%;\n}\n.card[data-v-3ef095b9] {\n    display: flex;\n    justify-content: center;\n    flex-wrap: wrap;\n}\n.card_detail[data-v-3ef095b9] {\n    position: relative;\n    width: 30vh;\n    height: 32vh;\n    border-radius: 10px;\n    padding: 15px 25px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n    transition: transform 0.5s;\n}\n.landscape[data-v-3ef095b9] {\n    background-image: url('/images/yellow.jpeg');\n}\n.animal[data-v-3ef095b9] {\n    background-image: url('/images/cat.jpeg');\n}\n.portrait[data-v-3ef095b9] {\n    background-image: url('/images/portrait.jpeg');\n}\n.others[data-v-3ef095b9] {\n    background-image: url('/images/wine.jpeg');\n}\n.card_detail[data-v-3ef095b9]:hover {\n    transform: translateY(-10px);\n}\nh5[data-v-3ef095b9] {\n    color: #fff;\n    text-shadow: 0 0 5px #999;\n}\np[data-v-3ef095b9] {\n    color: #fff;\n    font-size: 11px;\n    text-shadow: 0 0 15px #000;\n}\n@media screen and (max-width: 1150px) {\n.col[data-v-3ef095b9] {\n        flex-basis: 50%;\n}\n.card[data-v-3ef095b9] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n}\n.card_detail[data-v-3ef095b9] {\n        height: 15vh;\n        width: 30vw;\n}\n}\n@media screen and (max-width: 950px) {\n.card[data-v-3ef095b9] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding-bottom: 25px;\n}\n.card_detail[data-v-3ef095b9] {\n        height: 10vh;\n        width: 60vh;\n}\n}\n@media screen and (max-width: 480px) {\n.card[data-v-3ef095b9] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        margin-top: 3vh;\n}\n.card_detail[data-v-3ef095b9] {\n        height: 8vh;\n        width: 40vh;\n        margin-top: 2vh;\n}\np[data-v-3ef095b9] {\n        display: none;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8084,7 +8166,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.col[data-v-23d29dfa] {\n    flex-basis: 50%;\n}\nh1[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 95px;\n}\np[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 13px;\n    line-height: 18px;\n}\nbutton[data-v-23d29dfa] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 30px;\n    cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-23d29dfa] {\n    flex-basis: 50%;\n}\nh1[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 95px;\n}\np[data-v-23d29dfa] {\n    color: #fff;\n    font-size: 13px;\n    line-height: 18px;\n}\nbutton[data-v-23d29dfa] {\n    width: 180px;\n    color: #000;\n    font-size: 12px;\n    padding: 12px 0;\n    background: #fff;\n    border: 0;\n    border-radius: 20px;\n    outline: none;\n    margin-top: 30px;\n    cursor: pointer;\n}\n@media screen and (max-width: 1150px) {\n.col[data-v-23d29dfa] {\n        flex-basis: 50%;\n}\n.profile h1[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 80px;\n}\n.profile p[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 13px;\n        line-height: 20px;\n}\n}\n@media screen and (max-width: 950px) {\n.profile[data-v-23d29dfa] {\n        text-align: center;\n}\n.profile h1[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 60px;\n        margin-top: 20px;\n}\n.profile p[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 13px;\n        line-height: 20px;\n}\n.profile button[data-v-23d29dfa] {\n        width: 180px;\n        color: #000;\n        font-size: 12px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 20px;\n        margin-bottom: 10px;\n        cursor: pointer;\n}\n}\n@media screen and (max-width: 480px) {\n.profile[data-v-23d29dfa] {\n        text-align: center;\n}\n.profile h1[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 50px;\n}\n.profile p[data-v-23d29dfa] {\n        color: #fff;\n        font-size: 13px;\n        line-height: 20px;\n}\n.profile button[data-v-23d29dfa] {\n        width: 180px;\n        color: #000;\n        font-size: 12px;\n        padding: 12px 0;\n        background: #fff;\n        border: 0;\n        border-radius: 20px;\n        outline: none;\n        margin-top: 20px;\n        margin-bottom: 10px;\n        cursor: pointer;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8103,7 +8185,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card[data-v-70859c70] {\n    display: flex;\n    justify-content: center;\n    flex-wrap: wrap;\n}\n.card_detail[data-v-70859c70] {\n    position: relative;\n    width: 40%;\n    height: 250px;\n    border-radius: 10px;\n    padding: 15px 25px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n    transition: transform 0.5s;\n}\n.snapshot[data-v-70859c70] {\n    background-image: url(\"/images/snapshot.jpeg\");\n}\n.livecomp[data-v-70859c70] {\n    background-image: url(\"/images/livecomp.jpeg\");\n}\n.pinfilm[data-v-70859c70] {\n    background-image: url(\"/images/film.jpeg\");\n}\n.back[data-v-70859c70] {\n    background-color: #0b5c8c;\n}\n.card_detail[data-v-70859c70]:hover {\n    transform: translateY(-10px);\n}\nh5[data-v-70859c70] {\n    color: #fff;\n    text-shadow: 0 0 5px #999;\n}\np[data-v-70859c70] {\n    color: #fff;\n    font-size: 11px;\n    text-shadow: 0 0 15px #000;\n}\n.back h5[data-v-70859c70] {\n    font-size: 25px;\n    position: relative;\n}\n\n", ""]);
+exports.push([module.i, "\n.card[data-v-70859c70] {\n    display: flex;\n    justify-content: center;\n    flex-wrap: wrap;\n}\n.card_detail[data-v-70859c70] {\n    position: relative;\n    width: 40%;\n    height: 250px;\n    border-radius: 10px;\n    padding: 15px 25px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n    transition: transform 0.5s;\n}\n.snapshot[data-v-70859c70] {\n    background-image: url(\"/images/snapshot.jpeg\");\n}\n.livecomp[data-v-70859c70] {\n    background-image: url(\"/images/livecomp.jpeg\");\n}\n.pinfilm[data-v-70859c70] {\n    background-image: url(\"/images/film.jpeg\");\n}\n.back[data-v-70859c70] {\n    background-color: #000;\n    opacity: 0.7;\n}\n.card_detail[data-v-70859c70]:hover {\n    transform: translateY(-10px);\n}\nh5[data-v-70859c70] {\n    color: #fff;\n    text-shadow: 0 0 5px #999;\n}\np[data-v-70859c70] {\n    color: #fff;\n    font-size: 11px;\n    text-shadow: 0 0 15px #000;\n}\n.back h5[data-v-70859c70] {\n    font-size: 25px;\n    position: relative;\n}\n@media screen and (max-width: 1150px) {\n.col[data-v-70859c70] {\n        flex-basis: 50%;\n}\n.card[data-v-70859c70] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n}\n.card_detail[data-v-70859c70] {\n        height: 15vh;\n        width: 30vw;\n}\n}\n@media screen and (max-width: 950px) {\n.card[data-v-70859c70] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding-bottom: 25px;\n}\n.card_detail[data-v-70859c70] {\n        height: 10vh;\n        width: 60vh;\n}\n}\n@media screen and (max-width: 480px) {\n.card[data-v-70859c70] {\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        margin-top: 3vh;\n}\n.card_detail[data-v-70859c70] {\n        height: 8vh;\n        width: 40vh;\n        margin-top: 2vh;\n}\np[data-v-70859c70] {\n        display: none;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -8122,7 +8204,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.button[data-v-14aa306b] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 10vw;\n    position: fixed;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-14aa306b]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.next[data-v-14aa306b] {\n    bottom: 12%;\n    right: 26%;\n}\n.button.prev[data-v-14aa306b] {\n    bottom: 12%;\n    left: 26%;\n}\n.button.home[data-v-14aa306b] {\n    bottom: 12%;\n    right: 45%;\n    cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, "\n.button[data-v-14aa306b] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 10vw;\n    position: fixed;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-14aa306b]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.next[data-v-14aa306b] {\n    bottom: 12%;\n    right: 26%;\n}\n.button.prev[data-v-14aa306b] {\n    bottom: 12%;\n    left: 26%;\n}\n.button.home[data-v-14aa306b] {\n    bottom: 12%;\n    right: 45%;\n    cursor: pointer;\n}\n@media screen and (max-width: 880px) {\n.button[data-v-14aa306b] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 16px;\n        font-weight: bold;\n        line-height: 30px;\n        position: fixed;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid #ffffff;\n        outline: rgba(255, 255, 255, 0.5) solid 1px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-14aa306b]:hover {\n        border-color: #FFF;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.button.next[data-v-14aa306b] {\n        bottom: 18vh;\n        left: 60vw;\n        height: 10vh;\n        padding-top: 5vh;\n        background: transparent;\n}\n.button.prev[data-v-14aa306b] {\n        bottom: 18vh;\n        left: 30vw;\n        height: 10vh;\n        padding-top: 5vh;\n        background: transparent;\n}\n.button.home[data-v-14aa306b] {\n        bottom: 18vh;\n        left: 45vw;\n        height: 10vh;\n        cursor: pointer;\n}\n}\n@media screen and (max-width: 680px) {\n.button[data-v-14aa306b] {\n        color: #FFF;\n        display: inline-block;\n        font-size: 13px;\n        font-weight: bold;\n        line-height: 25px;\n        position: fixed;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid #ffffff;\n        outline: rgba(255, 255, 255, 0.5) solid 1px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-14aa306b]:hover {\n        border-color: #FFF;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.button.next[data-v-14aa306b] {\n        bottom: 18vh;\n        left: 60vw;\n        height: 10vh;\n        padding-top: 5vh;\n        background: transparent;\n}\n.button.prev[data-v-14aa306b] {\n        bottom: 18vh;\n        left: 30vw;\n        height: 10vh;\n        padding-top: 5vh;\n        background: transparent;\n}\n.button.home[data-v-14aa306b] {\n        bottom: 18vh;\n        left: 45vw;\n        height: 10vh;\n        cursor: pointer;\n}\n}\n@media screen and (max-width: 480px) {\n.button[data-v-14aa306b] {\n        color: #fff;\n        display: inline-block;\n        font-size: 16px;\n        font-weight: bold;\n        line-height: 30px;\n        width: 10vw;\n        position: fixed;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgba(255, 255, 255, 0.5) solid 1px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-14aa306b]:hover {\n        border-color: #FFF;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.button.next[data-v-14aa306b] {\n        bottom: 1vh;\n        width: 120px;\n        height: 20px;\n        padding-top: 30px;\n        padding-bottom: 10px;\n        margin-bottom: 20px;\n}\n.button.prev[data-v-14aa306b] {\n        bottom: 1vh;\n        left: 4vh;\n        width: 120px;\n        height: 20px;\n        padding-top: 30px;\n        padding-bottom: 10px;\n        margin-bottom: 20px;\n}\n.button.home[data-v-14aa306b] {\n        bottom: 10vh;\n        left: 43%;\n        width: 50px;\n        height: 30px;\n        cursor: pointer;\n}\n}\n@media screen and (max-height: 680px) {\n.button[data-v-14aa306b] {\n        color: #fff;\n        display: inline-block;\n        font-size: 9px;\n        font-weight: bold;\n        line-height: 30px;\n        width: 10vw;\n        position: fixed;\n        text-decoration: none;\n        text-transform: uppercase;\n        border: 1px solid transparent;\n        outline: rgba(255, 255, 255, 0.5) solid 1px;\n        outline-offset: 0;\n        text-align: center;\n        text-shadow: none;\n        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-14aa306b]:hover {\n        border-color: #fff;\n        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n        outline-color: transparent;\n        outline-offset: 12px;\n        text-shadow: 2px 2px 3px #000;\n}\n.button.next[data-v-14aa306b] {\n        bottom: 1vh;\n        width: 120px;\n        height: 20px;\n        padding-top: 1px;\n        padding-bottom: 10px;\n        margin-bottom: 1px;\n}\n.button.prev[data-v-14aa306b] {\n        bottom: 1vh;\n        left: 4vh;\n        width: 120px;\n        height: 20px;\n        padding-top: 1px;\n        padding-bottom: 10px;\n        margin-bottom: 1px;\n}\n.button.home[data-v-14aa306b] {\n        bottom: 6vh;\n        left: 43%;\n        width: 50px;\n        height: 30px;\n        cursor: pointer;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8160,7 +8242,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.photo-list[data-v-260a1c18] {\n    text-align: center;\n    margin-bottom: 10px;\n}\nh2[data-v-260a1c18] {\n    color: #fff;\n    position: absolute;\n    font-size: 40px;\n    top: 50%;\n    left: 30%;\n}\nimg[data-v-260a1c18] {\n    width: 200px;\n    height: 200px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n    position: relative;\n    transition: .3s ease-in-out;\n    border: 3px solid white;\n    border-radius: 10px;\n    padding: 10px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n    content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n    opacity: 0;\n    box-sizing: border-box;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    padding: 0.8em;\n    background: rgba(0, 0, 0, .6);\n    color: white;\n    font-size: 12px;\n    text-align: center;\n    transition: inherit;\n    transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n    opacity: 1;\n    transform: translateY(0);\n}\n\n\n", ""]);
+exports.push([module.i, "\n.photo-list[data-v-260a1c18] {\n    text-align: center;\n    height: 60vh;\n    margin-bottom: 5vh;\n}\nh2[data-v-260a1c18] {\n    color: #fff;\n    position: fixed;\n    top: 50vh;\n    left: 30vw;\n    font-size: 40px;\n}\nimg[data-v-260a1c18] {\n    width: 13vw;\n    height: 25vh;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n    position: relative;\n    transition: .3s ease-in-out;\n    border: 3px solid white;\n    border-radius: 10px;\n    padding: 10px;\n    box-sizing: border-box;\n    cursor: pointer;\n    background-position: center;\n    background-size: cover;\n    vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n    content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n    opacity: 0;\n    box-sizing: border-box;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    padding: 0.8em;\n    background: rgba(0, 0, 0, .6);\n    color: white;\n    font-size: 12px;\n    text-align: center;\n    transition: inherit;\n    transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n    opacity: 1;\n    transform: translateY(0);\n}\n@media screen and (max-width: 1350px) {\n.photo-list[data-v-260a1c18] {\n        text-align: center;\n        margin-bottom: 10px;\n}\nh2[data-v-260a1c18] {\n        color: #fff;\n        position: fixed;\n        top: 50vh;\n        left: 30vw;\n        font-size: 35px;\n}\nimg[data-v-260a1c18] {\n        width: 13vw;\n        height: 23vh;\n        -o-object-fit: cover;\n           object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n        position: relative;\n        transition: .3s ease-in-out;\n        border: 3px solid white;\n        border-radius: 10px;\n        padding: 10px;\n        box-sizing: border-box;\n        cursor: pointer;\n        background-position: center;\n        background-size: cover;\n        vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n        content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n        opacity: 0;\n        box-sizing: border-box;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        padding: 0.8em;\n        background: rgba(0, 0, 0, .6);\n        color: white;\n        font-size: 12px;\n        text-align: center;\n        transition: inherit;\n        transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n        opacity: 1;\n        transform: translateY(0);\n}\n}\n@media screen and (max-width: 1050px) {\n.photo-list[data-v-260a1c18] {\n        text-align: center;\n        margin-bottom: 10px;\n}\nh2[data-v-260a1c18] {\n        color: #fff;\n        position: fixed;\n        top: 50vh;\n        left: 28vw;\n        font-size: 30px;\n}\nimg[data-v-260a1c18] {\n        width: 13vw;\n        height: 25vh;\n        -o-object-fit: cover;\n           object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n        position: relative;\n        transition: .3s ease-in-out;\n        border: 3px solid white;\n        border-radius: 10px;\n        padding: 10px;\n        box-sizing: border-box;\n        cursor: pointer;\n        background-position: center;\n        background-size: cover;\n        vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n        content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n        opacity: 0;\n        box-sizing: border-box;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        padding: 0.8em;\n        background: rgba(0, 0, 0, .6);\n        color: white;\n        font-size: 12px;\n        text-align: center;\n        transition: inherit;\n        transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n        opacity: 1;\n        transform: translateY(0);\n}\n}\n@media screen and (max-width: 880px) {\n.photo-list[data-v-260a1c18] {\n        text-align: center;\n        margin-bottom: 10px;\n}\nh2[data-v-260a1c18] {\n        color: #fff;\n        position: fixed;\n        top: 50vh;\n        left: 25vw;\n        font-size: 30px;\n}\nimg[data-v-260a1c18] {\n        width: 17vw;\n        height: 17vh;\n        -o-object-fit: cover;\n           object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n        position: relative;\n        transition: .3s ease-in-out;\n        border: 3px solid white;\n        border-radius: 10px;\n        padding: 10px;\n        box-sizing: border-box;\n        cursor: pointer;\n        background-position: center;\n        background-size: cover;\n        vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        margin-top: 3vh;\n}\n.luminous[data-v-260a1c18]::before {\n        content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n        opacity: 0;\n        box-sizing: border-box;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        padding: 0.8em;\n        background: rgba(0, 0, 0, .6);\n        color: white;\n        font-size: 12px;\n        text-align: center;\n        transition: inherit;\n        transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n        opacity: 1;\n        transform: translateY(0);\n}\n}\n@media screen and (max-width: 650px) {\n.photo-list[data-v-260a1c18] {\n        text-align: center;\n        margin-top: 3vh;\n}\nh2[data-v-260a1c18] {\n        color: #fff;\n        position: fixed;\n        top: 50vh;\n        left: 20vw;\n        font-size: 25px;\n}\nimg[data-v-260a1c18] {\n        width: 16vw;\n        height: 16vh;\n        -o-object-fit: cover;\n           object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n        position: relative;\n        transition: .3s ease-in-out;\n        border: 3px solid white;\n        border-radius: 10px;\n        padding: 10px;\n        box-sizing: border-box;\n        cursor: pointer;\n        background-position: center;\n        background-size: cover;\n        vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        margin-top: 3vh;\n}\n.luminous[data-v-260a1c18]::before {\n        content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n        opacity: 0;\n        box-sizing: border-box;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        padding: 0.8em;\n        background: rgba(0, 0, 0, .6);\n        color: white;\n        font-size: 12px;\n        text-align: center;\n        transition: inherit;\n        transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n        opacity: 1;\n        transform: translateY(0);\n}\n}\n@media screen and (max-width: 530px) {\n.photo-list[data-v-260a1c18] {\n        text-align: center;\n        margin-top: 3vh;\n}\nh2[data-v-260a1c18] {\n        color: #fff;\n        position: fixed;\n        top: 50vh;\n        left: 20vw;\n        font-size: 25px;\n}\nimg[data-v-260a1c18] {\n        width: 15vw;\n        height: 15vh;\n        -o-object-fit: cover;\n           object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n        position: relative;\n        transition: .3s ease-in-out;\n        border: 3px solid white;\n        border-radius: 10px;\n        padding: 10px;\n        box-sizing: border-box;\n        cursor: pointer;\n        background-position: center;\n        background-size: cover;\n        vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        margin-top: 3vh;\n}\n.luminous[data-v-260a1c18]::before {\n        content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n        opacity: 0;\n        box-sizing: border-box;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        padding: 0.8em;\n        background: rgba(0, 0, 0, .6);\n        color: white;\n        font-size: 12px;\n        text-align: center;\n        transition: inherit;\n        transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n        opacity: 1;\n        transform: translateY(0);\n}\n}\n@media screen and (max-width: 480px) {\n.photo-list[data-v-260a1c18] {\n        text-align: center;\n        padding-bottom: 5vh;\n}\nh2[data-v-260a1c18] {\n        color: #fff;\n        font-size: 17px;\n}\nimg[data-v-260a1c18] {\n        width: 30vw;\n        height: 9vh;\n        -o-object-fit: cover;\n           object-fit: cover;\n}\n.luminous[data-v-260a1c18] {\n        position: relative;\n        transition: .3s ease-in-out;\n        border: 3px solid white;\n        border-radius: 10px;\n        padding: 10px;\n        box-sizing: border-box;\n        cursor: pointer;\n        background-position: center;\n        background-size: cover;\n        vertical-align: bottom;\n}\n.images[data-v-260a1c18] {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n}\n.luminous[data-v-260a1c18]::before {\n        content: \"\\30AF\\30EA\\30C3\\30AF\\3057\\3066\\62E1\\5927\";\n        opacity: 0;\n        box-sizing: border-box;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        width: 100%;\n        padding: 0.8em;\n        background: rgba(0, 0, 0, .6);\n        color: white;\n        font-size: 12px;\n        text-align: center;\n        transition: inherit;\n        transform: translateY(0%);\n}\n.luminous[data-v-260a1c18]:hover::before {\n        opacity: 1;\n        transform: translateY(0);\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8217,7 +8299,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    position: relative;\n    left: 22%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n    cursor: pointer;\n}\n.button[data-v-d5f427ea] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 150px;\n    position: fixed;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-d5f427ea]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.home[data-v-d5f427ea] {\n    bottom: 35%;\n    right: 45%;\n    cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    flex-basis: 100%;\n    height: 100%;\n    margin-top: 40%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n    font-size: 30px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n    cursor: pointer;\n}\n.button[data-v-d5f427ea] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 150px;\n    margin-top: 15px;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-d5f427ea]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.home[data-v-d5f427ea] {\n    cursor: pointer;\n}\n@media screen and (max-width: 950px) {\n.col[data-v-d5f427ea] {\n        text-align: center;\n        color: #fff;\n        flex-basis: 100%;\n        height: 100%;\n        margin-top: 35%;\n}\nh1[data-v-d5f427ea] {\n        margin-bottom: 10px;\n        font-size: 25px;\n}\n}\n@media screen and (max-width: 480px) {\n.col[data-v-d5f427ea] {\n        text-align: center;\n        color: #fff;\n        flex-basis: 100%;\n        height: 100%;\n        margin-top: 35%;\n        min-height: 85vh;\n}\nh1[data-v-d5f427ea] {\n        margin-top: 15px;\n        margin-bottom: 10px;\n        font-size: 22px;\n}\np[data-v-d5f427ea] {\n        overflow-wrap: normal;\n        margin-top: 45px;\n        margin-bottom: 50px;\n        font-size: 19px;\n        line-height: 30px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -46859,7 +46941,15 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("sidebar-menu-component", { attrs: { showSidebar: _vm.showSidebars } })
+      _c("sidebar-menu-component", {
+        staticClass: "sidebar",
+        attrs: { showSidebar: _vm.showSidebars },
+        on: {
+          close: function($event) {
+            _vm.showSidebars = false
+          }
+        }
+      })
     ],
     1
   )
@@ -46886,7 +46976,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("ul", { staticClass: "language" }, [
+  return _c("ul", { staticClass: "language", attrs: { ontouchstart: "" } }, [
     _c("li", [
       _c("a", [_vm._v("Language")]),
       _vm._v(" "),
@@ -46897,7 +46987,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  return _vm.$router.push("/aboutme")
+                  return _vm.changeLang("/aboutme")
                 }
               }
             },
@@ -46911,7 +47001,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  return _vm.$router.push("/aboutme/english")
+                  return _vm.changeLang("/aboutme/english")
                 }
               }
             },
@@ -46925,7 +47015,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  return _vm.$router.push("/aboutme/french")
+                  return _vm.changeLang("/aboutme/french")
                 }
               }
             },
@@ -46939,7 +47029,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  return _vm.$router.push("/aboutme/korean")
+                  return _vm.changeLang("/aboutme/korean")
                 }
               }
             },
@@ -46953,7 +47043,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
-                  return _vm.$router.push("/aboutme/chinese")
+                  return _vm.changeLang("/aboutme/chinese")
                 }
               }
             },
@@ -47156,7 +47246,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return this.card
+  return this.card && _vm.cardStatus
     ? _c("div", { staticClass: "col" }, [
         _c(
           "div",
@@ -47239,7 +47329,7 @@ var render = function() {
           ]
         )
       ])
-    : !this.card
+    : !this.card && _vm.cardStatus
     ? _c("other-card-component")
     : _vm._e()
 }
@@ -47266,16 +47356,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col" }, [
-    _c("h1", [_vm._v("Koyolympus")]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(
-        "\n        Photography is a means of capturing and preserving the instant that doesn't come twice.\n        That's why I cannot stop exploring the world with my camera gear to cut out the exact moment\n        that I would like to keep as it is.\n    "
-      )
-    ]),
-    _vm._v(" "),
-    _c("button", { staticClass: "button", on: { click: this.photo } }, [
-      _vm._v("Explore My Photo")
+    _c("div", { staticClass: "profile" }, [
+      _c("h1", [_vm._v("Koyolympus")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n            Photography is a means of capturing and preserving the instant that doesn't come twice.\n            That's why I cannot stop exploring the world with my camera gear to cut out the exact moment\n            that I would like to keep as it is.\n        "
+        )
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "button", on: { click: this.photo } }, [
+        _vm._v("Explore My Photo")
+      ])
     ])
   ])
 }
@@ -47328,7 +47420,9 @@ var render = function() {
                 _c("h5", [_vm._v("SnapShot")]),
                 _vm._v(" "),
                 _c("p", [
-                  _vm._v("The landscape are there, and I just take them.")
+                  _vm._v(
+                    "It is more important to click with people than to click the shutter."
+                  )
                 ])
               ]
             ),
@@ -47344,7 +47438,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", [
                   _vm._v(
-                    "If you want to be a better animal photographer, stand in front of more animals."
+                    "Since I’m inarticulate, I express myself with images."
                   )
                 ])
               ]
@@ -47361,7 +47455,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", [
                   _vm._v(
-                    "The whole point of taking portraits is so that I can see how far people have come."
+                    "Seeing is not enough; you have to feel what you photograph"
                   )
                 ])
               ]
@@ -47421,7 +47515,7 @@ var render = function() {
           staticStyle: { "background-color": "transparent" },
           on: { click: _vm.moveMainPage }
         },
-        [_vm._v("« HOME\n        »\n    ")]
+        [_vm._v("HOME\n    ")]
       ),
       _vm._v(" "),
       !_vm.isLastPage
@@ -47497,7 +47591,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "photo-list" },
+    { staticClass: "photo-list", attrs: { ontouchstart: "" } },
     [
       _c("loading", {
         attrs: {
@@ -47807,38 +47901,74 @@ var render = function() {
       staticClass: "container"
     },
     [
-      _c(
-        "div",
-        { staticClass: "navigation-icons" },
-        [
-          _c("router-link", { attrs: { to: { name: "about.me" } } }, [
-            _c("img", { attrs: { src: "/images/human.png" } })
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("About Me")]),
-          _vm._v(" "),
-          _c("img", { attrs: { src: "/images/camera.png" } }),
-          _vm._v(" "),
-          _c("p", [_vm._v("Photo")]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
-            _c("img", { attrs: { src: "/images/mail.png" } })
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Inquiry")]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c("p", [_vm._v("github")]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "login" } } }, [
-            _c("img", { attrs: { src: "/images/photo.png" } })
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("upload")])
-        ],
-        1
-      )
+      _c("div", { staticClass: "navigation-icons" }, [
+        _c(
+          "ul",
+          {
+            on: {
+              click: function($event) {
+                return _vm.$emit("close")
+              }
+            }
+          },
+          [
+            _c(
+              "li",
+              [
+                _c("router-link", { attrs: { to: { name: "about.me" } } }, [
+                  _c("img", { attrs: { src: "/images/human.png" } })
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: { name: "about.me" } } }, [
+                  _c("p", [_vm._v("About Me")])
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("li", [
+              _c("img", { attrs: { src: "/images/camera.png" } }),
+              _vm._v(" "),
+              _c("p", { on: { click: _vm.photo } }, [_vm._v("Photo")])
+            ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              [
+                _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
+                  _c("img", { attrs: { src: "/images/mail.png" } })
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
+                  _c("p", [_vm._v("Inquiry")])
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "upload" },
+              [
+                _c("router-link", { attrs: { to: { name: "login" } } }, [
+                  _c("img", { attrs: { src: "/images/photo.png" } })
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v("upload")])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3)
+          ]
+        )
+      ])
     ]
   )
 }
@@ -47847,11 +47977,53 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { attrs: { href: "https://github.com/wadakatu/koyolympus" } },
-      [_c("img", { attrs: { src: "/images/github.png" } })]
-    )
+    return _c("li", [
+      _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [
+        _c("img", { attrs: { src: "/images/github.png" } })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [
+        _c("p", [_vm._v("github")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "insta" }, [
+      _c(
+        "a",
+        { attrs: { href: "https://www.instagram.com/wadakatu1234/?hl=ja" } },
+        [_c("p", [_vm._v("Instagram")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "facebook" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.facebook.com/people/Koyo-Isono/100006224742543"
+          }
+        },
+        [_c("p", [_vm._v("Facebook")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "twitter" }, [
+      _c("a", { attrs: { href: "https://twitter.com/ktwdwdwd" } }, [
+        _c("p", [_vm._v("Twitter")])
+      ])
+    ])
   }
 ]
 render._withStripped = true

@@ -1,5 +1,5 @@
 <template>
-    <div class="col" v-if="this.card">
+    <div class="col" v-if="this.card && cardStatus">
         <div class="card" v-model="genre">
             <div class="card_detail landscape" @click="searchLandscape">
                 <h5>Landscape</h5>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <other-card-component v-else-if="!this.card"></other-card-component>
+    <other-card-component v-else-if="!this.card && cardStatus"></other-card-component>
 </template>
 
 <script>
@@ -33,6 +33,10 @@ export default {
         return {
             genre: '',
             url: '',
+            cardStatus: true,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            currentPath: this.$route.path,
         }
     },
     methods: {
@@ -59,12 +63,37 @@ export default {
         },
         showOthers() {
             this.$store.commit('photo/setCard', false);
-        }
+        },
+        handleResize: function () {
+            // resizeのたびにこいつが発火するので、ここでやりたいことをやる
+            this.width = window.innerWidth;
+            this.height = window.innerHeight;
+            const currentPath = this.$route.path;
+
+            this.cardStatus = !(this.width < 950 && (currentPath.match("aboutme") || currentPath === '/bizinq'));
+        },
     },
     computed: {
         card() {
             return this.$store.state.photo.card;
+        },
+    },
+    watch: {
+        $route() {
+            const currentPath = this.$route.path;
+
+            this.cardStatus = currentPath === "/" || 950 < this.width;
         }
+    },
+    created: function () {
+        const currentPath = this.$route.path;
+        this.cardStatus = currentPath === "/" || 950 < this.width;
+    },
+    mounted: function () {
+        window.addEventListener('resize', this.handleResize);
+    },
+    beforeDestroy: function () {
+        window.removeEventListener('resize', this.handleResize)
     }
 }
 </script>
@@ -124,6 +153,57 @@ p {
     color: #fff;
     font-size: 11px;
     text-shadow: 0 0 15px #000;
+}
+
+@media screen and (max-width: 1150px) {
+    .col {
+        flex-basis: 50%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 950px) {
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 25px;
+    }
+
+    .card_detail {
+        height: 10vh;
+        width: 60vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3vh;
+    }
+
+    .card_detail {
+        height: 8vh;
+        width: 40vh;
+        margin-top: 2vh;
+    }
+
+    p {
+        display: none;
+    }
 }
 
 </style>
