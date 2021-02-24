@@ -113,6 +113,14 @@ nav ul li a {
 }
 
 @media screen and (max-width: 480px) {
+    .navbar {
+        height: 12%;
+        display: flex;
+        align-items: center;
+        padding-top: 20px;
+        z-index: 999;
+    }
+
     .logo {
         width: 150px;
         text-align: center;
@@ -124,7 +132,8 @@ nav ul li a {
 
     .menu-icon {
         width: 40px;
-        margin-left: 80px;
+        position: static;
+        padding-left: 10%;
     }
 
     .sidebar {
