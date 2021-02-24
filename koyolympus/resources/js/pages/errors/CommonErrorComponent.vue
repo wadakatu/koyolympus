@@ -21,6 +21,8 @@ export default {
     text-align: center;
     color: #fff;
     flex-basis: 100%;
+    height: 100%;
+    margin-top: 40%;
 }
 
 h1 {
@@ -64,38 +66,45 @@ span {
     cursor: pointer;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 950px) {
+
     .col {
         text-align: center;
         color: #fff;
         flex-basis: 100%;
-        padding-top: 35%;
+        height: 100%;
+        margin-top: 35%;
     }
 
     h1 {
         margin-bottom: 10px;
         font-size: 25px;
     }
-
-    p {
-        overflow-wrap: normal;
-        margin-top: 30px;
-        margin-bottom: 25px;
-    }
 }
 
 @media screen and (max-width: 480px) {
 
+    .col {
+        text-align: center;
+        color: #fff;
+        flex-basis: 100%;
+        height: 100%;
+        margin-top: 35%;
+        min-height: 85vh;
+    }
+
     h1 {
+        margin-top: 15px;
         margin-bottom: 10px;
-        font-size: 20px;
+        font-size: 22px;
     }
 
     p {
         overflow-wrap: normal;
-        margin-top: 30px;
-        margin-bottom: 25px;
-        font-size: 18px;
+        margin-top: 45px;
+        margin-bottom: 50px;
+        font-size: 19px;
+        line-height: 30px;
     }
 }
 
