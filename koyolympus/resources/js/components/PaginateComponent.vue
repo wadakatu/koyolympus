@@ -6,8 +6,7 @@
             class="button prev"
         >&laquo; prev
         </RouterLink>
-        <button class="button home" style="background-color: transparent;" @click="moveMainPage">&laquo; HOME
-            &raquo;
+        <button class="button home" style="background-color: transparent;" @click="moveMainPage">HOME
         </button>
         <RouterLink
             v-if="! isLastPage"

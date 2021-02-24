@@ -2828,7 +2828,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PaginateComponent.vue",
   props: {
@@ -8072,7 +8071,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n    z-index: 999;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n@media screen and (max-width: 760px) {\n.logo[data-v-153bfd55] {\n        width: 150px;\n        text-align: center;\n}\nnav[data-v-153bfd55] {\n        display: none;\n}\n.menu-icon[data-v-153bfd55] {\n        width: 40px;\n        margin-left: 80px;\n}\n.sidebar[data-v-153bfd55] {\n        position: fixed;\n        right: 0;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.navbar[data-v-153bfd55] {\n    height: 12%;\n    display: flex;\n    align-items: center;\n    padding-top: 20px;\n    z-index: 999;\n}\n.logo[data-v-153bfd55] {\n    width: 150px;\n    cursor: pointer;\n}\n.menu-icon[data-v-153bfd55] {\n    width: 30px;\n    cursor: pointer;\n    margin-left: 40px;\n}\nnav[data-v-153bfd55] {\n    flex: 1;\n    text-align: right;\n}\nnav ul li[data-v-153bfd55] {\n    list-style: none;\n    display: inline-block;\n    margin-left: 60px;\n}\nnav ul li a[data-v-153bfd55] {\n    text-decoration: none;\n    color: #fff;\n    font-size: 15px;\n}\n@media screen and (max-width: 760px) {\n.logo[data-v-153bfd55] {\n        width: 150px;\n        text-align: center;\n}\nnav[data-v-153bfd55] {\n        display: none;\n}\n.menu-icon[data-v-153bfd55] {\n        width: 40px;\n        position: fixed;\n        top: 7%;\n        right: 20vw;\n}\n.sidebar[data-v-153bfd55] {\n        position: fixed;\n        right: 0;\n}\n}\n@media screen and (max-width: 480px) {\n.logo[data-v-153bfd55] {\n        width: 150px;\n        text-align: center;\n}\nnav[data-v-153bfd55] {\n        display: none;\n}\n.menu-icon[data-v-153bfd55] {\n        width: 40px;\n        margin-left: 80px;\n}\n.sidebar[data-v-153bfd55] {\n        position: fixed;\n        right: 0;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -8300,7 +8299,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    position: relative;\n    left: 22%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n    cursor: pointer;\n}\n.button[data-v-d5f427ea] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 150px;\n    position: fixed;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-d5f427ea]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.home[data-v-d5f427ea] {\n    bottom: 35%;\n    right: 45%;\n    cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, "\n.col[data-v-d5f427ea] {\n    text-align: center;\n    color: #fff;\n    flex-basis: 100%;\n}\nh1[data-v-d5f427ea] {\n    margin-bottom: 10px;\n    font-size: 30px;\n}\nspan[data-v-d5f427ea] {\n    color: #fff;\n    border-bottom: solid 3px white;\n    cursor: pointer;\n}\n.button[data-v-d5f427ea] {\n    color: #FFF;\n    display: inline-block;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 30px;\n    width: 150px;\n    margin-top: 15px;\n    text-decoration: none;\n    text-transform: uppercase;\n    border: 1px solid transparent;\n    outline: rgba(255, 255, 255, 0.5) solid 1px;\n    outline-offset: 0;\n    text-align: center;\n    text-shadow: none;\n    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);\n}\n.button[data-v-d5f427ea]:hover {\n    border-color: #FFF;\n    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);\n    outline-color: transparent;\n    outline-offset: 12px;\n    text-shadow: 2px 2px 3px #000;\n}\n.button.home[data-v-d5f427ea] {\n    cursor: pointer;\n}\n@media screen and (max-width: 960px) {\n.col[data-v-d5f427ea] {\n        text-align: center;\n        color: #fff;\n        flex-basis: 100%;\n        padding-top: 35%;\n}\nh1[data-v-d5f427ea] {\n        margin-bottom: 10px;\n        font-size: 25px;\n}\np[data-v-d5f427ea] {\n        overflow-wrap: normal;\n        margin-top: 30px;\n        margin-bottom: 25px;\n}\n}\n@media screen and (max-width: 480px) {\nh1[data-v-d5f427ea] {\n        margin-bottom: 10px;\n        font-size: 20px;\n}\np[data-v-d5f427ea] {\n        overflow-wrap: normal;\n        margin-top: 30px;\n        margin-bottom: 25px;\n        font-size: 18px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -47516,7 +47515,7 @@ var render = function() {
           staticStyle: { "background-color": "transparent" },
           on: { click: _vm.moveMainPage }
         },
-        [_vm._v("« HOME\n        »\n    ")]
+        [_vm._v("HOME\n    ")]
       ),
       _vm._v(" "),
       !_vm.isLastPage

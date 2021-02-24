@@ -101,6 +101,29 @@ nav ul li a {
 
     .menu-icon {
         width: 40px;
+        position: fixed;
+        top: 7%;
+        right: 20vw;
+    }
+
+    .sidebar {
+        position: fixed;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        width: 150px;
+        text-align: center;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .menu-icon {
+        width: 40px;
         margin-left: 80px;
     }
 
