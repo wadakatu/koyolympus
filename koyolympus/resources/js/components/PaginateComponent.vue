@@ -194,6 +194,7 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
+
     .button {
         color: #fff;
         display: inline-block;
@@ -201,7 +202,7 @@ export default {
         font-weight: bold;
         line-height: 30px;
         width: 10vw;
-        position: fixed;
+        position: static;
         text-decoration: none;
         text-transform: uppercase;
         border: 1px solid transparent;
@@ -210,6 +211,9 @@ export default {
         text-align: center;
         text-shadow: none;
         transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
+        margin-top: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
     }
 
     .button:hover {
@@ -221,29 +225,18 @@ export default {
     }
 
     .button.next {
-        bottom: 1vh;
-        width: 120px;
+        width: 90px;
         height: 20px;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
     }
 
     .button.prev {
-        bottom: 1vh;
-        left: 4vh;
-        width: 120px;
+        width: 90px;
         height: 20px;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
     }
 
     .button.home {
-        bottom: 10vh;
-        left: 43%;
         width: 50px;
-        height: 30px;
+        height: 40px;
         cursor: pointer;
     }
 }
