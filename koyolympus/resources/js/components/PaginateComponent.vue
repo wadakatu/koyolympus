@@ -198,10 +198,9 @@ export default {
     .button {
         color: #fff;
         display: inline-block;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: bold;
         line-height: 30px;
-        width: 10vw;
         position: static;
         text-decoration: none;
         text-transform: uppercase;
