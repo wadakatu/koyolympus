@@ -187,6 +187,23 @@ p {
     }
 }
 
+@media screen and (min-height: 910px) and (max-width: 1310px) {
+    .col {
+        flex-basis: 50%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
 @media screen and (max-width: 480px) {
     .card {
         display: flex;

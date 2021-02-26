@@ -194,14 +194,14 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
+
     .button {
         color: #fff;
         display: inline-block;
-        font-size: 16px;
+        font-size: 12px;
         font-weight: bold;
         line-height: 30px;
-        width: 10vw;
-        position: fixed;
+        position: static;
         text-decoration: none;
         text-transform: uppercase;
         border: 1px solid transparent;
@@ -210,6 +210,9 @@ export default {
         text-align: center;
         text-shadow: none;
         transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
+        margin-top: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
     }
 
     .button:hover {
@@ -221,84 +224,18 @@ export default {
     }
 
     .button.next {
-        bottom: 1vh;
-        width: 120px;
+        width: 70px;
         height: 20px;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
     }
 
     .button.prev {
-        bottom: 1vh;
-        left: 4vh;
-        width: 120px;
+        width: 70px;
         height: 20px;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
     }
 
     .button.home {
-        bottom: 10vh;
-        left: 43%;
-        width: 50px;
-        height: 30px;
-        cursor: pointer;
-    }
-}
-
-@media screen and (max-height: 680px) {
-    .button {
-        color: #fff;
-        display: inline-block;
-        font-size: 9px;
-        font-weight: bold;
-        line-height: 30px;
-        width: 10vw;
-        position: fixed;
-        text-decoration: none;
-        text-transform: uppercase;
-        border: 1px solid transparent;
-        outline: rgba(255, 255, 255, 0.5) solid 1px;
-        outline-offset: 0;
-        text-align: center;
-        text-shadow: none;
-        transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
-    }
-
-    .button:hover {
-        border-color: #fff;
-        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
-        outline-color: transparent;
-        outline-offset: 12px;
-        text-shadow: 2px 2px 3px #000;
-    }
-
-    .button.next {
-        bottom: 1vh;
-        width: 120px;
-        height: 20px;
-        padding-top: 1px;
-        padding-bottom: 10px;
-        margin-bottom: 1px;
-    }
-
-    .button.prev {
-        bottom: 1vh;
-        left: 4vh;
-        width: 120px;
-        height: 20px;
-        padding-top: 1px;
-        padding-bottom: 10px;
-        margin-bottom: 1px;
-    }
-
-    .button.home {
-        bottom: 6vh;
-        left: 43%;
-        width: 50px;
-        height: 30px;
+        width: 60px;
+        height: 40px;
         cursor: pointer;
     }
 }

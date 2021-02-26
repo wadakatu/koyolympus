@@ -483,6 +483,7 @@ img {
 @media screen and (max-width: 480px) {
     .photo-list {
         text-align: center;
+        min-height: 80vh;
         padding-bottom: 5vh;
     }
 
