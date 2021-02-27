@@ -2,7 +2,7 @@
     <div>
         <div class="navbar">
             <router-link v-bind:to="{name: 'main'}"><img src="/images/mylogo_white.png"
-                                                         class="logo"></router-link>
+                                                         class="logo" alt="myLogo"></router-link>
             <nav>
                 <ul>
                     <li><a href="">
@@ -16,7 +16,7 @@
                     </a></li>
                 </ul>
             </nav>
-            <img src="/images/menu.png" class="menu-icon" @click="showNav">
+            <img src="/images/menu.png" class="menu-icon" alt="menu" @click="showNav">
         </div>
         <sidebar-menu-component v-bind:showSidebar="showSidebars" @close="showSidebars = false"
                                 class="sidebar"></sidebar-menu-component>

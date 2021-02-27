@@ -4,24 +4,25 @@
         <div class="navigation-icons">
             <ul @click="$emit('close')">
                 <li>
-                    <router-link v-bind:to="{name: 'about.me'}"><img src="/images/human.png">
+                    <router-link v-bind:to="{name: 'about.me'}"><img src="/images/human.png" alt="aboutMe">
                     </router-link>
                     <router-link v-bind:to="{name: 'about.me'}"><p>About Me</p></router-link>
                 </li>
                 <li>
-                    <img src="/images/camera.png">
+                    <img src="/images/camera.png" alt="Photo">
                     <p @click="photo">Photo</p>
                 </li>
                 <li>
-                    <router-link v-bind:to="{name: 'main.biz'}"><img src="/images/mail.png"></router-link>
+                    <router-link v-bind:to="{name: 'main.biz'}"><img src="/images/mail.png" alt="bizInquiry">
+                    </router-link>
                     <router-link v-bind:to="{name: 'main.biz'}"><p>Inquiry</p></router-link>
                 </li>
                 <li>
-                    <a href="https://github.com/wadakatu/koyolympus"><img src="/images/github.png"></a>
+                    <a href="https://github.com/wadakatu/koyolympus"><img src="/images/github.png" alt="github"></a>
                     <a href="https://github.com/wadakatu/koyolympus"><p>github</p></a>
                 </li>
                 <li class="upload">
-                    <router-link v-bind:to="{name: 'login'}"><img src="/images/photo.png"></router-link>
+                    <router-link v-bind:to="{name: 'login'}"><img src="/images/photo.png" alt="upload"></router-link>
                     <p>upload</p>
                 </li>
                 <li class="insta">

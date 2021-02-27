@@ -2311,6 +2311,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /***/ }),
 
@@ -3309,6 +3310,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -46822,7 +46824,11 @@ var staticRenderFns = [
               {
                 attrs: { href: "https://www.instagram.com/wadakatu1234/?hl=ja" }
               },
-              [_c("img", { attrs: { src: "/images/instagram.png" } })]
+              [
+                _c("img", {
+                  attrs: { src: "/images/instagram.png", alt: "instagram" }
+                })
+              ]
             )
           ]),
           _vm._v(" "),
@@ -46835,19 +46841,27 @@ var staticRenderFns = [
                     "https://www.facebook.com/people/Koyo-Isono/100006224742543"
                 }
               },
-              [_c("img", { attrs: { src: "/images/facebook.png" } })]
+              [
+                _c("img", {
+                  attrs: { src: "/images/facebook.png", alt: "facebook" }
+                })
+              ]
             )
           ]),
           _vm._v(" "),
           _c("li", [
             _c("a", { attrs: { href: "https://twitter.com/ktwdwdwd" } }, [
-              _c("img", { attrs: { src: "/images/twitter.png" } })
+              _c("img", {
+                attrs: { src: "/images/twitter.png", alt: "twitter" }
+              })
             ])
           ]),
           _vm._v(" "),
           _c("li", [
             _c("a", { attrs: { href: "" } }, [
-              _c("img", { attrs: { src: "/images/email.png" } })
+              _c("img", {
+                attrs: { src: "/images/email.png", alt: "bizInquiry" }
+              })
             ])
           ])
         ])
@@ -46886,7 +46900,7 @@ var render = function() {
           _c("router-link", { attrs: { to: { name: "main" } } }, [
             _c("img", {
               staticClass: "logo",
-              attrs: { src: "/images/mylogo_white.png" }
+              attrs: { src: "/images/mylogo_white.png", alt: "myLogo" }
             })
           ]),
           _vm._v(" "),
@@ -46934,7 +46948,7 @@ var render = function() {
           _vm._v(" "),
           _c("img", {
             staticClass: "menu-icon",
-            attrs: { src: "/images/menu.png" },
+            attrs: { src: "/images/menu.png", alt: "menu" },
             on: { click: _vm.showNav }
           })
         ],
@@ -47916,7 +47930,9 @@ var render = function() {
               "li",
               [
                 _c("router-link", { attrs: { to: { name: "about.me" } } }, [
-                  _c("img", { attrs: { src: "/images/human.png" } })
+                  _c("img", {
+                    attrs: { src: "/images/human.png", alt: "aboutMe" }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("router-link", { attrs: { to: { name: "about.me" } } }, [
@@ -47927,7 +47943,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("li", [
-              _c("img", { attrs: { src: "/images/camera.png" } }),
+              _c("img", { attrs: { src: "/images/camera.png", alt: "Photo" } }),
               _vm._v(" "),
               _c("p", { on: { click: _vm.photo } }, [_vm._v("Photo")])
             ]),
@@ -47936,7 +47952,9 @@ var render = function() {
               "li",
               [
                 _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
-                  _c("img", { attrs: { src: "/images/mail.png" } })
+                  _c("img", {
+                    attrs: { src: "/images/mail.png", alt: "bizInquiry" }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("router-link", { attrs: { to: { name: "main.biz" } } }, [
@@ -47953,7 +47971,9 @@ var render = function() {
               { staticClass: "upload" },
               [
                 _c("router-link", { attrs: { to: { name: "login" } } }, [
-                  _c("img", { attrs: { src: "/images/photo.png" } })
+                  _c("img", {
+                    attrs: { src: "/images/photo.png", alt: "upload" }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("p", [_vm._v("upload")])
@@ -47979,7 +47999,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [
-        _c("img", { attrs: { src: "/images/github.png" } })
+        _c("img", { attrs: { src: "/images/github.png", alt: "github" } })
       ]),
       _vm._v(" "),
       _c("a", { attrs: { href: "https://github.com/wadakatu/koyolympus" } }, [

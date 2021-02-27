@@ -2,12 +2,13 @@
     <footer>
         <nav>
             <ul>
-                <li><a href="https://www.instagram.com/wadakatu1234/?hl=ja"><img src="/images/instagram.png"></a>
+                <li><a href="https://www.instagram.com/wadakatu1234/?hl=ja"><img src="/images/instagram.png"
+                                                                                 alt="instagram"></a>
                 </li>
                 <li><a href="https://www.facebook.com/people/Koyo-Isono/100006224742543"><img
-                    src="/images/facebook.png"></a></li>
-                <li><a href="https://twitter.com/ktwdwdwd"><img src="/images/twitter.png"></a></li>
-                <li><a href=""><img src="/images/email.png"></a></li>
+                    src="/images/facebook.png" alt="facebook"></a></li>
+                <li><a href="https://twitter.com/ktwdwdwd"><img src="/images/twitter.png" alt="twitter"></a></li>
+                <li><a href=""><img src="/images/email.png" alt="bizInquiry"></a></li>
             </ul>
         </nav>
     </footer>
