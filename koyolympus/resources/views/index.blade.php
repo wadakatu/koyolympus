@@ -20,7 +20,7 @@
     <meta property="og:url" content="https://koyolympus.gallery/"/>
     <meta property="og:title" content="Koyolympus"/>
     <meta property="og:description" content="Tokyo Photographer Koyo Isono with Olympus Camera"/>
-    <meta property="og:image" content="/images/mylogo_white.png"/>
+    <meta property="og:image" content={{ asset('/images/mylogo_white.png') }}/>
 
     <title>Koyolympus</title>
     <meta name="author" content="Koyo Isono">
@@ -28,7 +28,6 @@
     Please feel free to enjoy visiting my website and seeing my photography.
     I hope you are going to find out something touch your heart in this site.">
 
-    <link href="{{ asset('/css/index.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/reset.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
