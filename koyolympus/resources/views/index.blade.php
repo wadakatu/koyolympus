@@ -15,6 +15,7 @@
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#000000">
 
+    <meta property="og:type" content="website">
     <meta name=”twitter:card” content=”summary_large_image“/>
     <meta name="twitter:creator" content="@ktwdwdwd"/>
     <meta property="og:url" content="https://koyolympus.gallery"/>
