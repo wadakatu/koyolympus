@@ -20,7 +20,6 @@
             v-on:vdropzone-error="uploadError"
             v-on:vdropzone-removed-file="fileRemoved"
             v-on:vdropzone-sending="sendingEvent"
-
         >
             <div class="dropzone-custom-content">
                 <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>

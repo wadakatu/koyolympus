@@ -1,18 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "./store";
-import MainMessageComponent from "./components/MainMessageComponent";
 import MainCardComponent from "./components/MainCardComponent";
-import AboutMeComponent from "./components/AboutMeComponent";
-import AboutMeEnglishComponent from "./components/AboutMeEnglishComponent";
-import AboutMeFrenchComponent from "./components/AboutMeFrenchComponent";
-import AboutMeKoreanComponent from "./components/AboutMeKoreanComponent";
-import AboutMeChineseComponent from "./components/AboutMeChineseComponent";
-import BizInquiriesComponent from "./components/BizInquiriesComponent";
-import PhotoUpComponent from "./components/PhotoUpComponent";
-import LoginComponent from "./components/LoginComponent";
-import PhotoListComponent from "./components/PhotoListComponent";
-import SystemError from './pages/errors/CommonErrorComponent';
 
 Vue.use(VueRouter);
 
@@ -22,7 +11,7 @@ const router = new VueRouter({
         {
             path: '/',
             components: {
-                default: MainMessageComponent,
+                default: () => import('./components/MainMessageComponent'),
                 card: MainCardComponent
             },
             name: 'main',
@@ -30,7 +19,7 @@ const router = new VueRouter({
         {
             path: '/aboutme',
             components: {
-                default: AboutMeComponent,
+                default: () => import('./components/AboutMeComponent'),
                 card: MainCardComponent,
             },
             name: 'about.me',
@@ -38,7 +27,7 @@ const router = new VueRouter({
         {
             path: '/aboutme/english',
             components: {
-                default: AboutMeEnglishComponent,
+                default: () => import('./components/AboutMeEnglishComponent'),
                 card: MainCardComponent,
             },
             name: 'about.me.english'
@@ -46,7 +35,7 @@ const router = new VueRouter({
         {
             path: '/aboutme/french',
             components: {
-                default: AboutMeFrenchComponent,
+                default: () => import('./components/AboutMeFrenchComponent'),
                 card: MainCardComponent,
             },
             name: 'about.me.french',
@@ -54,7 +43,7 @@ const router = new VueRouter({
         {
             path: '/aboutme/korean',
             components: {
-                default: AboutMeKoreanComponent,
+                default: () => import('./components/AboutMeKoreanComponent'),
                 card: MainCardComponent,
             },
             name: 'about.me.korean',
@@ -62,14 +51,14 @@ const router = new VueRouter({
         {
             path: '/aboutme/chinese',
             components: {
-                default: AboutMeChineseComponent,
+                default: () => import('./components/AboutMeChineseComponent'),
                 card: MainCardComponent,
             }
         },
         {
             path: '/bizinq',
             components: {
-                default: BizInquiriesComponent,
+                default: () => import('./components/BizInquiriesComponent'),
                 card: MainCardComponent,
             },
             name: 'main.biz'
@@ -77,7 +66,7 @@ const router = new VueRouter({
         {
             path: '/upload',
             components: {
-                default: PhotoUpComponent,
+                default: () => import('./components/PhotoUpComponent'),
                 card: MainCardComponent,
             },
             name: 'photo.upload',
@@ -92,7 +81,7 @@ const router = new VueRouter({
         {
             path: '/login',
             components: {
-                default: LoginComponent,
+                default: () => import('./components/LoginComponent'),
                 card: MainCardComponent,
             },
             name: 'login',
@@ -107,12 +96,12 @@ const router = new VueRouter({
         {
             path: '*',
             components: {
-                default: SystemError,
+                default: () => import('./pages/errors/CommonErrorComponent'),
             },
         },
         {
             path: '/photo',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;
@@ -122,7 +111,7 @@ const router = new VueRouter({
         },
         {
             path: '/photo/landscape',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;
@@ -132,7 +121,7 @@ const router = new VueRouter({
         },
         {
             path: '/photo/animal',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;
@@ -142,7 +131,7 @@ const router = new VueRouter({
         },
         {
             path: '/photo/portrait',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;
@@ -152,7 +141,7 @@ const router = new VueRouter({
         },
         {
             path: '/photo/others/snapshot',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;
@@ -162,7 +151,7 @@ const router = new VueRouter({
         },
         {
             path: '/photo/others/livecomposite',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;
@@ -172,7 +161,7 @@ const router = new VueRouter({
         },
         {
             path: '/photo/others/pinfilm',
-            component: PhotoListComponent,
+            component: () => import('./components/PhotoListComponent'),
             props: route => {
                 console.log(route);
                 const page = route.query.page;

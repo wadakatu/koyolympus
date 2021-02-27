@@ -2,20 +2,22 @@
     <div class="col" v-if="this.card && cardStatus">
         <div class="card" v-model="genre">
             <div class="card_detail landscape" @click="searchLandscape">
-                <h5>Landscape</h5>
-                <p>The landscape are there, and I just take them.</p>
+                <h5 class="card_title">Landscape</h5>
+                <p class="card_description">The landscape are there, and I just take them.</p>
             </div>
             <div class="card_detail animal" @click="searchAnimal">
-                <h5>Animal</h5>
-                <p>If you want to be a better animal photographer, stand in front of more animals.</p>
+                <h5 class="card_title">Animal</h5>
+                <p class="card_description">If you want to be a better animal photographer, stand in front of more
+                    animals.</p>
             </div>
             <div class="card_detail portrait" @click="searchPortrait">
-                <h5>Portrait</h5>
-                <p>The whole point of taking portraits is so that I can see how far people have come.</p>
+                <h5 class="card_title">Portrait</h5>
+                <p class="card_description">The whole point of taking portraits is so that I can see how far people have
+                    come.</p>
             </div>
             <div class="card_detail others" @click="showOthers">
-                <h5>Others</h5>
-                <p>The Earth is art, The photographer is only a witness.</p>
+                <h5 class="card_title">Others</h5>
+                <p class="card_description">The Earth is art, The photographer is only a witness.</p>
             </div>
         </div>
     </div>
@@ -144,24 +146,19 @@ export default {
     transform: translateY(-10px);
 }
 
-h5 {
+.card_title {
     color: #fff;
     text-shadow: 0 0 5px #999;
 }
 
-p {
+.card_description {
     color: #fff;
     font-size: 11px;
     text-shadow: 0 0 15px #000;
 }
 
-@media screen and (max-width: 1150px) {
-    .col {
-        flex-basis: 50%;
-    }
-
+@media screen and (max-width: 1170px) {
     .card {
-        display: flex;
         flex-direction: column;
         align-items: center;
     }
@@ -175,9 +172,6 @@ p {
 @media screen and (max-width: 950px) {
 
     .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         padding-bottom: 25px;
     }
 
@@ -188,16 +182,6 @@ p {
 }
 
 @media screen and (min-height: 910px) and (max-width: 1310px) {
-    .col {
-        flex-basis: 50%;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
     .card_detail {
         height: 15vh;
         width: 30vw;
@@ -206,9 +190,6 @@ p {
 
 @media screen and (max-width: 480px) {
     .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         margin-top: 3vh;
     }
 
@@ -218,7 +199,7 @@ p {
         margin-top: 2vh;
     }
 
-    p {
+    .card_description {
         display: none;
     }
 }

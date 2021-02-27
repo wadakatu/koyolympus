@@ -23,18 +23,14 @@ import Viewer from 'v-viewer'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import Vue from 'vue'
-import PhotoComponent from "./PhotoComponent";
 import PaginateComponent from "./PaginateComponent";
-import LikeComponent from "./LikeComponent";
 
 Vue.use(Viewer)
 
 export default {
     name: "PhotoListComponent.vue",
     components: {
-        PhotoComponent,
         PaginateComponent,
-        LikeComponent,
         Loading,
     },
     props: {
@@ -154,210 +150,48 @@ img {
 
 @media screen and (max-width: 1350px) {
     .photo-list {
-        text-align: center;
         margin-bottom: 10px;
     }
 
     h2 {
-        color: #fff;
-        position: fixed;
-        top: 50vh;
-        left: 30vw;
         font-size: 35px;
     }
 
     img {
-        width: 13vw;
         height: 23vh;
-        object-fit: cover;
-    }
-
-    .luminous {
-        position: relative;
-        transition: .3s ease-in-out;
-        border: 3px solid white;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        vertical-align: bottom;
-    }
-
-    .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .luminous::before {
-        content: "クリックして拡大";
-        opacity: 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0.8em;
-        background: rgba(0, 0, 0, .6);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        transition: inherit;
-        transform: translateY(0%);
-    }
-
-    .luminous:hover::before {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
 @media screen and (max-width: 1050px) {
-    .photo-list {
-        text-align: center;
-        margin-bottom: 10px;
-    }
 
     h2 {
-        color: #fff;
-        position: fixed;
-        top: 50vh;
         left: 28vw;
         font-size: 30px;
-    }
-
-    img {
-        width: 13vw;
-        height: 25vh;
-        object-fit: cover;
-    }
-
-    .luminous {
-        position: relative;
-        transition: .3s ease-in-out;
-        border: 3px solid white;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        vertical-align: bottom;
-    }
-
-    .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .luminous::before {
-        content: "クリックして拡大";
-        opacity: 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0.8em;
-        background: rgba(0, 0, 0, .6);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        transition: inherit;
-        transform: translateY(0%);
-    }
-
-    .luminous:hover::before {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
 @media screen and (max-width: 880px) {
-    .photo-list {
-        text-align: center;
-        margin-bottom: 10px;
-    }
 
     h2 {
-        color: #fff;
-        position: fixed;
-        top: 50vh;
         left: 25vw;
-        font-size: 30px;
     }
 
     img {
         width: 17vw;
         height: 17vh;
-        object-fit: cover;
-    }
-
-    .luminous {
-        position: relative;
-        transition: .3s ease-in-out;
-        border: 3px solid white;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        vertical-align: bottom;
     }
 
     .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
         margin-top: 3vh;
-    }
-
-    .luminous::before {
-        content: "クリックして拡大";
-        opacity: 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0.8em;
-        background: rgba(0, 0, 0, .6);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        transition: inherit;
-        transform: translateY(0%);
-    }
-
-    .luminous:hover::before {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
 @media screen and (max-width: 650px) {
     .photo-list {
-        text-align: center;
         margin-top: 3vh;
     }
 
     h2 {
-        color: #fff;
-        position: fixed;
-        top: 50vh;
         left: 20vw;
         font-size: 25px;
     }
@@ -365,181 +199,30 @@ img {
     img {
         width: 16vw;
         height: 16vh;
-        object-fit: cover;
-    }
-
-    .luminous {
-        position: relative;
-        transition: .3s ease-in-out;
-        border: 3px solid white;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        vertical-align: bottom;
-    }
-
-    .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-top: 3vh;
-    }
-
-    .luminous::before {
-        content: "クリックして拡大";
-        opacity: 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0.8em;
-        background: rgba(0, 0, 0, .6);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        transition: inherit;
-        transform: translateY(0%);
-    }
-
-    .luminous:hover::before {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
 @media screen and (max-width: 530px) {
-    .photo-list {
-        text-align: center;
-        margin-top: 3vh;
-    }
-
-    h2 {
-        color: #fff;
-        position: fixed;
-        top: 50vh;
-        left: 20vw;
-        font-size: 25px;
-    }
 
     img {
         width: 15vw;
         height: 15vh;
-        object-fit: cover;
-    }
-
-    .luminous {
-        position: relative;
-        transition: .3s ease-in-out;
-        border: 3px solid white;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        vertical-align: bottom;
-    }
-
-    .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-top: 3vh;
-    }
-
-    .luminous::before {
-        content: "クリックして拡大";
-        opacity: 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0.8em;
-        background: rgba(0, 0, 0, .6);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        transition: inherit;
-        transform: translateY(0%);
-    }
-
-    .luminous:hover::before {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
 @media screen and (max-width: 480px) {
     .photo-list {
-        text-align: center;
         min-height: 80vh;
         padding-bottom: 5vh;
     }
 
     h2 {
-        color: #fff;
         font-size: 17px;
     }
 
     img {
         width: 30vw;
         height: 9vh;
-        object-fit: cover;
-    }
-
-    .luminous {
-        position: relative;
-        transition: .3s ease-in-out;
-        border: 3px solid white;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        vertical-align: bottom;
-    }
-
-    .images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .luminous::before {
-        content: "クリックして拡大";
-        opacity: 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 0.8em;
-        background: rgba(0, 0, 0, .6);
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        transition: inherit;
-        transform: translateY(0%);
-    }
-
-    .luminous:hover::before {
-        opacity: 1;
-        transform: translateY(0);
     }
 }
 
