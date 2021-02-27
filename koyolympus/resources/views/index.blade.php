@@ -20,7 +20,7 @@
     <meta name="twitter:creator" content="@ktwdwdwd"/>
     <meta property="og:url" content="https://koyolympus.gallery"/>
     <meta property="og:title" content="Koyolympus"/>
-    <meta property="og:description" content="Tokyo Photographer Koyo Isono with Olympus Camera"/>
+    <meta property="og:description" content="Tokyo Photographer Koyo Isono with Olympus Camera."/>
     <meta property="og:image" content="https://koyolympus.gallery/images/mylogo_black.jpg"/>
 
     <title>Koyolympus</title>
