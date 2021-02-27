@@ -15,12 +15,12 @@
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#000000">
 
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:site" content="@ktwdwdwd"/>
+    <meta name=”twitter:card” content=”summary_large_image“>
+    <meta name="twitter:creator" content="@ktwdwdwd"/>
     <meta property="og:url" content="https://koyolympus.gallery/"/>
     <meta property="og:title" content="Koyolympus"/>
     <meta property="og:description" content="Tokyo Photographer Koyo Isono with Olympus Camera"/>
-    <meta property="og:image" content={{ asset('/images/mylogo_white.png') }}/>
+    <meta property="og:image" content="https://koyolympus.gallery/images/mylogo_white.png"/>
 
     <title>Koyolympus</title>
     <meta name="author" content="Koyo Isono">
