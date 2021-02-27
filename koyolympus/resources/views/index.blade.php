@@ -7,10 +7,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>koyolympus</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#000000">
 
-    {{--  <!-- Styles -->--}}
-    {{--  <link href="{{ mix('/css/app.css') }}" rel="stylesheet">--}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@ktwdwdwd"/>
+    <meta property="og:url" content="https://koyolympus.gallery/"/>
+    <meta property="og:title" content="Koyolympus"/>
+    <meta property="og:description" content="Tokyo Photographer Koyo Isono with Olympus Camera"/>
+    <meta property="og:image" content="/images/mylogo_white.png"/>
+
+    <title>Koyolympus</title>
+    <meta name="author" content="Koyo Isono">
+    <meta name="description" content="Enthusiastic OLYMPUS photographer in Tokyo, Japan.
+    Please feel free to enjoy visiting my website and seeing my photography.
+    I hope you are going to find out something touch your heart in this site.">
+
     <link href="{{ asset('/css/index.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/reset.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
