@@ -1,12 +1,12 @@
 <template>
     <ul class="language" ontouchstart="">
-        <li><a>Language</a>
-            <ul>
-                <li><a @click="changeLang('/aboutme')">日本語</a></li>
-                <li><a @click="changeLang('/aboutme/english')">English</a></li>
-                <li><a @click="changeLang('/aboutme/french')">French</a></li>
-                <li><a @click="changeLang('/aboutme/korean')">한국말</a></li>
-                <li><a @click="changeLang('/aboutme/chinese')">中文</a></li>
+        <li class="language_title"><a>Language</a>
+            <ul class="language_ul">
+                <li class="lang"><a @click="changeLang('/aboutme')" class="lang_detail">日本語</a></li>
+                <li class="lang"><a @click="changeLang('/aboutme/english')" class="lang_detail">English</a></li>
+                <li class="lang"><a @click="changeLang('/aboutme/french')" class="lang_detail">French</a></li>
+                <li class="lang"><a @click="changeLang('/aboutme/korean')" class="lang_detail">한국말</a></li>
+                <li class="lang"><a @click="changeLang('/aboutme/chinese')" class="lang_detail">中文</a></li>
             </ul>
         </li>
     </ul>
@@ -40,14 +40,14 @@ export default {
     z-index: 990;
 }
 
-.language li {
+.language_title {
     width: 25%;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-.language ul a {
+.lang_detail {
     display: block;
     margin: 0;
     padding: 13px 0;
@@ -56,9 +56,10 @@ export default {
     font-weight: bold;
     line-height: 1;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.language li ul {
+.language_ul {
     list-style: none;
     position: absolute;
     top: 100%;
@@ -67,7 +68,7 @@ export default {
     padding: 0;
 }
 
-.language li ul li {
+.lang {
     overflow: hidden;
     width: 75px;
     height: 0;
@@ -79,7 +80,7 @@ export default {
     transition: .2s;
 }
 
-.language li ul li a {
+.lang_detail {
     padding: 13px 15px;
     background: #1a5293;
     text-align: center;
@@ -87,156 +88,82 @@ export default {
     font-weight: normal;
 }
 
-.language li:hover > a {
+.language_title:hover > a {
     background: #1a5293;
     color: #e0dc62;
 }
 
-.language li:hover ul li {
+.language_title:hover .lang {
     overflow: visible;
     height: 38px;
     border-bottom: 1px solid #fff;
 }
 
-.language li:hover ul li:first-child {
+.language_title:hover .lang:first-child {
     border-top: 0;
 }
 
-.language li:hover ul li:last-child {
+.language_title:hover .lang:last-child {
     border-bottom: 0;
 }
 
 @media screen and (max-width: 950px) {
     .language {
         margin-left: 45vw;
-        background-color: #1a5293;
-        color: #fff;
-        position: relative;
-        list-style-type: none;
         width: 20vw;
         height: 3vh;
         z-index: 900;
     }
 
-    .language li {
+    .language_title {
         width: 20vw;
-        margin: 0;
-        padding: 0;
-        text-align: center;
     }
 
-    .language ul a {
-        display: block;
-        margin: 0;
-        padding: 13px 0;
-        color: #fff;
+    .lang_detail {
         font-size: 25px;
-        font-weight: bold;
-        line-height: 1;
-        text-decoration: none;
     }
 
-    .language li ul {
-        list-style: none;
+    .language_ul {
         position: relative;
-        top: 100%;
-        left: 0;
-        margin: 0;
-        padding: 0;
         z-index: 900;
     }
 
-    .language li ul li {
-        overflow: hidden;
+    .lang {
         width: 20vw;
-        height: 0;
-        color: #fff;
-        -moz-transition: .2s;
-        -webkit-transition: .2s;
-        -o-transition: .2s;
-        -ms-transition: .2s;
-        transition: .2s;
     }
 
-    .language li ul li a {
-        padding: 13px 15px;
-        background: #1a5293;
-        text-align: center;
+    .lang_detail {
         font-size: 16px;
-        font-weight: normal;
     }
 }
 
 @media screen and (max-width: 480px) {
     .language {
-        background-color: #1a5293;
-        color: #fff;
-        position: relative;
-        list-style-type: none;
         width: 23vw;
         height: 3vh;
-        z-index: 900;
     }
 
-    .language li {
+    .language_title {
         width: 23vw;
-        text-align: center;
     }
 
-    .language ul a {
-        display: block;
+    .lang_detail {
         padding: 1vh;
-        color: #fff;
         font-size: 30px;
-        font-weight: bold;
-        text-decoration: none;
     }
 
-    .language li ul {
-        list-style: none;
-        position: relative;
-        top: 0;
-        left: 0;
-        z-index: 900;
-    }
-
-    .language li ul li {
-        overflow: hidden;
+    .lang {
         width: 23vw;
-        height: 0;
-        color: #fff;
-        -moz-transition: .2s;
-        -webkit-transition: .2s;
-        -o-transition: .2s;
-        -ms-transition: .2s;
-        transition: .2s;
     }
 
-    .language li ul li a {
+    .lang_detail {
         padding: 15px;
-        background: #1a5293;
-        text-align: center;
         font-size: 15px;
-        font-weight: normal;
     }
 
-    .language li:hover > a {
-        background: #1a5293;
-        color: #e0dc62;
-    }
-
-    .language li:hover ul li {
-        overflow: visible;
+    .language_title:hover .lang {
         height: 5vh;
         border-bottom: 2px solid #fff;
-    }
-
-    .language li:hover ul li:first-child {
-        border-top: 0;
-    }
-
-    .language li:hover ul li:last-child {
-        border-bottom: 0;
     }
 }
 

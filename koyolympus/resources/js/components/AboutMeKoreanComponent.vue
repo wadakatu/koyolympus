@@ -21,12 +21,11 @@
 </template>
 
 <script>
-import LanguageSelectComponent from "./LanguageSelectComponent";
 
 export default {
     name: "AboutMeKoreanComponent.vue",
     components: {
-        'language-select-component': LanguageSelectComponent,
+        'language-select-component': () => import('./LanguageSelectComponent'),
     }
 }
 </script>

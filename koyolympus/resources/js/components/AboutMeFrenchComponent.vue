@@ -21,12 +21,10 @@
 </template>
 
 <script>
-import LanguageSelectComponent from "./LanguageSelectComponent";
-
 export default {
     name: "AboutMeFrenchComponent.vue",
     components: {
-        'language-select-component': LanguageSelectComponent,
+        'language-select-component': () => import('./LanguageSelectComponent'),
     }
 }
 </script>

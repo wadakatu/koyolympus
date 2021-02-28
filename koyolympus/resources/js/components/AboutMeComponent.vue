@@ -21,11 +21,10 @@
 </template>
 
 <script>
-import LanguageSelectComponent from "./LanguageSelectComponent";
 
 export default {
     components: {
-        'language-select-component': LanguageSelectComponent,
+        'language-select-component': () => import('./LanguageSelectComponent'),
     }
 }
 

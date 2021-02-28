@@ -10,13 +10,10 @@
 </template>
 
 <script>
-import HeaderComponent from "./HeaderComponent.vue";
-import FooterComponent from "./FooterComponent";
-
 export default {
     components: {
-        'header-component': HeaderComponent,
-        'footer-component': FooterComponent,
+        'header-component': () => import('./HeaderComponent'),
+        'footer-component': () => import('./FooterComponent'),
     }
 }
 </script>

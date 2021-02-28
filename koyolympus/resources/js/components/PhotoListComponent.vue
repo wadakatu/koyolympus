@@ -20,18 +20,18 @@
 import {OK} from '../util';
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
 import Vue from 'vue'
-import PaginateComponent from "./PaginateComponent";
 
 Vue.use(Viewer)
 
 export default {
     name: "PhotoListComponent.vue",
     components: {
-        PaginateComponent,
-        Loading,
+        PaginateComponent: () => import('./PaginateComponent'),
+        Loading: () => {
+            import('vue-loading-overlay');
+            import('vue-loading-overlay/dist/vue-loading.css');
+        }
     },
     props: {
         page: {
