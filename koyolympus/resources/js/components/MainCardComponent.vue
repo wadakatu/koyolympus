@@ -25,11 +25,9 @@
 </template>
 
 <script>
-import OtherCardComponent from "./OtherCardComponent";
-
 export default {
     components: {
-        OtherCardComponent,
+        OtherCardComponent: () => import('./OtherCardComponent'),
     },
     data() {
         return {

@@ -23,12 +23,10 @@
 </template>
 
 <script>
-import MainCardComponent from "./MainCardComponent";
-
 export default {
     name: "OtherCardComponent.vue",
     components: {
-        MainCardComponent,
+        MainCardComponent: () => import('./MainCardComponent'),
     },
     data() {
         return {

@@ -18,7 +18,6 @@ export default {
 }
 </script>
 
-<!-- TODO: APIを利用して、S3から任意の画像を取得、背景に適応できるようにする -->
 <style scoped>
 .container {
     width: 100%;
