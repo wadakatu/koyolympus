@@ -9,7 +9,7 @@
                     <router-link v-bind:to="{name: 'about.me'}"><p>About Me</p></router-link>
                 </li>
                 <li>
-                    <img src="/images/camera.png" alt="Photo">
+                    <img src="/images/camera.png" alt="Photo" @click="photo">
                     <p @click="photo">Photo</p>
                 </li>
                 <li>

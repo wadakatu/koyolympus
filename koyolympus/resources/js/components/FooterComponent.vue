@@ -2,13 +2,17 @@
     <footer>
         <nav>
             <ul>
-                <li><a href="https://www.instagram.com/wadakatu1234/?hl=ja"><img src="/images/instagram.png"
-                                                                                 alt="instagram"></a>
+                <li class="sns"><a href="https://www.instagram.com/wadakatu1234/?hl=ja"><img src="/images/instagram.png"
+                                                                                             alt="instagram"></a>
                 </li>
-                <li><a href="https://www.facebook.com/people/Koyo-Isono/100006224742543"><img
+                <li class="sns"><a href="https://www.facebook.com/people/Koyo-Isono/100006224742543"><img
                     src="/images/facebook.png" alt="facebook"></a></li>
-                <li><a href="https://twitter.com/ktwdwdwd"><img src="/images/twitter.png" alt="twitter"></a></li>
-                <li><a href=""><img src="/images/email.png" alt="bizInquiry"></a></li>
+                <li class="sns"><a href="https://twitter.com/ktwdwdwd"><img src="/images/twitter.png" alt="twitter"></a>
+                </li>
+                <li class="sns">
+                    <router-link v-bind:to="{name: 'main.biz'}"><img src="/images/email.png" alt="bizInquiry">
+                    </router-link>
+                </li>
             </ul>
         </nav>
     </footer>
@@ -21,7 +25,7 @@
 <style scoped>
 
 img {
-    width: 35px;
+    width: 30px;
 }
 
 footer {
@@ -32,10 +36,10 @@ footer {
     text-align: center;
 }
 
-nav ul li {
+.sns {
     display: inline-block;
-    margin-left: 35px;
-    margin-right: 35px;
+    margin-left: 5vh;
+    margin-right: 5vh;
 }
 
 @media screen and (max-width: 950px) {
@@ -43,25 +47,11 @@ nav ul li {
         display: inline-block;
         width: 100%;
     }
-
-    nav ul li {
-        display: inline-block;
-        margin-left: 35px;
-        margin-right: 35px;
-    }
 }
 
 @media screen and (max-width: 480px) {
     footer {
         display: none;
-        width: 100vw;
-    }
-
-    nav ul li {
-        display: inline-block;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-top: 5px;
     }
 }
 

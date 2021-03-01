@@ -31,13 +31,12 @@
 
     <link href="{{ asset('/css/reset.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
     <background-image-component></background-image-component>
 </div>
 <!-- Script -->
-<script src="{{ mix('/js/app.js') }}" defer></script>
+<script type="application/javascript" src="/js/app.js" defer></script>
 </body>
 </html>

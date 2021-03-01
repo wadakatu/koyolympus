@@ -10,18 +10,14 @@
 </template>
 
 <script>
-import HeaderComponent from "./HeaderComponent.vue";
-import FooterComponent from "./FooterComponent";
-
 export default {
     components: {
-        'header-component': HeaderComponent,
-        'footer-component': FooterComponent,
+        'header-component': () => import('./HeaderComponent'),
+        'footer-component': () => import('./FooterComponent'),
     }
 }
 </script>
 
-<!-- TODO: APIを利用して、S3から任意の画像を取得、背景に適応できるようにする -->
 <style scoped>
 .container {
     width: 100%;
@@ -29,8 +25,7 @@ export default {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
     background-position: center;
     background-size: cover;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding: 0 8vw 0 8vw;
     box-sizing: border-box;
 }
 
@@ -41,17 +36,7 @@ export default {
 }
 
 @media screen and (max-width: 950px) {
-    .container {
-        width: 100%;
-        height: 100vh;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
-        background-position: center;
-        background-repeat: repeat;
-        box-sizing: border-box;
-    }
-
     .row {
-        display: flex;
         flex-direction: column;
     }
 }
@@ -60,15 +45,6 @@ export default {
     .container {
         width: 100vw;
         height: 100%;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/PC280455.jpeg");
-        background-position: center;
-        background-size: cover;
-        box-sizing: border-box;
-    }
-
-    .row {
-        display: flex;
-        flex-direction: column;
     }
 }
 </style>

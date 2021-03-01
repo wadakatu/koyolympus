@@ -24,12 +24,11 @@
 </template>
 
 <script>
-import SidebarMenuComponent from "./SidebarMenuComponent";
 
 export default {
     name: "HeaderComponent.vue",
     components: {
-        'sidebar-menu-component': SidebarMenuComponent,
+        'sidebar-menu-component': () => import('./SidebarMenuComponent'),
     },
     data: () => {
         return {

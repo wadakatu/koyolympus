@@ -1,32 +1,30 @@
 <template>
     <div class="col">
-        <h1>À propos de moi</h1>
+        <h1 class="aboutMe_french">À propos de moi</h1>
         <language-select-component></language-select-component>
         <div class="intro">
-            <h4>Mon Nom</h4>
-            <h5>Koyo Isono</h5>
-            <h4>Mon Adresse</h4>
-            <h5>Japan, entre Tokyo et Saitama.</h5>
-            <h4>Mon Âge/Signe du zodiaque/Anniversaire</h4>
-            <h5>22 ans / Le Bélier / Le 30 Mars</h5>
-            <h4>Mes centres d’intérêt</h4>
-            <h5>Caméra / Vélo de route / Jeu vidéo</h5>
-            <h4>Ma caméra</h4>
-            <h5>OLYMPUS PEN-F / OMD EM-1 MarkⅡ</h5>
-            <h4>Ma devise</h4>
-            <h5>Tout est dans l'attitude</h5>
-            <button class="button" @click="$router.push('/')">HOME</button>
+            <h4 class="question_fr">Mon Nom</h4>
+            <h5 class="answer_fr">Koyo Isono</h5>
+            <h4 class="question_fr">Mon Adresse</h4>
+            <h5 class="answer_fr">Japan, entre Tokyo et Saitama.</h5>
+            <h4 class="question_fr">Mon Âge/Signe du zodiaque/Anniversaire</h4>
+            <h5 class="answer_fr">22 ans / Le Bélier / Le 30 Mars</h5>
+            <h4 class="question_fr">Mes centres d’intérêt</h4>
+            <h5 class="answer_fr">Caméra / Vélo de route / Jeu vidéo</h5>
+            <h4 class="question_fr">Ma caméra</h4>
+            <h5 class="answer_fr">OLYMPUS PEN-F / OMD EM-1 MarkⅡ</h5>
+            <h4 class="question_fr">Ma devise</h4>
+            <h5 class="answer_fr">Tout est dans l'attitude</h5>
+            <button class="top_button" @click="$router.push('/')">HOME</button>
         </div>
     </div>
 </template>
 
 <script>
-import LanguageSelectComponent from "./LanguageSelectComponent";
-
 export default {
     name: "AboutMeFrenchComponent.vue",
     components: {
-        'language-select-component': LanguageSelectComponent,
+        'language-select-component': () => import('./LanguageSelectComponent'),
     }
 }
 </script>
@@ -40,27 +38,27 @@ export default {
     text-align: center;
 }
 
-h1 {
+.aboutMe_french {
     color: #fff;
     font-size: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     font-weight: 500;
     text-align: center;
 }
 
-h4 {
+.question_fr {
     color: #fff;
     font-size: 16px;
 }
 
-h5 {
+.answer_fr {
     color: #fff;
     font-size: 22px;
     border-bottom: solid 2px #1f6fb2;
     margin-bottom: 14px;
 }
 
-button {
+.top_button {
     width: 180px;
     color: #000;
     font-size: 12px;
@@ -74,88 +72,34 @@ button {
 
 @media screen and (max-width: 950px) {
     .col {
-        flex-basis: 50%;
         height: 100vh;
         width: 70vw;
-        padding: 3vh;
+        padding: 2vh;
     }
 
-    .intro {
-        text-align: center;
-    }
-
-    h1 {
-        color: #fff;
-        font-size: 30px;
-        font-weight: 400;
+    .aboutMe_french {
+        font-size: 35px;
+        font-weight: 450;
         margin-bottom: 2vh;
-        text-align: center;
     }
 
-    h4 {
-        color: #fff;
-        font-size: 15px;
-    }
-
-    h5 {
-        color: #fff;
-        font-size: 20px;
-        border-bottom: solid 2px #1f6fb2;
-    }
-
-    button {
+    .top_button {
         width: 130px;
-        color: #000;
         font-size: 11px;
-        padding: 12px 0;
-        background: #fff;
-        border: 0;
-        border-radius: 20px;
-        outline: none;
-        margin-top: 1vh;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .col {
-        flex-basis: 50%;
-        height: 100vh;
-        width: 70vw;
-        padding: 3vh;
-    }
 
-    .intro {
-        text-align: center;
-    }
-
-    h1 {
-        color: #fff;
-        font-size: 30px;
-        font-weight: 400;
-        margin-bottom: 2vh;
-        text-align: center;
-    }
-
-    h4 {
-        color: #fff;
+    .question_fr {
         font-size: 14px;
     }
 
-    h5 {
-        color: #fff;
+    .answer_fr {
         font-size: 19px;
-        border-bottom: solid 2px #1f6fb2;
     }
 
-    button {
-        width: 130px;
-        color: #000;
-        font-size: 11px;
-        padding: 12px 0;
-        background: #fff;
-        border: 0;
-        border-radius: 20px;
-        outline: none;
+    .top_button {
         margin-top: 3vh;
     }
 }
