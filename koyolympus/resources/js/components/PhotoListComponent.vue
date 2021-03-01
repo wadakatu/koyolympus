@@ -1,5 +1,5 @@
 <template xmlns:loading="http://www.w3.org/1999/html">
-    <div class="photo-list">
+    <div class="photo-list" ontouchstart="">
         <loading
             :active.sync="isLoading"
             :is-full-page="fullPage"
@@ -20,22 +20,18 @@
 import {OK} from '../util';
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
 import Vue from 'vue'
-import PhotoComponent from "./PhotoComponent";
-import PaginateComponent from "./PaginateComponent";
-import LikeComponent from "./LikeComponent";
 
 Vue.use(Viewer)
 
 export default {
     name: "PhotoListComponent.vue",
     components: {
-        PhotoComponent,
-        PaginateComponent,
-        LikeComponent,
-        Loading,
+        PaginateComponent: () => import('./PaginateComponent'),
+        Loading: () => {
+            import('vue-loading-overlay');
+            import('vue-loading-overlay/dist/vue-loading.css');
+        }
     },
     props: {
         page: {
@@ -90,20 +86,21 @@ export default {
 
 .photo-list {
     text-align: center;
-    margin-bottom: 10px;
+    height: 60vh;
+    margin-bottom: 5vh;
 }
 
 h2 {
     color: #fff;
-    position: absolute;
+    position: fixed;
+    top: 50vh;
+    left: 30vw;
     font-size: 40px;
-    top: 50%;
-    left: 30%;
 }
 
 img {
-    width: 200px;
-    height: 200px;
+    width: 13vw;
+    height: 25vh;
     object-fit: cover;
 }
 
@@ -151,5 +148,82 @@ img {
     transform: translateY(0);
 }
 
+@media screen and (max-width: 1350px) {
+    .photo-list {
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    img {
+        height: 23vh;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+
+    h2 {
+        left: 28vw;
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 880px) {
+
+    h2 {
+        left: 25vw;
+    }
+
+    img {
+        width: 17vw;
+        height: 17vh;
+    }
+
+    .images {
+        margin-top: 3vh;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .photo-list {
+        margin-top: 3vh;
+    }
+
+    h2 {
+        left: 20vw;
+        font-size: 25px;
+    }
+
+    img {
+        width: 16vw;
+        height: 16vh;
+    }
+}
+
+@media screen and (max-width: 530px) {
+
+    img {
+        width: 15vw;
+        height: 15vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .photo-list {
+        min-height: 80vh;
+        padding-bottom: 5vh;
+    }
+
+    h2 {
+        font-size: 17px;
+    }
+
+    img {
+        width: 30vw;
+        height: 9vh;
+    }
+}
 
 </style>

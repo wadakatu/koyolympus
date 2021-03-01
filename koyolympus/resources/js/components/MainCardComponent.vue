@@ -1,38 +1,42 @@
 <template>
-    <div class="col" v-if="this.card">
+    <div class="col" v-if="this.card && cardStatus">
         <div class="card" v-model="genre">
             <div class="card_detail landscape" @click="searchLandscape">
-                <h5>Landscape</h5>
-                <p>The landscape are there, and I just take them.</p>
+                <h5 class="card_title">Landscape</h5>
+                <p class="card_description">The landscape are there, and I just take them.</p>
             </div>
             <div class="card_detail animal" @click="searchAnimal">
-                <h5>Animal</h5>
-                <p>If you want to be a better animal photographer, stand in front of more animals.</p>
+                <h5 class="card_title">Animal</h5>
+                <p class="card_description">If you want to be a better animal photographer, stand in front of more
+                    animals.</p>
             </div>
             <div class="card_detail portrait" @click="searchPortrait">
-                <h5>Portrait</h5>
-                <p>The whole point of taking portraits is so that I can see how far people have come.</p>
+                <h5 class="card_title">Portrait</h5>
+                <p class="card_description">The whole point of taking portraits is so that I can see how far people have
+                    come.</p>
             </div>
             <div class="card_detail others" @click="showOthers">
-                <h5>Others</h5>
-                <p>The Earth is art, The photographer is only a witness.</p>
+                <h5 class="card_title">Others</h5>
+                <p class="card_description">The Earth is art, The photographer is only a witness.</p>
             </div>
         </div>
     </div>
-    <other-card-component v-else-if="!this.card"></other-card-component>
+    <other-card-component v-else-if="!this.card && cardStatus"></other-card-component>
 </template>
 
 <script>
-import OtherCardComponent from "./OtherCardComponent";
-
 export default {
     components: {
-        OtherCardComponent,
+        OtherCardComponent: () => import('./OtherCardComponent'),
     },
     data() {
         return {
             genre: '',
             url: '',
+            cardStatus: true,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            currentPath: this.$route.path,
         }
     },
     methods: {
@@ -59,12 +63,37 @@ export default {
         },
         showOthers() {
             this.$store.commit('photo/setCard', false);
-        }
+        },
+        handleResize: function () {
+            // resizeのたびにこいつが発火するので、ここでやりたいことをやる
+            this.width = window.innerWidth;
+            this.height = window.innerHeight;
+            const currentPath = this.$route.path;
+
+            this.cardStatus = !(this.width < 950 && (currentPath.match("aboutme") || currentPath === '/bizinq'));
+        },
     },
     computed: {
         card() {
             return this.$store.state.photo.card;
+        },
+    },
+    watch: {
+        $route() {
+            const currentPath = this.$route.path;
+
+            this.cardStatus = currentPath === "/" || 950 < this.width;
         }
+    },
+    created: function () {
+        const currentPath = this.$route.path;
+        this.cardStatus = currentPath === "/" || 950 < this.width;
+    },
+    mounted: function () {
+        window.addEventListener('resize', this.handleResize);
+    },
+    beforeDestroy: function () {
+        window.removeEventListener('resize', this.handleResize)
     }
 }
 </script>
@@ -115,15 +144,62 @@ export default {
     transform: translateY(-10px);
 }
 
-h5 {
+.card_title {
     color: #fff;
     text-shadow: 0 0 5px #999;
 }
 
-p {
+.card_description {
     color: #fff;
     font-size: 11px;
     text-shadow: 0 0 15px #000;
+}
+
+@media screen and (max-width: 1170px) {
+    .card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 950px) {
+
+    .card {
+        padding-bottom: 25px;
+    }
+
+    .card_detail {
+        height: 10vh;
+        width: 60vh;
+    }
+}
+
+@media screen and (min-height: 910px) and (max-width: 1310px) {
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        margin-top: 3vh;
+    }
+
+    .card_detail {
+        height: 8vh;
+        width: 40vh;
+        margin-top: 2vh;
+    }
+
+    .card_description {
+        display: none;
+    }
 }
 
 </style>

@@ -20,12 +20,14 @@ export default {
 .col {
     text-align: center;
     color: #fff;
-    position: relative;
-    left: 22%;
+    flex-basis: 100%;
+    height: 100%;
+    margin-top: 40%;
 }
 
 h1 {
     margin-bottom: 10px;
+    font-size: 30px;
 }
 
 span {
@@ -41,7 +43,7 @@ span {
     font-weight: bold;
     line-height: 30px;
     width: 150px;
-    position: fixed;
+    margin-top: 15px;
     text-decoration: none;
     text-transform: uppercase;
     border: 1px solid transparent;
@@ -61,9 +63,49 @@ span {
 }
 
 .button.home {
-    bottom: 35%;
-    right: 45%;
     cursor: pointer;
+}
+
+@media screen and (max-width: 950px) {
+
+    .col {
+        text-align: center;
+        color: #fff;
+        flex-basis: 100%;
+        height: 100%;
+        margin-top: 35%;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .col {
+        text-align: center;
+        color: #fff;
+        flex-basis: 100%;
+        height: 100%;
+        margin-top: 35%;
+        min-height: 85vh;
+    }
+
+    h1 {
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-size: 22px;
+    }
+
+    p {
+        overflow-wrap: normal;
+        margin-top: 45px;
+        margin-bottom: 50px;
+        font-size: 19px;
+        line-height: 30px;
+    }
 }
 
 </style>

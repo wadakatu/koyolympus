@@ -6,8 +6,7 @@
             class="button prev"
         >&laquo; prev
         </RouterLink>
-        <button class="button home" style="background-color: transparent;" @click="moveMainPage">&laquo; HOME
-            &raquo;
+        <button class="button home" style="background-color: transparent;" @click="moveMainPage">HOME
         </button>
         <RouterLink
             v-if="! isLastPage"
@@ -78,20 +77,76 @@ export default {
     text-shadow: 2px 2px 3px #000;
 }
 
-.button.next {
+.next {
     bottom: 12%;
     right: 26%;
 }
 
-.button.prev {
+.prev {
     bottom: 12%;
     left: 26%;
 }
 
-.button.home {
+.home {
     bottom: 12%;
     right: 45%;
     cursor: pointer;
+}
+
+@media screen and (max-width: 880px) {
+    .next {
+        bottom: 18vh;
+        left: 60vw;
+        height: 10vh;
+        padding-top: 5vh;
+        background: transparent;
+    }
+
+    .prev {
+        bottom: 18vh;
+        left: 30vw;
+        height: 10vh;
+        padding-top: 5vh;
+        background: transparent;
+    }
+
+    .home {
+        bottom: 18vh;
+        left: 45vw;
+        height: 10vh;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .button {
+        font-size: 13px;
+        line-height: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .button {
+        font-size: 12px;
+        line-height: 30px;
+        position: static;
+        margin: 20px 10px 0 10px;
+    }
+
+    .next {
+        width: 70px;
+        height: 20px;
+    }
+
+    .prev {
+        width: 70px;
+        height: 20px;
+    }
+
+    .home {
+        width: 60px;
+        height: 40px;
+    }
 }
 
 </style>
