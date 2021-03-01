@@ -7,7 +7,6 @@ import './bootstrap';
 import Vue from 'vue';
 import router from './router';
 import store from './store';
-import BackgroundImage from "./components/BackgroundImageComponent";
 import {INTERNAL_SERVER_ERROR} from "./util";
 
 require('./bootstrap');
@@ -22,7 +21,7 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('background-image-component', BackgroundImage)
+Vue.component('background-image-component', () => import('./components/BackgroundImageComponent'))
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

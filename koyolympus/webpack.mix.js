@@ -23,7 +23,10 @@ mix.js('resources/js/app.js', 'public/js')
                 threshold: 10240,
                 minRatio: 0.8,
             })
-        ]
+        ],
+        output: {
+            chunkFilename: 'js/chunk/[name].js',
+        }
     })
     .options({
         processCssUrls: false
