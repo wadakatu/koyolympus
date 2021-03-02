@@ -3,10 +3,10 @@
 ## Brand new website about my Photography.
 
 You can access the website down below.
-- https://koyolympus.gallery/　(I created this site.)
+- https://koyolympus.gallery/
 
 You can buy my photography through EC site.
-- https://koyolympus.thebase.in/ (I DID'T create this site.) 
+- https://koyolympus.thebase.in/
 
 ## Request
 
