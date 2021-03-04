@@ -132,7 +132,7 @@ nav ul li a {
     .menu-icon {
         width: 40px;
         position: static;
-        padding-left: 10%;
+        padding-left: 20%;
     }
 
     .sidebar {
