@@ -103,17 +103,7 @@ img {
     height: 25vh;
     object-fit: cover;
     cursor: zoom-in;
-}
-
-.luminous {
-    position: relative;
-    transition: .3s ease-in-out;
-    padding: 10px;
-    box-sizing: border-box;
-    cursor: pointer;
-    background-position: center;
-    background-size: cover;
-    vertical-align: bottom;
+    padding: 0 5px;
 }
 
 .images {
@@ -203,7 +193,7 @@ img {
 
     img {
         width: 40vw;
-        height: 11vh;
+        height: 12vh;
     }
 }
 
