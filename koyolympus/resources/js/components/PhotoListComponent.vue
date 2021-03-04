@@ -6,11 +6,8 @@
             :can-cancel="true"
         ></loading>
         <h2 v-show="noPhoto">There are no photos in this page.</h2>
-        <div class="images" v-viewer="{movable: false}">
-            <a class="luminous" v-for="photo in photos">
-                <img class="item" :src="photo.url" :key="photo.url"
-                     alt="This photo taken by Koyo Isono.">
-            </a>
+        <div class="images" v-for="photo in photos">
+            <PhotoComponent v-bind:item=photo></PhotoComponent>
         </div>
         <PaginateComponent :current-page="currentPage" :last-page="lastPage"></PaginateComponent>
     </div>
@@ -18,15 +15,11 @@
 
 <script>
 import {OK} from '../util';
-import 'viewerjs/dist/viewer.css'
-import Viewer from 'v-viewer'
-import Vue from 'vue'
-
-Vue.use(Viewer)
 
 export default {
     name: "PhotoListComponent.vue",
     components: {
+        PhotoComponent: () => import('./PhotoComponent'),
         PaginateComponent: () => import('./PaginateComponent'),
         Loading: () => {
             import('vue-loading-overlay');
@@ -86,7 +79,7 @@ export default {
 
 .photo-list {
     text-align: center;
-    height: 60vh;
+    height: 50vh;
     margin-bottom: 5vh;
 }
 
@@ -98,54 +91,8 @@ h2 {
     font-size: 40px;
 }
 
-img {
-    width: 13vw;
-    height: 25vh;
-    object-fit: cover;
-}
-
-.luminous {
-    position: relative;
-    transition: .3s ease-in-out;
-    border: 3px solid white;
-    border-radius: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    cursor: pointer;
-    background-position: center;
-    background-size: cover;
-    vertical-align: bottom;
-}
-
 .images {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.luminous::before {
-    content: "クリックして拡大";
-    opacity: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.8em;
-    background: rgba(0, 0, 0, .6);
-    color: white;
-    font-size: 12px;
-    text-align: center;
-    transition: inherit;
-    transform: translateY(0%);
-}
-
-.luminous:hover::before {
-    opacity: 1;
-    transform: translateY(0);
+    display: inline-block;
 }
 
 @media screen and (max-width: 1350px) {
@@ -170,19 +117,14 @@ img {
     }
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 950px) {
 
     h2 {
         left: 25vw;
     }
 
-    img {
-        width: 17vw;
-        height: 17vh;
-    }
-
     .images {
-        margin-top: 3vh;
+        margin-top: 6vh;
     }
 }
 
@@ -194,19 +136,6 @@ img {
     h2 {
         left: 20vw;
         font-size: 25px;
-    }
-
-    img {
-        width: 16vw;
-        height: 16vh;
-    }
-}
-
-@media screen and (max-width: 530px) {
-
-    img {
-        width: 15vw;
-        height: 15vh;
     }
 }
 
@@ -220,9 +149,8 @@ img {
         font-size: 17px;
     }
 
-    img {
-        width: 30vw;
-        height: 9vh;
+    .images {
+        margin-top: 2vh;
     }
 }
 
