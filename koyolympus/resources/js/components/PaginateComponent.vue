@@ -3,16 +3,16 @@
         <RouterLink
             v-if="! isFirstPage"
             :to="`${this.url}/?page=${currentPage - 1}`"
-            class="button prev"
-        >&laquo; prev
+        >
+            <button class="button prev">&laquo; prev</button>
         </RouterLink>
         <button class="button home" style="background-color: transparent;" @click="moveMainPage">HOME
         </button>
         <RouterLink
             v-if="! isLastPage"
             :to="`${this.url}/?page=${currentPage + 1}`"
-            class="button next"
-        >next &raquo;
+        >
+            <button class="button next">next &raquo;</button>
         </RouterLink>
     </div>
 </template>
@@ -56,8 +56,6 @@ export default {
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    line-height: 30px;
-    width: 10vw;
     position: fixed;
     text-decoration: none;
     text-transform: uppercase;
@@ -67,6 +65,8 @@ export default {
     text-align: center;
     text-shadow: none;
     transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
+    background: transparent;
+    cursor: pointer;
 }
 
 .button:hover {
@@ -80,72 +80,68 @@ export default {
 .next {
     bottom: 12%;
     right: 26%;
+    width: 15vw;
+    height: 5vh;
 }
 
 .prev {
     bottom: 12%;
     left: 26%;
+    width: 15vw;
+    height: 5vh;
 }
 
 .home {
     bottom: 12%;
     right: 45%;
-    cursor: pointer;
+    width: 10vw;
+    height: 5vh;
 }
 
 @media screen and (max-width: 880px) {
     .next {
         bottom: 18vh;
-        left: 60vw;
-        height: 10vh;
-        padding-top: 5vh;
-        background: transparent;
+        right: 20vw;
+        width: 20vw;
     }
 
     .prev {
         bottom: 18vh;
-        left: 30vw;
-        height: 10vh;
-        padding-top: 5vh;
-        background: transparent;
+        left: 20vw;
+        width: 20vw;
     }
 
     .home {
         bottom: 18vh;
-        left: 45vw;
-        height: 10vh;
+        text-align: center;
+        height: 3vh;
     }
 }
 
 @media screen and (max-width: 680px) {
     .button {
-        font-size: 13px;
-        line-height: 25px;
+        font-size: 12px;
     }
 }
 
 @media screen and (max-width: 480px) {
-
     .button {
-        font-size: 12px;
-        line-height: 30px;
+        font-size: 11px;
         position: static;
-        margin: 20px 10px 0 10px;
-    }
-
-    .next {
-        width: 70px;
-        height: 20px;
-    }
-
-    .prev {
-        width: 70px;
-        height: 20px;
+        margin-top: 1vh;
     }
 
     .home {
-        width: 60px;
-        height: 40px;
+        height: 5vh;
+        width: 15vw;
+    }
+
+    .next {
+        width: 30vw;
+    }
+
+    .prev {
+        width: 30vw;
     }
 }
 
