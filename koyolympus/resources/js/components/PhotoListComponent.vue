@@ -190,7 +190,6 @@ img {
 @media screen and (max-width: 480px) {
     .photo-list {
         min-height: 80vh;
-        padding-bottom: 5vh;
     }
 
     .images {
