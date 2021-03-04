@@ -203,7 +203,7 @@ img {
 
     img {
         width: 40vw;
-        height: 12vh;
+        height: 11vh;
     }
 }
 
