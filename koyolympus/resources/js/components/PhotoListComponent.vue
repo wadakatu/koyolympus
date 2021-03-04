@@ -189,8 +189,12 @@ img {
 
 @media screen and (max-width: 480px) {
     .photo-list {
-        min-height: 80vh;
+        min-height: 100vh;
         padding-bottom: 5vh;
+    }
+
+    .images {
+        margin-top: 1vh;
     }
 
     h2 {
