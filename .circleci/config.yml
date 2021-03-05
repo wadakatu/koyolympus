@@ -46,6 +46,7 @@ jobs:
       - run:
           name: generate app_key
           command: php artisan key:generate
+          working_directory: koyolympus
       - run:
           name: config cache
           command: php artisan config:cache
