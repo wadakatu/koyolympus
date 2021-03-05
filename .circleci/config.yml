@@ -2,52 +2,33 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
-        environment:
-          - APP_DEBUG: true
-          - APP_ENV: testing
-          - DB_CONNECTION: mysql
-          - DB_DATABASE: koyolympus_test
-          - DB_USERNAME: root
+      - image: circleci/php:7.3.0-node-browsers
+      - image: circleci/mariadb:10.4
 
-      - image: circleci/mysql:5.7-ram
-        environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: true
-          - DB_DATABASE: koyolympus_test
+    environment:
+      - DB_CONNECTION: circle_testing
+    working_directory: ~/koyolympus
     steps:
       - checkout
-
-      - run: sudo apt update
-      - run: sudo docker-php-ext-install pdo_mysql
-
+      - run:
+          name: Update apt-get
+          command: sudo apt-get update
+      - run:
+          name: Docker php extensiions install
+          command: sudo docker-php-ext-install pdo_mysql
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "koyolympus/composer.json" }}
+            - v1-dependencies-{{ checksum "composer.json" }}
             - v1-dependencies-
-
-      - run: 
-          working_directory: koyolympus
+      - run:
+          name: Install PHP libraries
           command: composer install -n --prefer-dist
-
       - save_cache:
-          key: v1-dependencies-{{ checksum "koyolympus/composer.json" }}
           paths:
             - ./vendor
-
+          key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
-         working_directory: koyolympus
-         command: echo "APP_KEY=" > .env.testing
-      - run:
-         working_directory: koyolympus
-         command: php artisan key:generate
+          name: Run PHPUnit
+          command: vendor/bin/phpunit
+   
 
-      - run: 
-         working_directory: koyolympus
-         command: php artisan command:checkdb
-
-      - run:
-         working_directory: koyolympus
-         command: php artisan migrate
-
-      - run: 
-         command: ./vendor/bin/phpunit  
