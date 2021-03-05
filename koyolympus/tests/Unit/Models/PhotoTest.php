@@ -12,6 +12,7 @@ class PhotoTest extends TestCase
     use RefreshDatabase;
 
     private $photo;
+    public $mockConsoleOutput = false;
 
     protected function setUp(): void
     {
