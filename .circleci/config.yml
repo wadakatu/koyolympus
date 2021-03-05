@@ -7,7 +7,7 @@ jobs:
 
     environment:
       - DB_CONNECTION: circle_testing
-    working_directory: ~/koyolympus/koyolympus
+    working_directory: ~/koyolympus_circleci
     steps:
       - checkout
       - run:
@@ -21,7 +21,7 @@ jobs:
           command: ls -a
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-{{ checksum "koyolympus/composer.json" }}
             - v1-dependencies-
       - run:
           name: Install PHP libraries
@@ -29,7 +29,7 @@ jobs:
       - save_cache:
           paths:
             - ./vendor
-          key: v1-dependencies-{{ checksum "composer.json" }}
+          key: v1-dependencies-{{ checksum "koyolympus/composer.json" }}
       - run:
           name: Run PHPUnit
           command: vendor/bin/phpunit
