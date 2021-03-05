@@ -26,7 +26,7 @@ jobs:
           command: cd koyolympus       
       - run:
           name: Install PHP libraries
-          command: composer install -n --prefer-dist
+          command: composer install -n --prefer-dist --working-dir=./koyolympus
       - save_cache:
           paths:
             - ./vendor
