@@ -103,6 +103,14 @@ class ImageControllerTest extends TestCase
             ->once()
             ->with();
 
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロード開始');
+
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロード終了');
+
         $this->photoService
             ->shouldReceive('uploadPhotoToS3')
             ->once()
@@ -150,10 +158,18 @@ class ImageControllerTest extends TestCase
             ->once()
             ->with();
 
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロード開始');
+
         $this->photoService
             ->shouldReceive('uploadPhotoToS3')
             ->once()
             ->andThrow(Exception::class);
+
+        Log::shouldReceive('debug')
+            ->never()
+            ->with('ファイルのアップロード終了');
 
         DB::shouldReceive('commit')
             ->never()
