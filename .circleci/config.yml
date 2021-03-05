@@ -7,7 +7,7 @@ jobs:
 
     environment:
       - DB_CONNECTION: circle_testing
-    working_directory: ~/koyolympus/koyolympus
+    working_directory: ~/koyolympus
     steps:
       - checkout
       - run:
@@ -16,6 +16,9 @@ jobs:
       - run:
           name: Docker php extensiions install
           command: sudo docker-php-ext-install pdo_mysql
+      - run:
+          name: check file structure
+          command: ls -a
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "composer.json" }}
