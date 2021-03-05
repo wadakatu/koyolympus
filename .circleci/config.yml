@@ -45,7 +45,7 @@ jobs:
           command: echo "APP_KEY=" > .env.testing
       - run:
           name: generate app_key
-          command: php artisan key:generate
+          command: php artisan key:generate --env=testing
           working_directory: koyolympus
       - run:
           name: config cache
