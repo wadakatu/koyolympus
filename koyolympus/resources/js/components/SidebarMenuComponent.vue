@@ -21,9 +21,9 @@
                     <a href="https://github.com/wadakatu/koyolympus"><img src="/images/github.png" alt="github"></a>
                     <a href="https://github.com/wadakatu/koyolympus"><p>github</p></a>
                 </li>
-                <li class="upload">
-                    <router-link v-bind:to="{name: 'login'}"><img src="/images/photo.png" alt="upload"></router-link>
-                    <p>upload</p>
+                <li>
+                    <a href="https://koyolympus.thebase.in/"><img src="/images/photo.png" alt="purchase"></a>
+                   <a href="https://koyolympus.thebase.in/"><p style="color: orange">Buy Photo</p></a>
                 </li>
                 <li class="insta">
                     <a href="https://www.instagram.com/wadakatu1234/?hl=ja">
@@ -233,10 +233,6 @@ img {
     }
 
     img {
-        display: none;
-    }
-
-    .upload {
         display: none;
     }
 
