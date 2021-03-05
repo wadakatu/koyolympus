@@ -48,8 +48,8 @@ jobs:
           command: php artisan key:generate --env=testing
           working_directory: koyolympus
       - run:
-          name: config clear
-          command: php artisan config:clear
+          name: config cache
+          command: php artisan config:cache
           working_directory: koyolympus
       - run:
           name: Run PHPUnit 
