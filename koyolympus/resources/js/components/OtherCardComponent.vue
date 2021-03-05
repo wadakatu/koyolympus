@@ -3,31 +3,30 @@
     <div class="col" v-else-if="!this.card">
         <div class="card" v-model="genre">
             <div class="card_detail snapshot" @click="searchSnapshot">
-                <h5>SnapShot</h5>
-                <p>The landscape are there, and I just take them.</p>
+                <h5 class="card_other_tittle">SnapShot</h5>
+                <p class="card_other_description">It is more important to click with people than to click the
+                    shutter.</p>
             </div>
             <div class="card_detail livecomp" @click="searchLivecomp">
-                <h5>Live Composite</h5>
-                <p>If you want to be a better animal photographer, stand in front of more animals.</p>
+                <h5 class="card_other_tittle">Live Composite</h5>
+                <p class="card_other_description">Since I’m inarticulate, I express myself with images.</p>
             </div>
             <div class="card_detail pinfilm" @click="searchPinfilm">
-                <h5>Pinhole/Film</h5>
-                <p>The whole point of taking portraits is so that I can see how far people have come.</p>
+                <h5 class="card_other_tittle">Pinhole/Film</h5>
+                <p class="card_other_description">Seeing is not enough; you have to feel what you photograph</p>
             </div>
             <div class="card_detail back" @click="showMain">
-                <h5>->Back</h5>
+                <h5 class="back_title">->Back</h5>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import MainCardComponent from "./MainCardComponent";
-
 export default {
     name: "OtherCardComponent.vue",
     components: {
-        MainCardComponent,
+        MainCardComponent: () => import('./MainCardComponent'),
     },
     data() {
         return {
@@ -79,8 +78,8 @@ export default {
 
 .card_detail {
     position: relative;
-    width: 40%;
-    height: 250px;
+    width: 30vh;
+    height: 32vh;
     border-radius: 10px;
     padding: 15px 25px;
     box-sizing: border-box;
@@ -104,27 +103,77 @@ export default {
 }
 
 .back {
-    background-color: #0b5c8c;
+    background-color: #000;
+    opacity: 0.7;
 }
 
 .card_detail:hover {
     transform: translateY(-10px);
 }
 
-h5 {
+.card_other_tittle {
     color: #fff;
     text-shadow: 0 0 5px #999;
 }
 
-p {
+.card_other_description {
     color: #fff;
     font-size: 11px;
     text-shadow: 0 0 15px #000;
 }
 
-.back h5 {
+.back_title {
     font-size: 25px;
+    color: #fff;
     position: relative;
 }
+
+@media screen and (max-width: 1170px) {
+    .card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 950px) {
+
+    .card {
+        padding-bottom: 25px;
+    }
+
+    .card_detail {
+        height: 10vh;
+        width: 60vh;
+    }
+}
+
+@media screen and (min-height: 910px) and (max-width: 1310px) {
+    .card_detail {
+        height: 15vh;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        margin-top: 3vh;
+    }
+
+    .card_detail {
+        height: 8vh;
+        width: 40vh;
+        margin-top: 2vh;
+    }
+
+    .card_other_description {
+        display: none;
+    }
+}
+
 
 </style>

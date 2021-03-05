@@ -24,11 +24,6 @@ class ImageController extends Controller
         $this->photoService = $photoService;
     }
 
-    public function index()
-    {
-        return csrf_token();
-    }
-
     public function getPhoto(GetPhotoRequest $request): LengthAwarePaginator
     {
         $genre = $request->input('genre');

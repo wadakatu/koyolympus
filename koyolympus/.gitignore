@@ -31,4 +31,7 @@ npm-debug.log
 yarn-error.log
 _ide_helper.php
 _ide_helper_models.php
-/public/.gz
+public/*.js
+public/js/app.js
+public/*.js.gz
+public/.gz

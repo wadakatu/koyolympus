@@ -1,12 +1,14 @@
 <template>
     <div class="col">
-        <h1>Koyolympus</h1>
-        <p>
-            Photography is a means of capturing and preserving the instant that doesn't come twice.
-            That's why I cannot stop exploring the world with my camera gear to cut out the exact moment
-            that I would like to keep as it is.
-        </p>
-        <button class="button" @click="this.photo">Explore My Photo</button>
+        <div class="profile">
+            <h1 class="title">Koyolympus</h1>
+            <p class="description">
+                Photography is a means of capturing and preserving the instant that doesn't come twice.
+                That's why I cannot stop exploring the world with my camera gear to cut out the exact moment
+                that I would like to keep as it is.
+            </p>
+            <button class="photo_button" @click="this.photo">Explore My Photo</button>
+        </div>
     </div>
 </template>
 
@@ -33,18 +35,18 @@ export default {
     flex-basis: 50%;
 }
 
-h1 {
+.title {
     color: #fff;
     font-size: 95px;
 }
 
-p {
+.description {
     color: #fff;
     font-size: 13px;
     line-height: 18px;
 }
 
-button {
+.photo_button {
     width: 180px;
     color: #000;
     font-size: 12px;
@@ -55,6 +57,37 @@ button {
     outline: none;
     margin-top: 30px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1150px) {
+    .title {
+        font-size: 80px;
+    }
+
+    .description {
+        line-height: 20px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .profile {
+        text-align: center;
+    }
+
+    .title {
+        font-size: 60px;
+        margin-top: 20px;
+    }
+
+    .photo_button {
+        margin: 20px 0 10px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .title {
+        font-size: 50px;
+    }
 }
 
 </style>

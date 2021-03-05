@@ -17,14 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// TODO: EC2デプロイ時に削除する
-Route::get('/test', function () {
-    return response()->json(['name' => 'koyo']);
-});
-
-// TODO: CSRFトークン生成メソッド(Postman用)　EC2デプロイ時に削除
-Route::get('/csrf', 'v1\ImageController@index');
-
 //Admin専用
 Route::group(['middleware' => ['auth']], function () {
     //写真アップロードメソッド

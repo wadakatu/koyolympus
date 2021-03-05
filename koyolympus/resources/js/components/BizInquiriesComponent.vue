@@ -4,26 +4,27 @@
             <div class="contactForm">
                 <form action="./api/bizinq/send" method="post" @submit.prevent="postInquiry">
                     <input type="hidden" name="_token" v-model="csrf">
-                    <h1>Biz Inquiries</h1>
+                    <h1 class="biz_title">Biz Inquiries</h1>
                     <div class="inputBox">
-                        <input type="text" name="name" v-model="params.name" required>
-                        <span>Your name</span>
+                        <input type="text" name="name" class="params_input" v-model="params.name" required>
+                        <span class="params_name">Your name</span>
                     </div>
                     <div class="error_text" v-html="errors.name"></div>
                     <div class="inputBox">
-                        <input type="email" name="email" v-model="params.email" required>
-                        <span>Email</span>
+                        <input type="email" name="email" class="params_input" v-model="params.email" required>
+                        <span class="params_name">Email</span>
                     </div>
                     <div class="error_text" v-html="errors.email"></div>
                     <div class="inputBox">
-                        <textarea name="opinion" v-model="params.opinion" required></textarea>
-                        <span>Type your thoughts...</span>
+                        <textarea name="opinion" class="params_textarea" v-model="params.opinion" required></textarea>
+                        <span class="params_name">Type your thoughts...</span>
                     </div>
                     <div class="error_text" v-html="errors.opinion"></div>
+                    <div class="loading" v-if="loading">Sending...</div>
                     <div class="alert-success" v-if="sentEmail">Thank you for getting in touch!</div>
                     <div class="inputBox">
-                        <input type="submit" v-bind:disabled="isPush" value="Send">
-                        <input type="button" @click="$router.push('/')" value="Home">
+                        <input type="submit" class="sub_inq" v-bind:disabled="isPush" value="Send">
+                        <input type="button" class="mov_home" @click="$router.push('/')" value="Home">
                     </div>
                 </form>
             </div>
@@ -32,13 +33,10 @@
 </template>
 
 <script>
-import MainCardComponent from "./MainCardComponent";
 
 export default {
     name: "BizInquiriesComponent.vue",
-    components: {
-        'main-card-component': MainCardComponent
-    },
+    components: {},
     data() {
         return {
             errors: {},
@@ -49,44 +47,51 @@ export default {
             },
             isPush: false,
             sentEmail: false,
+            loading: false,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     },
     methods: {
         postInquiry() {
+            this.sentEmail = false;
             this.isPush = true;
             this.errors = {};
             let self = this;
-            axios.post('/api/bizinq/send', this.params)
-                .then((response) => {
-                    this.reset();
-                    self.sentEmail = true;
-                })
-                .catch((error) => {
-                    var errors = {};
+            const confirm = window.confirm('Would it be okay to send this inquiry?\nこの内容で送信してよろしいですか？');
+            if (!confirm) {
+                this.isPush = false;
+            } else {
+                self.loading = true;
+                axios.post('/api/bizinq/send', this.params)
+                    .then((response) => {
+                        this.reset();
+                        self.loading = false;
+                        self.sentEmail = true;
+                    })
+                    .catch((error) => {
+                        self.loading = false;
+                        var errors = {};
 
-                    for (var key in error.response.data.errors) {
-                        if (error.response.data.errors.hasOwnProperty(key)) {
-                            errors[key] = error.response.data.errors[key].join('<br>');
+                        for (var key in error.response.data.errors) {
+                            if (error.response.data.errors.hasOwnProperty(key)) {
+                                errors[key] = error.response.data.errors[key].join('<br>');
+                            }
                         }
-                    }
-
-                    self.errors = errors;
-                });
+                        self.errors = errors;
+                    });
+            }
         },
         reset() {
             Object.assign(this.$data, this.$options.data.call(this));
         },
         mounted() {
             this.reset();
-            this.postInquiry();
         }
     }
 }
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
 .contact {
     flex-basis: 50%;
@@ -114,22 +119,21 @@ export default {
     margin-left: 40px;
 }
 
-.contactForm h1 {
+.biz_title {
     font-size: 40px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     color: #fff;
     font-weight: 500;
     text-align: center;
 }
 
-.contactForm .inputBox {
+.inputBox {
     position: relative;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.contactForm .inputBox input,
-.contactForm .inputBox textarea {
+.params_input, .params_textarea, .sub_inq, .mov_home {
     width: 32vw;
     padding: 10px 0;
     font-size: 16px;
@@ -141,12 +145,12 @@ export default {
     color: #fff;
 }
 
-.contactForm .inputBox textarea {
+.params_textarea {
     resize: none;
     height: 15vh;
 }
 
-.contactForm .inputBox span {
+.params_name {
     position: absolute;
     left: 0;
     padding: 5px 0;
@@ -157,16 +161,16 @@ export default {
     color: #fff;
 }
 
-.contactForm .inputBox input:focus ~ span,
-.contactForm .inputBox input:valid ~ span,
-.contactForm .inputBox textarea:focus ~ span,
-.contactForm .inputBox textarea:valid ~ span {
+.params_input:focus ~ .params_name,
+.params_input:valid ~ .params_name,
+.params_textarea:focus ~ .params_name,
+.params_textarea:valid ~ .params_name {
     color: #e91e63;
     font-size: 12px;
     transform: translateY(-20px);
 }
 
-.contactForm .inputBox input[type="submit"] {
+.sub_inq {
     color: #FFF;
     display: inline-block;
     font-size: 15px;
@@ -186,7 +190,7 @@ export default {
     transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
-.contactForm .inputBox input[type="button"] {
+.mov_home {
     color: #FFF;
     display: inline-block;
     font-size: 15px;
@@ -205,7 +209,7 @@ export default {
     transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
-.contactForm .inputBox input[type="button"]:hover {
+.mov_home:hover {
     border-color: #ffced1;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
     outline-color: transparent;
@@ -213,7 +217,7 @@ export default {
     text-shadow: 2px 2px 3px #000;
 }
 
-.contactForm .inputBox input[type="submit"]:hover {
+.sub_inq:hover {
     border-color: #d1ffd3;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
     outline-color: transparent;
@@ -230,22 +234,113 @@ export default {
     text-align: center;
 }
 
-@media (max-width: 991px) {
-    .contact {
-        padding: 50px;
-    }
+.loading {
+    color: #fff;
+    text-align: center;
+}
 
+@media screen and (max-width: 950px) {
     .container {
-        flex-direction: column;
+        width: 100vw;
     }
 
-    .container .contactInfo {
-        margin-bottom: 40px;
-    }
-
-    .container .contactInfo,
     .contactForm {
-        width: 100%;
+        width: 100vw;
+        height: 75vh;
+        text-align: center;
+    }
+
+    .params_input, .params_textarea, .sub_inq, .mov_home {
+        width: 60vw;
+    }
+
+    .params_name {
+        left: 12vw;
+    }
+
+    .sub_inq {
+        width: 18vw;
+        left: 28vw;
+    }
+
+    .mov_home {
+        width: 18vw;
+        right: 28vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact {
+        height: 100%;
+    }
+
+    .contactForm {
+        width: 100vw;
+        height: 100%;
+    }
+
+    .biz_title {
+        margin-bottom: 2vh;
+    }
+
+    .params_input, .params_textarea, .sub_inq, .mov_home {
+        width: 80vw;
+    }
+
+    .params_textarea {
+        height: 18vh;
+    }
+
+    .params_name {
+        position: static;
+    }
+
+    .sub_inq {
+        width: 25vw;
+        position: relative;
+        left: -5vw;
+    }
+
+    .mov_home {
+        width: 25vw;
+        position: relative;
+        right: -5vw;
+    }
+}
+
+@media screen and (min-height: 910px) and (max-width: 1330px) {
+    .params_textarea {
+        height: 20vh;
+    }
+
+    .params_name {
+        top: 0;
+    }
+
+    .sub_inq {
+        width: 9vw;
+        left: 18vw;
+    }
+
+    .mov_home {
+        width: 9vw;
+        right: 60vw;
+    }
+}
+
+@media screen and (min-height: 910px) and (max-width: 950px) {
+    .params_input, .params_textarea, .sub_inq, .mov_home {
+        width: 50vw;
+    }
+
+    .sub_inq {
+        width: 12vw;
+        left: 30vw;
+    }
+
+    .mov_home {
+        width: 12vw;
+        right: 30vw;
     }
 }
 
