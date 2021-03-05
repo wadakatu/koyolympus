@@ -15,8 +15,14 @@ jobs:
           name: Docker php extensiions install
           command: sudo docker-php-ext-install pdo_mysql
       - run:
-          name: check file structure
-          command: ls -a
+          name: libjpeg etc install
+          command: sudo apt-get install -y wget git unzip libpq-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev
+      - run:
+          name: php-gd install
+          command: sudo docker-php-ext-configure gd --with-freetype --with-jpeg
+      - run:
+          name: add install command
+          command: sudo docker-php-ext-install -j$(nproc) gd
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "koyolympus/composer.json" }}
