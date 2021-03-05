@@ -121,6 +121,10 @@ class ImageControllerTest extends TestCase
             $mock->shouldReceive('removePhoto')->never()->with($request)->andReturn(response()->json([]));
         });
 
+        Log::shouldReceive('debug')
+            ->never()
+            ->with('ファイルのアップロードに失敗しました。');
+
         Log::shouldReceive('error')
             ->never()
             ->with('noError');
@@ -162,6 +166,10 @@ class ImageControllerTest extends TestCase
         $this->imageController
             ->shouldReceive('removePhoto')
             ->with($request);
+
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロードに失敗しました。');
 
         Log::shouldReceive('error')
             ->once()

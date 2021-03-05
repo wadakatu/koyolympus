@@ -41,6 +41,14 @@ jobs:
           name: Show PHPUnit Test List
           command: koyolympus/vendor/bin/phpunit --list-tests koyolympus/tests/Unit/
       - run:
+          name: config cache
+          command: php artisan config:cache
+          working_directory: koyolympus
+      - run:
+          name: config clear
+          command: php artisan config:clear
+          working_directory: koyolympus
+      - run:
           name: Run PHPUnit 
           command: koyolympus/vendor/bin/phpunit koyolympus/tests/Unit/
 
