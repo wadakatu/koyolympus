@@ -32,7 +32,9 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "koyolympus/composer.json" }}
       - run:
-          name: Run PHPUnit
+          name: Show PHPUnit Test List
           command: koyolympus/vendor/bin/phpunit --list-tests koyolympus/tests/Unit/
-   
+      - run:
+          name: Run PHPUnit 
+          command: koyolympus/vendor/bin/phpunit koyolympus/tests/Unit/
 
