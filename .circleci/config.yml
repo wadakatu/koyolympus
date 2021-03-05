@@ -7,7 +7,7 @@ jobs:
 
     environment:
       - DB_CONNECTION: circle_testing
-    working_directory: ~/koyolympus
+    working_directory: ~/koyolympus/koyolympus
     steps:
       - checkout
       - run:
