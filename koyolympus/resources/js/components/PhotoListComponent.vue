@@ -10,11 +10,12 @@
 
 <script>
 import {OK} from '../util';
+import PhotoComponent from './PhotoComponent';
 
 export default {
     name: "PhotoListComponent.vue",
     components: {
-        PhotoComponent: () => import('./PhotoComponent'),
+        PhotoComponent: PhotoComponent,
         PaginateComponent: () => import('./PaginateComponent'),
     },
     props: {
