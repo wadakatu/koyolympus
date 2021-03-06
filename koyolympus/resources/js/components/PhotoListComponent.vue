@@ -70,7 +70,9 @@ export default {
     watch: {
         $route: {
             async handler() {
-                await this.fetchPhotos();
+                await this.fetchPhotos().catch(e => {
+                    console.log(e.message);
+                });
 
                 this.noPhoto = this.photos.length === 0;
             },
