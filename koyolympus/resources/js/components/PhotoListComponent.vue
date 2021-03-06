@@ -1,10 +1,5 @@
 <template xmlns:loading="http://www.w3.org/1999/html">
     <div class="photo-list" ontouchstart="">
-        <loading
-            :active.sync="isLoading"
-            :is-full-page="fullPage"
-            :can-cancel="true"
-        ></loading>
         <h2 v-show="noPhoto">There are no photos in this page.</h2>
         <div class="images" v-viewer="{movable: false}">
             <a class="luminous" v-for="photo in photos">
@@ -28,10 +23,6 @@ export default {
     name: "PhotoListComponent.vue",
     components: {
         PaginateComponent: () => import('./PaginateComponent'),
-        Loading: () => {
-            import('vue-loading-overlay');
-            import('vue-loading-overlay/dist/vue-loading.css');
-        }
     },
     props: {
         page: {
@@ -46,14 +37,11 @@ export default {
             currentPage: 0,
             lastPage: 0,
             noPhoto: false,
-            isLoading: false,
-            fullPage: true,
         }
     },
     methods: {
         async fetchPhotos() {
             let self = this;
-            self.isLoading = true;
             let response;
             try {
                 response = await axios.get(`/api/photos/?page=${self.page}`, {params: {genre: self.genre}}).catch(e => {
@@ -70,7 +58,6 @@ export default {
             self.photos = response.data.data;
             self.currentPage = response.data.current_page;
             self.lastPage = response.data.last_page;
-            self.isLoading = false;
         },
     },
     watch: {
