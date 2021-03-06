@@ -103,7 +103,6 @@ const router = new VueRouter({
             path: '/photo',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
@@ -113,7 +112,6 @@ const router = new VueRouter({
             path: '/photo/landscape',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
@@ -123,7 +121,6 @@ const router = new VueRouter({
             path: '/photo/animal',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
@@ -133,7 +130,6 @@ const router = new VueRouter({
             path: '/photo/portrait',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
@@ -143,7 +139,6 @@ const router = new VueRouter({
             path: '/photo/others/snapshot',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
@@ -153,7 +148,6 @@ const router = new VueRouter({
             path: '/photo/others/livecomposite',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
@@ -163,7 +157,6 @@ const router = new VueRouter({
             path: '/photo/others/pinfilm',
             component: () => import('./components/PhotoListComponent'),
             props: route => {
-                console.log(route);
                 const page = route.query.page;
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },

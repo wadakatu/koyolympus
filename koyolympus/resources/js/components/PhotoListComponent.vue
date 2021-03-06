@@ -53,7 +53,14 @@ export default {
     methods: {
         async fetchPhotos() {
             this.isLoading = true;
-            const response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}});
+            let response;
+            try {
+                response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}}).catch(e => {
+                });
+            } catch (e) {
+                this.$store.commit('error/setCode', e.status);
+                return;
+            }
             if (response.status !== OK) {
                 this.$store.commit('error/setCode', response.status);
                 return false;
@@ -67,7 +74,9 @@ export default {
     watch: {
         $route: {
             async handler() {
-                await this.fetchPhotos();
+                await this.fetchPhotos().catch(e => {
+                    this.$store.commit('error/setCode', e.status);
+                });
 
                 this.noPhoto = this.photos.length === 0;
             },

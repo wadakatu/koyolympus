@@ -60,7 +60,6 @@ export default {
             console.log('An Error Occurred');
         },
         fileRemoved(file) {
-            console.log(file);
             let genre = this.genre;
             let params = {
                 file,
