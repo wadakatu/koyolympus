@@ -57,9 +57,10 @@ export default {
             let response;
             try {
                 response = await axios.get(`/api/photos/?page=${self.page}`, {params: {genre: self.genre}}).catch(e => {
+                    throw 'getPhoto error' + e.message
                 });
-            } catch (e) {
-                self.$store.commit('error/setCode', e.status);
+            } catch (err) {
+                self.$store.commit('error/setCode', err.status);
                 return;
             }
             if (response.status !== OK) {
@@ -75,11 +76,17 @@ export default {
     watch: {
         $route: {
             async handler() {
-                await this.fetchPhotos().catch(e => {
-                    this.$store.commit('error/setCode', e.status);
-                });
+                let self = this;
+                try {
+                    await self.fetchPhotos().catch(e => {
+                        throw 'getPhoto error' + e.message
+                    });
+                } catch (err) {
+                    self.$store.commit('error/setCode', err.status);
+                    return;
+                }
 
-                this.noPhoto = this.photos.length === 0;
+                self.noPhoto = self.photos.length === 0;
             },
             immediate: true,
         }
