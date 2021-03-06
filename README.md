@@ -1,5 +1,7 @@
 # Koyolympus
 
+[![CircleCI](https://circleci.com/gh/wadakatu/Koyolympus.svg?style=svg)](https://circleci.com/gh/wadakatu/Koyolympus)
+
 ## Brand new website about my Photography.
 
 You can access the website down below.

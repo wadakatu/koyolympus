@@ -46,7 +46,17 @@ export default {
     methods: {
         async fetchPhotos() {
             this.isLoading = true;
-            const response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}});
+            let response;
+            try {
+                response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}}).catch(e => {
+                    throw 'getPhoto error' + e.message
+                });
+            } catch (error) {
+                console.log('error occurred');
+                console.log('error description:' + error.message);
+                return;
+            }
+
             if (response.status !== OK) {
                 this.$store.commit('error/setCode', response.status);
                 return false;

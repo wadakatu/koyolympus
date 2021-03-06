@@ -103,6 +103,14 @@ class ImageControllerTest extends TestCase
             ->once()
             ->with();
 
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロード開始');
+
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロード終了');
+
         $this->photoService
             ->shouldReceive('uploadPhotoToS3')
             ->once()
@@ -120,6 +128,10 @@ class ImageControllerTest extends TestCase
         $this->partialMock(ImageController::class, function ($mock) use ($request) {
             $mock->shouldReceive('removePhoto')->never()->with($request)->andReturn(response()->json([]));
         });
+
+        Log::shouldReceive('debug')
+            ->never()
+            ->with('ファイルのアップロードに失敗しました。');
 
         Log::shouldReceive('error')
             ->never()
@@ -146,10 +158,18 @@ class ImageControllerTest extends TestCase
             ->once()
             ->with();
 
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロード開始');
+
         $this->photoService
             ->shouldReceive('uploadPhotoToS3')
             ->once()
             ->andThrow(Exception::class);
+
+        Log::shouldReceive('debug')
+            ->never()
+            ->with('ファイルのアップロード終了');
 
         DB::shouldReceive('commit')
             ->never()
@@ -162,6 +182,10 @@ class ImageControllerTest extends TestCase
         $this->imageController
             ->shouldReceive('removePhoto')
             ->with($request);
+
+        Log::shouldReceive('debug')
+            ->once()
+            ->with('ファイルのアップロードに失敗しました。');
 
         Log::shouldReceive('error')
             ->once()

@@ -23,7 +23,7 @@
                 </li>
                 <li>
                     <a href="https://koyolympus.thebase.in/"><img src="/images/photo.png" alt="purchase"></a>
-                    <p style="color: orange"> Buy Photo</p>
+                   <a href="https://koyolympus.thebase.in/"><p style="color: orange">Buy Photo</p></a>
                 </li>
                 <li class="insta">
                     <a href="https://www.instagram.com/wadakatu1234/?hl=ja">

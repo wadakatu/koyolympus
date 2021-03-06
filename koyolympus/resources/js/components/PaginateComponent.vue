@@ -3,7 +3,6 @@
         <RouterLink
             v-if="! isFirstPage"
             :to="`${this.url}/?page=${currentPage - 1}`"
-
         >
             <button class="button prev">&laquo; prev</button>
         </RouterLink>
@@ -126,7 +125,6 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
-
     .button {
         font-size: 11px;
         position: static;
