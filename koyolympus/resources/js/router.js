@@ -105,6 +105,8 @@ const router = new VueRouter({
             props: route => {
                 console.log(route);
                 const page = route.query.page;
+                this.$store.commit('photo/setUrl', url);
+                this.$store.commit('photo/setGenre', null);
                 return {page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1}
             },
             name: 'photo.all',
