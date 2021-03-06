@@ -101,7 +101,9 @@ const router = new VueRouter({
         },
         {
             path: '/photo',
-            component: () => import('./components/PhotoListComponent'),
+            components: {
+                default: () => import('./components/PhotoListComponent'),
+            },
             props: route => {
                 console.log(route);
                 const page = route.query.page;

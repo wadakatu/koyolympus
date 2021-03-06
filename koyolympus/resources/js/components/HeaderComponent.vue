@@ -9,7 +9,7 @@
                         <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
                     </a></li>
                     <li><a href="">
-                        <router-link v-bind:to="{name: 'photo.all'}">Photography</router-link>
+                        <router-link v-bind:to="{name: 'about.me'}">Photography</router-link>
                     </a></li>
                     <li><a>
                         <router-link v-bind:to="{name: 'main.biz'}">Biz Inquiries</router-link>
