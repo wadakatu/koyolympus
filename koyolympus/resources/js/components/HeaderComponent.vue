@@ -8,7 +8,7 @@
                     <li><a href="">
                         <router-link v-bind:to="{name: 'about.me'}">About Me</router-link>
                     </a></li>
-                    <li><a href="" @click.prevent="this.photo">
+                    <li><a href="" @click.prevent="photo">
                         <router-link v-bind:to="{}">Photography</router-link>
                     </a></li>
                     <li><a>
