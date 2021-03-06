@@ -1,4 +1,4 @@
-<template xmlns:loading="http://www.w3.org/1999/html">
+<template>
     <div class="photo-list" ontouchstart="">
         <h2 v-show="noPhoto">There are no photos in this page.</h2>
         <div class="images" v-viewer="{movable: false}">
