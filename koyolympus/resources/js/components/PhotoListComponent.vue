@@ -52,23 +52,24 @@ export default {
     },
     methods: {
         async fetchPhotos() {
-            this.isLoading = true;
+            let self = this;
+            self.isLoading = true;
             let response;
             try {
-                response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}}).catch(e => {
+                response = await axios.get(`/api/photos/?page=${self.page}`, {params: {genre: self.genre}}).catch(e => {
                 });
             } catch (e) {
-                this.$store.commit('error/setCode', e.status);
+                self.$store.commit('error/setCode', e.status);
                 return;
             }
             if (response.status !== OK) {
-                this.$store.commit('error/setCode', response.status);
+                self.$store.commit('error/setCode', response.status);
                 return false;
             }
-            this.photos = response.data.data;
-            this.currentPage = response.data.current_page;
-            this.lastPage = response.data.last_page;
-            this.isLoading = false;
+            self.photos = response.data.data;
+            self.currentPage = response.data.current_page;
+            self.lastPage = response.data.last_page;
+            self.isLoading = false;
         },
     },
     watch: {
