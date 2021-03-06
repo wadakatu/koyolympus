@@ -14,14 +14,12 @@ export default {
     name: "PhotoComponent.vue",
     props: {
         item: {
-            // this item has photo info(like url)
             type: Object,
             required: true,
         },
     },
     methods: {
         luminous() {
-            // only look for relevant elements *inside* this component. Should only match one element
             new Luminous(this.$el.querySelector(".lightbox"));
         },
     },
