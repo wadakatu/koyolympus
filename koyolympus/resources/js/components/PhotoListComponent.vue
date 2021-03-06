@@ -1,7 +1,7 @@
 <template xmlns:loading="http://www.w3.org/1999/html">
     <div class="photo-list" ontouchstart="">
         <h2 v-show="noPhoto">There are no photos in this page.</h2>
-        <div class="images" v-for="photo in photos">
+        <div class="images" v-for="photo in photos" :key="photo.url">
             <PhotoComponent v-bind:item=photo></PhotoComponent>
         </div>
         <PaginateComponent :current-page="currentPage" :last-page="lastPage"></PaginateComponent>
