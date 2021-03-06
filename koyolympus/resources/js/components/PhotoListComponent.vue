@@ -1,10 +1,5 @@
-<template xmlns:loading="http://www.w3.org/1999/html">
+<template>
     <div class="photo-list" ontouchstart="">
-        <loading
-            :active.sync="isLoading"
-            :is-full-page="fullPage"
-            :can-cancel="true"
-        ></loading>
         <h2 v-show="noPhoto">There are no photos in this page.</h2>
         <div class="images" v-viewer="{movable: false}">
             <a class="luminous" v-for="photo in photos">
@@ -28,10 +23,6 @@ export default {
     name: "PhotoListComponent.vue",
     components: {
         PaginateComponent: () => import('./PaginateComponent'),
-        Loading: () => {
-            import('vue-loading-overlay');
-            import('vue-loading-overlay/dist/vue-loading.css');
-        }
     },
     props: {
         page: {
@@ -46,30 +37,43 @@ export default {
             currentPage: 0,
             lastPage: 0,
             noPhoto: false,
-            isLoading: false,
-            fullPage: true,
         }
     },
     methods: {
         async fetchPhotos() {
-            this.isLoading = true;
-            const response = await axios.get(`/api/photos/?page=${this.page}`, {params: {genre: this.genre}});
+            let self = this;
+            let response;
+            try {
+                response = await axios.get(`/api/photos/?page=${self.page}`, {params: {genre: self.genre}}).catch(e => {
+                    throw 'getPhoto error' + e.message
+                });
+            } catch (err) {
+                self.$store.commit('error/setCode', err.status);
+                return;
+            }
             if (response.status !== OK) {
-                this.$store.commit('error/setCode', response.status);
+                self.$store.commit('error/setCode', response.status);
                 return false;
             }
-            this.photos = response.data.data;
-            this.currentPage = response.data.current_page;
-            this.lastPage = response.data.last_page;
-            this.isLoading = false;
+            self.photos = response.data.data;
+            self.currentPage = response.data.current_page;
+            self.lastPage = response.data.last_page;
         },
     },
     watch: {
         $route: {
             async handler() {
-                await this.fetchPhotos();
+                let self = this;
+                try {
+                    await self.fetchPhotos().catch(e => {
+                        throw 'getPhoto error' + e.message
+                    });
+                } catch (err) {
+                    self.$store.commit('error/setCode', err.status);
+                    return;
+                }
 
-                this.noPhoto = this.photos.length === 0;
+                self.noPhoto = self.photos.length === 0;
             },
             immediate: true,
         }
