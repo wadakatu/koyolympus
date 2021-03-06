@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import {Luminous} from "luminous-lightbox";
 
 export default {
     name: "PhotoComponent.vue",
@@ -15,6 +16,16 @@ export default {
             type: Object,
             required: true,
         },
+    },
+    methods: {
+        async luminous() {
+            await new Luminous(this.$el.querySelector(".lightbox")).catch(e => {
+                console.log(e.message);
+            });
+        },
+    },
+    mounted() {
+        this.luminous();
     },
 };
 </script>
