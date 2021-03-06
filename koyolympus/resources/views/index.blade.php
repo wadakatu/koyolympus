@@ -37,6 +37,6 @@
     <background-image-component></background-image-component>
 </div>
 <!-- Script -->
-<script type="application/javascript" src="/js/app.js" defer></script>
+<script type="application/javascript" src="{{ mix('/js/app.js') }}" defer></script>
 </body>
 </html>
