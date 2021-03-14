@@ -23,7 +23,7 @@
                 </li>
                 <li>
                     <a href="https://koyolympus.thebase.in/"><img src="/images/photo.png" alt="purchase"></a>
-                   <a href="https://koyolympus.thebase.in/"><p style="color: orange">Buy Photo</p></a>
+                    <a href="https://koyolympus.thebase.in/"><p style="color: orange">Buy Photo</p></a>
                 </li>
                 <li class="insta">
                     <a href="https://www.instagram.com/wadakatu1234/?hl=ja">
@@ -31,13 +31,8 @@
                     </a>
                 </li>
                 <li class="facebook">
-                    <a href="https://www.facebook.com/people/Koyo-Isono/100006224742543">
+                    <a href="https://www.facebook.com/koyolympus/">
                         <p>Facebook</p>
-                    </a>
-                </li>
-                <li class="twitter">
-                    <a href="https://twitter.com/ktwdwdwd">
-                        <p>Twitter</p>
                     </a>
                 </li>
             </ul>
@@ -98,7 +93,7 @@ export default {
 
 img {
     width: 35px;
-    margin-top: 70px;
+    margin-top: 10vh;
     cursor: pointer;
     padding-left: 5px;
 }
@@ -111,22 +106,10 @@ img {
     display: none;
 }
 
-.twitter {
-    display: none;
-}
-
 @media screen and (max-width: 950px) {
     .container {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 5vw;
         padding: 5px;
-        min-height: calc(100vh - 20px);
-        background-color: transparent;
-        border: solid #fff;
-        border-width: 0 1px 0 0;
-        transition: all .5s ease-in-out;
     }
     .navigation-icons p {
         color: #fff;
@@ -136,7 +119,7 @@ img {
 
     img {
         width: 25px;
-        margin-top: 80px;
+        margin-top: 12vh;
         cursor: pointer;
     }
 }
@@ -186,54 +169,16 @@ img {
     img {
         display: none;
     }
-
-    .upload {
-        display: none;
-    }
 }
 
 @media screen and (max-width: 480px) {
-    .container {
-        border: 0 solid #fff;
-        padding: 5px;
-        transition: all .5s ease-in-out;
-        z-index: 999;
-    }
 
     .navigation-icons {
-        display: inline-block;
         text-align: center;
-        padding: 10px;
-    }
-
-    .navigation-icons ul {
-        position: fixed;
-        top: 15vh;
-        right: 0;
-        width: 100vw;
-        background: #1b1e21;
-        opacity: 0.9;
-    }
-
-    .navigation-icons li {
-        border-bottom: solid 1px #fff;
-        padding: 1vh;
-        margin-top: 1vh;
-    }
-
-    .navigation-icons li a {
-        text-decoration: none;
     }
 
     .navigation-icons p {
-        color: #fff;
         font-size: 30px;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    img {
-        display: none;
     }
 
     .insta {
@@ -244,11 +189,6 @@ img {
     .facebook {
         display: inline-block;
         text-align: center
-    }
-
-    .twitter {
-        display: inline-block;
-        text-align: center;
     }
 }
 

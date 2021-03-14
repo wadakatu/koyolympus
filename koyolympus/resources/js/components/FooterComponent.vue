@@ -5,10 +5,8 @@
                 <li class="sns"><a href="https://www.instagram.com/wadakatu1234/?hl=ja"><img src="/images/instagram.png"
                                                                                              alt="instagram"></a>
                 </li>
-                <li class="sns"><a href="https://www.facebook.com/people/Koyo-Isono/100006224742543"><img
+                <li class="sns"><a href="https://www.facebook.com/koyolympus/"><img
                     src="/images/facebook.png" alt="facebook"></a></li>
-                <li class="sns"><a href="https://twitter.com/ktwdwdwd"><img src="/images/twitter.png" alt="twitter"></a>
-                </li>
                 <li class="sns">
                     <router-link v-bind:to="{name: 'main.biz'}"><img src="/images/email.png" alt="bizInquiry">
                     </router-link>

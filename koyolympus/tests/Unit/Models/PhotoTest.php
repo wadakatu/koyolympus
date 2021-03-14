@@ -4,11 +4,12 @@ namespace Tests\Unit\Models;
 
 use App\Http\Models\Photo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PhotoTest extends TestCase
 {
-
     use RefreshDatabase;
 
     private $photo;
@@ -24,6 +25,46 @@ class PhotoTest extends TestCase
     protected function tearDown(): void
     {
         parent::tearDown();
+    }
+
+    /**
+     * @test
+     */
+    public function setId()
+    {
+        $this->photo = \Mockery::mock(Photo::class)->makePartial();
+
+        $this->photo->shouldReceive('getRandomId')
+            ->once()
+            ->andReturn('uuid');
+
+        $this->photo->setId();
+
+        $attribute = $this->photo->getAttributes();
+        $this->assertSame('uuid', $attribute['id']);
+    }
+
+    /**
+     * @test
+     */
+    public function getRandomId()
+    {
+        $uuid = $this->photo->getRandomId();
+        $this->assertIsString($uuid);
+    }
+
+    /**
+     * @test
+     */
+    public function getUrlAttribute()
+    {
+        $fakeDisk = Storage::fake('s3');
+        $fakeFile = UploadedFile::fake()->create('fake.txt', 100, 'text/html');
+        $fakeDisk->put('/fake', $fakeFile);
+        $this->photo->setAttribute('file_path', 'fake');
+        $actual = $this->photo->getUrlAttribute();
+
+        $this->assertSame('/storage/fake', $actual);
     }
 
     /**
@@ -99,5 +140,31 @@ class PhotoTest extends TestCase
 
         $this->assertSame(0, count($recordNull));
         $this->assertSame(1, count($record));
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPhotos()
+    {
+        factory(Photo::class)->create([
+            'file_name' => 'test3.jpeg',
+            'created_at' => '2021-01-01 00:00:00'
+        ]);
+        factory(Photo::class)->create([
+            'file_name' => 'test2.jpeg',
+            'created_at' => '2021-01-02 00:00:00'
+        ]);
+        factory(Photo::class)->create([
+            'file_name' => 'test1.jpeg',
+            'created_at' => '2021-01-01 00:00:01'
+        ]);
+
+        $photoList = $this->photo->getAllPhotos();
+
+        $this->assertSame('test2.jpeg', $photoList[0]->file_name);
+        $this->assertSame('test1.jpeg', $photoList[1]->file_name);
+        $this->assertSame('test3.jpeg', $photoList[2]->file_name);
+
     }
 }

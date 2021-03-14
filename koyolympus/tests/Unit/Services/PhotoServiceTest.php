@@ -7,6 +7,7 @@ use App\Http\Services\PhotoService;
 use Config;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Mockery;
 use Tests\TestCase;
@@ -107,6 +108,731 @@ class PhotoServiceTest extends TestCase
         $this->photoService->deletePhotoFromS3($expectedUniqueFileName, $genre);
 
         Storage::disk('s3')->assertMissing("$filePath/$expectedUniqueFileName");
+    }
+
+    /**
+     * @test
+     * @dataProvider providerDeleteMultiplePhotosIfDuplicate
+     * @param $prepare
+     * @param $expect
+     */
+    public function deleteMultiplePhotosIfDuplicate($prepare, $expect)
+    {
+        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
+
+        $this->photoService->shouldReceive('searchMultipleDuplicatePhotos')
+            ->once()
+            ->andReturn($prepare['searchMultipleDuplicatePhotos']['return']);
+
+        $this->photoService->shouldReceive('deletePhotoFromS3')
+            ->times($prepare['deletePhotoFromS3']['times'])
+            ->with($prepare['deletePhotoFromS3']['with']['file_name'], $prepare['deletePhotoFromS3']['with']['genre']);
+
+        $this->photo->shouldReceive('deletePhotoInfo')
+            ->times($prepare['deletePhotoInfo']['times'])
+            ->with($prepare['deletePhotoInfo']['with']['file_name']);
+
+        $actualPhotoList = $this->photoService->deleteMultiplePhotosIfDuplicate();
+
+        foreach ($actualPhotoList as $index => $photoList) {
+            $this->assertSame($expect[$index]['file_name'], $photoList->file_name);
+            $this->assertSame($expect[$index]['genre'], $photoList->genre);
+        }
+    }
+
+    public function providerDeleteMultiplePhotosIfDuplicate()
+    {
+        return [
+            '重複ファイル１つ' => [
+                'prepare' => [
+                    'searchMultipleDuplicatePhotos' => [
+                        'return' => new Collection([new Photo(['file_name' => 'fake.jpeg', 'genre' => 1])])
+                    ],
+                    'deletePhotoFromS3' => [
+                        'times' => 1,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                            'genre' => 1,
+                        ]
+                    ],
+                    'deletePhotoInfo' => [
+                        'times' => 1,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                        ]
+                    ],
+                ],
+                'expect' => [
+                    0 => [
+                        'file_name' => 'fake.jpeg',
+                        'genre' => 1
+                    ]
+                ]
+            ],
+            '重複ファイル複数' => [
+                'prepare' => [
+                    'searchMultipleDuplicatePhotos' => [
+                        'return' => new Collection([
+                            new Photo(['file_name' => 'fake.jpeg', 'genre' => 1]),
+                            new Photo(['file_name' => 'fake.jpeg', 'genre' => 1])
+                        ])
+                    ],
+                    'deletePhotoFromS3' => [
+                        'times' => 2,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                            'genre' => 1,
+                        ]
+                    ],
+                    'deletePhotoInfo' => [
+                        'times' => 2,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                        ]
+                    ],
+                ],
+                'expect' => [
+                    0 => [
+                        'file_name' => 'fake.jpeg',
+                        'genre' => 1
+                    ],
+                    1 => [
+                        'file_name' => 'fake.jpeg',
+                        'genre' => 1
+                    ]
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider providerSearchMultipleDuplicatePhotos
+     */
+    public function searchMultipleDuplicatePhotos($prepare, $expect)
+    {
+        $this->photo->shouldReceive('getAllPhotos')
+            ->once()
+            ->andReturn($prepare['getAllPhotos']['return']);
+
+        if (isset($prepare['error'])) {
+            $this->expectException(\Error::class);
+            $this->expectErrorMessage($prepare['error']);
+        }
+
+        $actualPhotoList = $this->photoService->searchMultipleDuplicatePhotos();
+
+        $this->assertEquals($expect, $actualPhotoList);
+    }
+
+    public function providerSearchMultipleDuplicatePhotos()
+    {
+        return [
+            '重複レコード１つ２件' => [
+                'prepare' => [
+                    'getAllPhotos' => [
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id02',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => '3.fake3.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:01'
+                            ]),
+                        ]),
+                    ],
+                ],
+                'expect' => new Collection([
+                    new Photo([
+                        'id' => 'id01',
+                        'file_name' => '1.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:00'
+                    ]),
+                ]),
+            ],
+            '重複レコード１つ３件' => [
+                'prepare' => [
+                    'getAllPhotos' => [
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:03'
+                            ]),
+                            new Photo([
+                                'id' => 'id02',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => '3.fake3.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:01'
+                            ]),
+                            new Photo([
+                                'id' => 'id05',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:02'
+                            ]),
+                        ]),
+                    ],
+                ],
+                'expect' => new Collection([
+                    new Photo([
+                        'id' => 'id04',
+                        'file_name' => '1.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:01'
+                    ]),
+                    new Photo([
+                        'id' => 'id05',
+                        'file_name' => '1.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:02'
+                    ]),
+                ]),
+            ],
+            '重複レコード２つ２件' => [
+                'prepare' => [
+                    'getAllPhotos' => [
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id02',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => '3.fake3.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:01'
+                            ]),
+                            new Photo([
+                                'id' => 'id05',
+                                'file_name' => '3.fake3.jpeg',
+                                'created_at' => '2021-01-02 00:00:01'
+                            ]),
+                        ]),
+                    ],
+                ],
+                'expect' => new Collection([
+                    new Photo([
+                        'id' => 'id01',
+                        'file_name' => '1.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:00'
+                    ]),
+                    new Photo([
+                        'id' => 'id03',
+                        'file_name' => '3.fake3.jpeg',
+                        'created_at' => '2021-01-01 00:00:00'
+                    ]),
+                ]),
+            ],
+            '重複レコード２つ３件' => [
+                'prepare' => [
+                    'getAllPhotos' => [
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:03'
+                            ]),
+                            new Photo([
+                                'id' => 'id02',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-05 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => '3.fake3.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:01'
+                            ]),
+                            new Photo([
+                                'id' => 'id05',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:02'
+                            ]),
+                            new Photo([
+                                'id' => 'id06',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-04 00:00:01'
+                            ]),
+                            new Photo([
+                                'id' => 'id07',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-02 00:00:02'
+                            ]),
+                        ]),
+                    ],
+                ],
+                'expect' => new Collection([
+                    new Photo([
+                        'id' => 'id04',
+                        'file_name' => '1.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:01'
+                    ]),
+                    new Photo([
+                        'id' => 'id05',
+                        'file_name' => '1.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:02'
+                    ]),
+                    new Photo([
+                        'id' => 'id06',
+                        'file_name' => '2.fake2.jpeg',
+                        'created_at' => '2021-01-04 00:00:01'
+                    ]),
+                    new Photo([
+                        'id' => 'id07',
+                        'file_name' => '2.fake2.jpeg',
+                        'created_at' => '2021-01-02 00:00:02'
+                    ]),
+                ]),
+            ],
+            'コレクションが空' => [
+                'prepare' => [
+                    'getAllPhotos' => [
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => '1.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id02',
+                                'file_name' => '2.fake2.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => '3.fake3.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                        ]),
+                    ],
+                    'error' => 'There is no duplicate file in the database.'
+                ],
+                'expect' => null,
+            ]
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider providerDeletePhotoIfDuplicate
+     */
+    public function deletePhotoIfDuplicate($prepare, $expect)
+    {
+        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
+
+        $this->photo->shouldReceive('getAllPhotos')
+            ->once()
+            ->andReturn($prepare['searchDuplicatePhoto']['with']['getAllPhotos']);
+
+        $this->photoService->shouldReceive('searchDuplicatePhoto')
+            ->once()
+            ->with(
+                $prepare['searchDuplicatePhoto']['with']['getAllPhotos'],
+                $prepare['searchDuplicatePhoto']['with']['fileName']
+            )->andReturn($prepare['searchDuplicatePhoto']['return']);
+
+        $this->photoService->shouldReceive('deletePhotoFromS3')
+            ->times($prepare['deletePhotoFromS3']['times'])
+            ->with($prepare['deletePhotoFromS3']['with']['file_name'], $prepare['deletePhotoFromS3']['with']['genre']);
+
+        $this->photo->shouldReceive('deletePhotoInfo')
+            ->times($prepare['deletePhotoInfo']['times'])
+            ->with($prepare['deletePhotoInfo']['with']['file_name']);
+
+        $actual = $this->photoService->deletePhotoIfDuplicate($prepare['file_name']);
+
+        $this->assertSame($expect, $actual);
+    }
+
+    public function providerDeletePhotoIfDuplicate()
+    {
+        return [
+            '重複レコード１件' => [
+                'prepare' => [
+                    'file_name' => 'fake.jpeg',
+                    'searchDuplicatePhoto' => [
+                        'with' => [
+                            'getAllPhotos' => new Collection([
+                                new Photo([
+                                    'id' => 'id01',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                                new Photo([
+                                    'id' => 'id02',
+                                    'file_name' => 'fake2.jpeg',
+                                    'genre' => 2
+                                ])
+                            ]),
+                            'fileName' => 'fake.jpeg',
+                        ],
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                        ]),
+                    ],
+                    'deletePhotoFromS3' => [
+                        'times' => 1,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                            'genre' => 1
+                        ]
+                    ],
+                    'deletePhotoInfo' => [
+                        'times' => 1,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                        ]
+                    ],
+                ],
+                'expect' => [
+                    'deleteFile' => 'fake.jpeg',
+                    'count' => 1
+                ]
+            ],
+            '重複レコード３件' => [
+                'prepare' => [
+                    'file_name' => 'fake.jpeg',
+                    'searchDuplicatePhoto' => [
+                        'with' => [
+                            'getAllPhotos' => new Collection([
+                                new Photo([
+                                    'id' => 'id01',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                                new Photo([
+                                    'id' => 'id02',
+                                    'file_name' => 'fake2.jpeg',
+                                    'genre' => 2
+                                ]),
+                                new Photo([
+                                    'id' => 'id03',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                                new Photo([
+                                    'id' => 'id04',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 2
+                                ])
+                            ]),
+                            'fileName' => 'fake.jpeg',
+                        ],
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ])
+                        ]),
+                    ],
+                    'deletePhotoFromS3' => [
+                        'times' => 3,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                            'genre' => 1
+                        ]
+                    ],
+                    'deletePhotoInfo' => [
+                        'times' => 3,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                        ]
+                    ],
+                ],
+                'expect' => [
+                    'deleteFile' => 'fake.jpeg',
+                    'count' => 3
+                ],
+            ],
+            '重複レコード５件' => [
+                'prepare' => [
+                    'file_name' => 'fake.jpeg',
+                    'searchDuplicatePhoto' => [
+                        'with' => [
+                            'getAllPhotos' => new Collection([
+                                new Photo([
+                                    'id' => 'id01',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                                new Photo([
+                                    'id' => 'id02',
+                                    'file_name' => 'fake2.jpeg',
+                                    'genre' => 2
+                                ]),
+                                new Photo([
+                                    'id' => 'id03',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                                new Photo([
+                                    'id' => 'id04',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 2
+                                ]),
+                                new Photo([
+                                    'id' => 'id05',
+                                    'file_name' => 'fake5.jpeg',
+                                    'genre' => 2
+                                ]),
+                                new Photo([
+                                    'id' => 'id06',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                                new Photo([
+                                    'id' => 'id07',
+                                    'file_name' => 'fake.jpeg',
+                                    'genre' => 1
+                                ]),
+                            ]),
+                            'fileName' => 'fake.jpeg',
+                        ],
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                            new Photo([
+                                'id' => 'id06',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                            new Photo([
+                                'id' => 'id07',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ]),
+                        ]),
+                    ],
+                    'deletePhotoFromS3' => [
+                        'times' => 5,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                            'genre' => 1
+                        ]
+                    ],
+                    'deletePhotoInfo' => [
+                        'times' => 5,
+                        'with' => [
+                            'file_name' => 'fake.jpeg',
+                        ]
+                    ],
+                ],
+                'expect' => [
+                    'deleteFile' => 'fake.jpeg',
+                    'count' => 5
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider providerSearchDuplicatePhoto
+     */
+    public function searchDuplicatePhoto($prepare, $expect)
+    {
+        if (isset($prepare['error'])) {
+            $this->expectException(\Error::class);
+            $this->expectExceptionMessage($prepare['error']);
+        }
+
+        $actual = $this->photoService->searchDuplicatePhoto($prepare['fileList'], $prepare['fileName']);
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    public function providerSearchDuplicatePhoto()
+    {
+        return [
+            '重複レコード１つ２件' => [
+                'prepare' => [
+                    'fileList' => new Collection([
+                        new Photo([
+                            'id' => 'id01',
+                            'file_name' => 'id01.fake1.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id02',
+                            'file_name' => 'id02.fake2.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id03',
+                            'file_name' => 'id03.fake3.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id04',
+                            'file_name' => 'id04.fake1.jpeg',
+                            'created_at' => '2021-01-01 00:00:00'
+                        ])
+                    ]),
+                    'fileName' => 'fake1.jpeg'
+                ],
+                'expect' => new Collection([
+                    1 => new Photo([
+                        'id' => 'id04',
+                        'file_name' => 'id04.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:00'
+                    ])
+                ])
+            ],
+            '重複レコード１つ３件' => [
+                'prepare' => [
+                    'fileList' => new Collection([
+                        new Photo([
+                            'id' => 'id01',
+                            'file_name' => 'id01.fake1.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id02',
+                            'file_name' => 'id02.fake2.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id03',
+                            'file_name' => 'id03.fake3.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id04',
+                            'file_name' => 'id04.fake1.jpeg',
+                            'created_at' => '2021-01-01 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id05',
+                            'file_name' => 'id05.fake1.jpeg',
+                            'created_at' => '2020-12-31 00:00:00'
+                        ])
+                    ]),
+                    'fileName' => 'fake1.jpeg'
+                ],
+                'expect' => new Collection([
+                    1 => new Photo([
+                        'id' => 'id04',
+                        'file_name' => 'id04.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:00'
+                    ]),
+                    2 => new Photo([
+                        'id' => 'id05',
+                        'file_name' => 'id05.fake1.jpeg',
+                        'created_at' => '2020-12-31 00:00:00'
+                    ])
+                ])
+            ],
+            'コレクション内１件のみ' => [
+                'prepare' => [
+                    'fileList' => new Collection([
+                        new Photo([
+                            'id' => 'id01',
+                            'file_name' => 'id01.fake1.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id02',
+                            'file_name' => 'id02.fake2.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id03',
+                            'file_name' => 'id03.fake3.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                    ]),
+                    'fileName' => 'fake1.jpeg',
+                    'error' => 'There is no duplicate file in the database.',
+                ],
+                'expect' => null,
+            ],
+            'コレクションが空' => [
+                'prepare' => [
+                    'fileList' => new Collection([
+                        new Photo([
+                            'id' => 'id01',
+                            'file_name' => 'id01.fake1.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id02',
+                            'file_name' => 'id02.fake2.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                        new Photo([
+                            'id' => 'id03',
+                            'file_name' => 'id03.fake3.jpeg',
+                            'created_at' => '2021-01-02 00:00:00'
+                        ]),
+                    ]),
+                    'fileName' => 'fake5.jpeg',
+                    'error' => 'There is no duplicate file in the database.',
+                ],
+                'expect' => null,
+            ],
+        ];
     }
 
 
