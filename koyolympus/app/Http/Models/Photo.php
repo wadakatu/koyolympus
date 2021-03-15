@@ -5,7 +5,9 @@ namespace App\Http\Models;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Photo extends Model
 {
@@ -20,12 +22,10 @@ class Photo extends Model
     ];
     protected $perPage = 10;
     protected $keyType = 'string';
-    const ID_LENGTH = 12;
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-
         if (!Arr::get($this->attributes, 'id')) {
             $this->setId();
         }
@@ -38,20 +38,7 @@ class Photo extends Model
 
     public function getRandomId(): string
     {
-        $characters = array_merge(
-            range(0, 9), range('a', 'z'),
-            range('A', 'Z'), ['-', '_']
-        );
-
-        $length = count($characters);
-
-        $id = "";
-
-        for ($i = 0; $i < self::ID_LENGTH; $i++) {
-            $id .= $characters[random_int(0, $length - 1)];
-        }
-
-        return $id;
+        return Str::uuid();
     }
 
     public function getUrlAttribute(): string
@@ -96,5 +83,10 @@ class Photo extends Model
         self::query()
             ->where('id', $fileIdAndName[0])
             ->delete();
+    }
+
+    public function getAllPhotos(): Collection
+    {
+        return self::query()->orderBy('created_at', 'desc')->get();
     }
 }

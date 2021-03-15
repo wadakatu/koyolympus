@@ -155,7 +155,7 @@ export default {
     text-shadow: 0 0 15px #000;
 }
 
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1245px) {
     .card {
         flex-direction: column;
         align-items: center;
@@ -163,7 +163,7 @@ export default {
 
     .card_detail {
         height: 15vh;
-        width: 30vw;
+        width: 35vw;
     }
 }
 
@@ -176,6 +176,7 @@ export default {
     .card_detail {
         height: 10vh;
         width: 60vh;
+        margin-top: 10px;
     }
 }
 
