@@ -214,83 +214,57 @@ class PhotoServiceTest extends TestCase
 
     /**
      * @test
+     * @dataProvider providerSearchMultipleDuplicatePhotos
      */
-    public function searchMultipleDuplicatePhotos()
+    public function searchMultipleDuplicatePhotos($prepare, $expect)
     {
         $this->photo->shouldReceive('getAllPhotos')
             ->once()
-            ->andReturn(new Collection([
-                new Photo([
-                    'id' => 'id01',
-                    'file_name' => 'id01.fake1.jpeg',
-                    'created_at' => '2021-01-01 00:00:00'
-                ]),
-                new Photo([
-                    'id' => 'id02',
-                    'file_name' => 'id02.fake2.jpeg',
-                    'created_at' => '2021-01-01 00:00:00'
-                ]),
-                new Photo([
-                    'id' => 'id03',
-                    'file_name' => 'id03.fake3.jpeg',
-                    'created_at' => '2021-01-01 00:00:00'
-                ]),
-                new Photo([
-                    'id' => 'id04',
-                    'file_name' => 'id04.fake1.jpeg',
-                    'created_at' => '2021-01-01 00:00:01'
-                ]),
-            ]));
+            ->andReturn($prepare['getAllPhotos']['return']);
 
         $actualPhotoList = $this->photoService->searchMultipleDuplicatePhotos();
 
-        $this->assertEquals(new Collection([
-            new Photo([
-                'id' => 'id01',
-                'file_name' => 'id01.fake1.jpeg',
-                'created_at' => '2021-01-01 00:00:00'
-            ])
-        ]), $actualPhotoList);
+        $this->assertEquals($expect, $actualPhotoList);
     }
 
-//    public function providerSearchMultipleDuplicatePhotos(): array
-//    {
-//        return [
-//            '重複レコード１つ２件' => [
-//                'prepare' => [
-//                    'getAllPhotos' => [
-//                        'return' => new Collection([
-//                            new Photo([
-//                                'id' => 'id01',
-//                                'file_name' => 'id01.fake1.jpeg',
-//                                'created_at' => '2021-01-01 00:00:00'
-//                            ]),
-//                            new Photo([
-//                                'id' => 'id02',
-//                                'file_name' => 'id02.fake2.jpeg',
-//                                'created_at' => '2021-01-01 00:00:00'
-//                            ]),
-//                            new Photo([
-//                                'id' => 'id03',
-//                                'file_name' => 'id03.fake3.jpeg',
-//                                'created_at' => '2021-01-01 00:00:00'
-//                            ]),
-//                            new Photo([
-//                                'id' => 'id04',
-//                                'file_name' => 'id04.fake1.jpeg',
-//                                'created_at' => '2021-01-01 00:00:01'
-//                            ]),
-//                        ]),
-//                    ],
-//                ],
-//                'expect' => new Collection([
-//                    new Photo([
-//                        'id' => 'id01',
-//                        'file_name' => 'id01.fake1.jpeg',
-//                        'created_at' => '2021-01-01 00:00:00'
-//                    ]),
-//                ]),
-//            ],
+    public function providerSearchMultipleDuplicatePhotos(): array
+    {
+        return [
+            '重複レコード１つ２件' => [
+                'prepare' => [
+                    'getAllPhotos' => [
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'id01',
+                                'file_name' => 'id01.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id02',
+                                'file_name' => 'id02.fake2.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id03',
+                                'file_name' => 'id03.fake3.jpeg',
+                                'created_at' => '2021-01-01 00:00:00'
+                            ]),
+                            new Photo([
+                                'id' => 'id04',
+                                'file_name' => 'id04.fake1.jpeg',
+                                'created_at' => '2021-01-01 00:00:01'
+                            ]),
+                        ]),
+                    ],
+                ],
+                'expect' => new Collection([
+                    new Photo([
+                        'id' => 'id01',
+                        'file_name' => 'id01.fake1.jpeg',
+                        'created_at' => '2021-01-01 00:00:00'
+                    ]),
+                ]),
+            ],
 //            '重複レコード１つ３件' => [
 //                'prepare' => [
 //                    'getAllPhotos' => [
@@ -471,8 +445,8 @@ class PhotoServiceTest extends TestCase
 //                ],
 //                'expect' => null,
 //            ]
-//];
-//}
+        ];
+    }
 
     /**
      * @test
