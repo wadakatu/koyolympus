@@ -704,63 +704,47 @@ class PhotoServiceTest extends TestCase
         ];
     }
 
-//    /**
-//     * @test
-//     * @dataProvider providerSearchDuplicatePhoto
-//     * @param $prepare
-//     * @param $expect
-//     */
-//    public function searchDuplicatePhoto($prepare, $expect)
-//    {
-//        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
-//
-//        if (isset($prepare['error'])) {
-//            $this->expectException(\Error::class);
-//            $this->expectExceptionMessage($prepare['error']);
-//        }
-//
-//        $actual = $this->photoService->searchDuplicatePhoto($prepare['fileList'], $prepare['fileName']);
-//
-//        $this->assertEquals($expect, $actual);
-//    }
-//
-//    public function providerSearchDuplicatePhoto(): array
-//    {
-//        return [
-//            '重複レコード１つ２件' => [
-//                'prepare' => [
-//                    'fileList' => new Collection([
-//                        new Photo([
-//                            'id' => 'id01',
-//                            'file_name' => 'id01.fake1.jpeg',
-//                            'created_at' => '2021-01-02 00:00:00'
-//                        ]),
-//                        new Photo([
-//                            'id' => 'id02',
-//                            'file_name' => 'id02.fake2.jpeg',
-//                            'created_at' => '2021-01-02 00:00:00'
-//                        ]),
-//                        new Photo([
-//                            'id' => 'id03',
-//                            'file_name' => 'id03.fake3.jpeg',
-//                            'created_at' => '2021-01-02 00:00:00'
-//                        ]),
-//                        new Photo([
-//                            'id' => 'id04',
-//                            'file_name' => 'id04.fake1.jpeg',
-//                            'created_at' => '2021-01-01 00:00:00'
-//                        ])
-//                    ]),
-//                    'fileName' => 'fake1.jpeg'
-//                ],
-//                'expect' => new Collection([
-//                    1 => new Photo([
-//                        'id' => 'id04',
-//                        'file_name' => 'id04.fake1.jpeg',
-//                        'created_at' => '2021-01-01 00:00:00'
-//                    ])
-//                ])
-//            ],
+    /**
+     * @test
+     */
+    public function searchDuplicatePhoto_重複レコード１つ２件()
+    {
+        $actual = $this->photoService->searchDuplicatePhoto(
+            new Collection([
+                new Photo([
+                    'id' => 'id01',
+                    'file_name' => 'id01.fake1.jpeg',
+                    'created_at' => '2021-01-02 00:00:00'
+                ]),
+                new Photo([
+                    'id' => 'id02',
+                    'file_name' => 'id02.fake2.jpeg',
+                    'created_at' => '2021-01-02 00:00:00'
+                ]),
+                new Photo([
+                    'id' => 'id03',
+                    'file_name' => 'id03.fake3.jpeg',
+                    'created_at' => '2021-01-02 00:00:00'
+                ]),
+                new Photo([
+                    'id' => 'id04',
+                    'file_name' => 'id04.fake1.jpeg',
+                    'created_at' => '2021-01-01 00:00:00'
+                ])
+            ]), 'fake1.jpeg');
+
+        $this->assertEquals(new Collection([
+            1 => new Photo([
+                'id' => 'id04',
+                'file_name' => 'id04.fake1.jpeg',
+                'created_at' => '2021-01-01 00:00:00'
+            ])
+        ]), $actual);
+    }
+
+    public function providerSearchDuplicatePhoto(): array
+    {
+        return [
 //            '重複レコード１つ３件' => [
 //                'prepare' => [
 //                    'fileList' => new Collection([
@@ -853,8 +837,8 @@ class PhotoServiceTest extends TestCase
 //                ],
 //                'expect' => null,
 //            ],
-//        ];
-//    }
+        ];
+    }
 
 
 }
