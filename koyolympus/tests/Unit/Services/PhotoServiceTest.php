@@ -220,6 +220,7 @@ class PhotoServiceTest extends TestCase
      */
     public function searchMultipleDuplicatePhotos($prepare, $expect)
     {
+        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
 
         $this->photo->shouldReceive('getAllPhotos')
             ->once()
@@ -707,6 +708,8 @@ class PhotoServiceTest extends TestCase
      */
     public function searchDuplicatePhoto($prepare, $expect)
     {
+        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
+
         if (isset($prepare['error'])) {
             $this->expectException(\Error::class);
             $this->expectExceptionMessage($prepare['error']);
