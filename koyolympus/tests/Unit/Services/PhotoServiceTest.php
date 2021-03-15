@@ -220,16 +220,9 @@ class PhotoServiceTest extends TestCase
      */
     public function searchMultipleDuplicatePhotos($prepare, $expect)
     {
-        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
-
         $this->photo->shouldReceive('getAllPhotos')
             ->once()
             ->andReturn($prepare['getAllPhotos']['return']);
-
-        if (isset($prepare['error'])) {
-            $this->expectException(\Error::class);
-            $this->expectErrorMessage($prepare['error']);
-        }
 
         $actualPhotoList = $this->photoService->searchMultipleDuplicatePhotos();
 
@@ -245,22 +238,22 @@ class PhotoServiceTest extends TestCase
                         'return' => new Collection([
                             new Photo([
                                 'id' => 'id01',
-                                'file_name' => '1.fake1.jpeg',
+                                'file_name' => 'id01.fake1.jpeg',
                                 'created_at' => '2021-01-01 00:00:00'
                             ]),
                             new Photo([
                                 'id' => 'id02',
-                                'file_name' => '2.fake2.jpeg',
+                                'file_name' => 'id02.fake2.jpeg',
                                 'created_at' => '2021-01-01 00:00:00'
                             ]),
                             new Photo([
                                 'id' => 'id03',
-                                'file_name' => '3.fake3.jpeg',
+                                'file_name' => 'id03.fake3.jpeg',
                                 'created_at' => '2021-01-01 00:00:00'
                             ]),
                             new Photo([
                                 'id' => 'id04',
-                                'file_name' => '1.fake1.jpeg',
+                                'file_name' => 'id04.fake1.jpeg',
                                 'created_at' => '2021-01-01 00:00:01'
                             ]),
                         ]),
@@ -269,7 +262,7 @@ class PhotoServiceTest extends TestCase
                 'expect' => new Collection([
                     new Photo([
                         'id' => 'id01',
-                        'file_name' => '1.fake1.jpeg',
+                        'file_name' => 'id01.fake1.jpeg',
                         'created_at' => '2021-01-01 00:00:00'
                     ]),
                 ]),

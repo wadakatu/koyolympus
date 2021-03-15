@@ -65,8 +65,6 @@ class PhotoService
         //写真一覧レコードを取得
         $photoList = $this->photo->getAllPhotos();
 
-        dd($photoList);
-
         $photoNameList = [];
 
         //写真レコードから必要なデータを配列として抽出
