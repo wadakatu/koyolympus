@@ -5,8 +5,8 @@ namespace Tests\Unit\Services;
 use App\Http\Models\Photo;
 use App\Http\Services\PhotoService;
 use Config;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Mockery;
@@ -21,8 +21,10 @@ class PhotoServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->photo = Mockery::mock(Photo::class);
-        $this->photoService = new PhotoService($this->photo);
+
+        $this->photo = $this->app->instance(Photo::class, Mockery::mock(Photo::class));
+        $this->photoService = $this->app->instance(PhotoService::class,
+            Mockery::mock(PhotoService::class, [$this->photo])->makePartial());
     }
 
     protected function tearDown(): void
@@ -37,16 +39,17 @@ class PhotoServiceTest extends TestCase
      */
     public function getAllPhoto($genre)
     {
-        $this->photo
-            ->shouldReceive('getAllPhoto')
+        $this->photo->shouldReceive('getAllPhoto')
             ->once()
             ->with($genre)
-            ->andReturn(new LengthAwarePaginator([], 1, 1));
+            ->andReturn(Mockery::mock(LengthAwarePaginator::class));
 
-        $this->photoService->getAllPhoto($genre);
+        $actual = $this->photoService->getAllPhoto($genre);
+
+        $this->assertInstanceOf(LengthAwarePaginator::class, $actual);
     }
 
-    public function providerGetAllPhoto()
+    public function providerGetAllPhoto(): array
     {
         return [
             'ジャンルなし' => [
@@ -118,8 +121,6 @@ class PhotoServiceTest extends TestCase
      */
     public function deleteMultiplePhotosIfDuplicate($prepare, $expect)
     {
-        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
-
         $this->photoService->shouldReceive('searchMultipleDuplicatePhotos')
             ->once()
             ->andReturn($prepare['searchMultipleDuplicatePhotos']['return']);
@@ -132,21 +133,24 @@ class PhotoServiceTest extends TestCase
             ->times($prepare['deletePhotoInfo']['times'])
             ->with($prepare['deletePhotoInfo']['with']['file_name']);
 
-        $actualPhotoList = $this->photoService->deleteMultiplePhotosIfDuplicate();
+        $actual = $this->photoService->deleteMultiplePhotosIfDuplicate();
 
-        foreach ($actualPhotoList as $index => $photoList) {
-            $this->assertSame($expect[$index]['file_name'], $photoList->file_name);
-            $this->assertSame($expect[$index]['genre'], $photoList->genre);
-        }
+        $this->assertEquals($expect, $actual);
     }
 
-    public function providerDeleteMultiplePhotosIfDuplicate()
+    public function providerDeleteMultiplePhotosIfDuplicate(): array
     {
         return [
             '重複ファイル１つ' => [
                 'prepare' => [
                     'searchMultipleDuplicatePhotos' => [
-                        'return' => new Collection([new Photo(['file_name' => 'fake.jpeg', 'genre' => 1])])
+                        'return' => new Collection([
+                            new Photo([
+                                'id' => 'aaaa',
+                                'file_name' => 'fake.jpeg',
+                                'genre' => 1
+                            ])
+                        ])
                     ],
                     'deletePhotoFromS3' => [
                         'times' => 1,
@@ -162,19 +166,20 @@ class PhotoServiceTest extends TestCase
                         ]
                     ],
                 ],
-                'expect' => [
-                    0 => [
+                'expect' => new Collection([
+                    0 => new Photo([
+                        'id' => 'aaaa',
                         'file_name' => 'fake.jpeg',
                         'genre' => 1
-                    ]
-                ]
+                    ])
+                ]),
             ],
             '重複ファイル複数' => [
                 'prepare' => [
                     'searchMultipleDuplicatePhotos' => [
                         'return' => new Collection([
-                            new Photo(['file_name' => 'fake.jpeg', 'genre' => 1]),
-                            new Photo(['file_name' => 'fake.jpeg', 'genre' => 1])
+                            new Photo(['id' => 'aaaa', 'file_name' => 'fake.jpeg', 'genre' => 1]),
+                            new Photo(['id' => 'bbbb', 'file_name' => 'fake.jpeg', 'genre' => 1])
                         ])
                     ],
                     'deletePhotoFromS3' => [
@@ -191,16 +196,18 @@ class PhotoServiceTest extends TestCase
                         ]
                     ],
                 ],
-                'expect' => [
-                    0 => [
+                'expect' => new Collection([
+                    0 => new Photo([
+                        'id' => 'aaaa',
                         'file_name' => 'fake.jpeg',
                         'genre' => 1
-                    ],
-                    1 => [
+                    ]),
+                    1 => new Photo([
+                        'id' => 'bbbb',
                         'file_name' => 'fake.jpeg',
                         'genre' => 1
-                    ]
-                ],
+                    ])
+                ]),
             ],
         ];
     }
@@ -208,9 +215,12 @@ class PhotoServiceTest extends TestCase
     /**
      * @test
      * @dataProvider providerSearchMultipleDuplicatePhotos
+     * @param $prepare
+     * @param $expect
      */
     public function searchMultipleDuplicatePhotos($prepare, $expect)
     {
+
         $this->photo->shouldReceive('getAllPhotos')
             ->once()
             ->andReturn($prepare['getAllPhotos']['return']);
@@ -225,7 +235,7 @@ class PhotoServiceTest extends TestCase
         $this->assertEquals($expect, $actualPhotoList);
     }
 
-    public function providerSearchMultipleDuplicatePhotos()
+    public function providerSearchMultipleDuplicatePhotos(): array
     {
         return [
             '重複レコード１つ２件' => [
@@ -449,6 +459,8 @@ class PhotoServiceTest extends TestCase
     /**
      * @test
      * @dataProvider providerDeletePhotoIfDuplicate
+     * @param $prepare
+     * @param $expect
      */
     public function deletePhotoIfDuplicate($prepare, $expect)
     {
@@ -690,6 +702,8 @@ class PhotoServiceTest extends TestCase
     /**
      * @test
      * @dataProvider providerSearchDuplicatePhoto
+     * @param $prepare
+     * @param $expect
      */
     public function searchDuplicatePhoto($prepare, $expect)
     {
@@ -703,7 +717,7 @@ class PhotoServiceTest extends TestCase
         $this->assertEquals($expect, $actual);
     }
 
-    public function providerSearchDuplicatePhoto()
+    public function providerSearchDuplicatePhoto(): array
     {
         return [
             '重複レコード１つ２件' => [

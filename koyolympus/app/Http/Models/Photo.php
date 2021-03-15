@@ -22,12 +22,10 @@ class Photo extends Model
     ];
     protected $perPage = 10;
     protected $keyType = 'string';
-    const ID_LENGTH = 12;
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-
         if (!Arr::get($this->attributes, 'id')) {
             $this->setId();
         }
