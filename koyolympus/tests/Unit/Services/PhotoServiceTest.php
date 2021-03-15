@@ -307,7 +307,7 @@ class PhotoServiceTest extends TestCase
     /**
      * @test
      */
-    public function searchMultipleDuplicatePhotos_重複レコードつ２件()
+    public function searchMultipleDuplicatePhotos_重複レコード2つ２件()
     {
         $this->photo->shouldReceive('getAllPhotos')
             ->once()
@@ -343,14 +343,14 @@ class PhotoServiceTest extends TestCase
 
         $this->assertEquals(new Collection([
             new Photo([
-                'id' => 'id04',
+                'id' => 'id01',
                 'file_name' => '1.fake1.jpeg',
-                'created_at' => '2021-01-01 00:00:01'
+                'created_at' => '2021-01-01 00:00:00'
             ]),
             new Photo([
-                'id' => 'id05',
-                'file_name' => '1.fake1.jpeg',
-                'created_at' => '2021-01-01 00:00:02'
+                'id' => 'id03',
+                'file_name' => '3.fake3.jpeg',
+                'created_at' => '2021-01-01 00:00:00'
             ]),
         ]), $actualPhotoList);
     }
