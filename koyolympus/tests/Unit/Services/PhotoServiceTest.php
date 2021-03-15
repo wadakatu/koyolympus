@@ -274,186 +274,186 @@ class PhotoServiceTest extends TestCase
                     ]),
                 ]),
             ],
-            '重複レコード１つ３件' => [
-                'prepare' => [
-                    'getAllPhotos' => [
-                        'return' => new Collection([
-                            new Photo([
-                                'id' => 'id01',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:03'
-                            ]),
-                            new Photo([
-                                'id' => 'id02',
-                                'file_name' => '2.fake2.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id03',
-                                'file_name' => '3.fake3.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id04',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:01'
-                            ]),
-                            new Photo([
-                                'id' => 'id05',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:02'
-                            ]),
-                        ]),
-                    ],
-                ],
-                'expect' => new Collection([
-                    new Photo([
-                        'id' => 'id04',
-                        'file_name' => '1.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:01'
-                    ]),
-                    new Photo([
-                        'id' => 'id05',
-                        'file_name' => '1.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:02'
-                    ]),
-                ]),
-            ],
-            '重複レコード２つ２件' => [
-                'prepare' => [
-                    'getAllPhotos' => [
-                        'return' => new Collection([
-                            new Photo([
-                                'id' => 'id01',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id02',
-                                'file_name' => '2.fake2.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id03',
-                                'file_name' => '3.fake3.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id04',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:01'
-                            ]),
-                            new Photo([
-                                'id' => 'id05',
-                                'file_name' => '3.fake3.jpeg',
-                                'created_at' => '2021-01-02 00:00:01'
-                            ]),
-                        ]),
-                    ],
-                ],
-                'expect' => new Collection([
-                    new Photo([
-                        'id' => 'id01',
-                        'file_name' => '1.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:00'
-                    ]),
-                    new Photo([
-                        'id' => 'id03',
-                        'file_name' => '3.fake3.jpeg',
-                        'created_at' => '2021-01-01 00:00:00'
-                    ]),
-                ]),
-            ],
-            '重複レコード２つ３件' => [
-                'prepare' => [
-                    'getAllPhotos' => [
-                        'return' => new Collection([
-                            new Photo([
-                                'id' => 'id01',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:03'
-                            ]),
-                            new Photo([
-                                'id' => 'id02',
-                                'file_name' => '2.fake2.jpeg',
-                                'created_at' => '2021-01-05 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id03',
-                                'file_name' => '3.fake3.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id04',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:01'
-                            ]),
-                            new Photo([
-                                'id' => 'id05',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:02'
-                            ]),
-                            new Photo([
-                                'id' => 'id06',
-                                'file_name' => '2.fake2.jpeg',
-                                'created_at' => '2021-01-04 00:00:01'
-                            ]),
-                            new Photo([
-                                'id' => 'id07',
-                                'file_name' => '2.fake2.jpeg',
-                                'created_at' => '2021-01-02 00:00:02'
-                            ]),
-                        ]),
-                    ],
-                ],
-                'expect' => new Collection([
-                    new Photo([
-                        'id' => 'id04',
-                        'file_name' => '1.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:01'
-                    ]),
-                    new Photo([
-                        'id' => 'id05',
-                        'file_name' => '1.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:02'
-                    ]),
-                    new Photo([
-                        'id' => 'id06',
-                        'file_name' => '2.fake2.jpeg',
-                        'created_at' => '2021-01-04 00:00:01'
-                    ]),
-                    new Photo([
-                        'id' => 'id07',
-                        'file_name' => '2.fake2.jpeg',
-                        'created_at' => '2021-01-02 00:00:02'
-                    ]),
-                ]),
-            ],
-            'コレクションが空' => [
-                'prepare' => [
-                    'getAllPhotos' => [
-                        'return' => new Collection([
-                            new Photo([
-                                'id' => 'id01',
-                                'file_name' => '1.fake1.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id02',
-                                'file_name' => '2.fake2.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                            new Photo([
-                                'id' => 'id03',
-                                'file_name' => '3.fake3.jpeg',
-                                'created_at' => '2021-01-01 00:00:00'
-                            ]),
-                        ]),
-                    ],
-                    'error' => 'There is no duplicate file in the database.'
-                ],
-                'expect' => null,
-            ]
+//            '重複レコード１つ３件' => [
+//                'prepare' => [
+//                    'getAllPhotos' => [
+//                        'return' => new Collection([
+//                            new Photo([
+//                                'id' => 'id01',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:03'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id02',
+//                                'file_name' => '2.fake2.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id03',
+//                                'file_name' => '3.fake3.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id04',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:01'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id05',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:02'
+//                            ]),
+//                        ]),
+//                    ],
+//                ],
+//                'expect' => new Collection([
+//                    new Photo([
+//                        'id' => 'id04',
+//                        'file_name' => '1.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:01'
+//                    ]),
+//                    new Photo([
+//                        'id' => 'id05',
+//                        'file_name' => '1.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:02'
+//                    ]),
+//                ]),
+//            ],
+//            '重複レコード２つ２件' => [
+//                'prepare' => [
+//                    'getAllPhotos' => [
+//                        'return' => new Collection([
+//                            new Photo([
+//                                'id' => 'id01',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id02',
+//                                'file_name' => '2.fake2.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id03',
+//                                'file_name' => '3.fake3.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id04',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:01'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id05',
+//                                'file_name' => '3.fake3.jpeg',
+//                                'created_at' => '2021-01-02 00:00:01'
+//                            ]),
+//                        ]),
+//                    ],
+//                ],
+//                'expect' => new Collection([
+//                    new Photo([
+//                        'id' => 'id01',
+//                        'file_name' => '1.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:00'
+//                    ]),
+//                    new Photo([
+//                        'id' => 'id03',
+//                        'file_name' => '3.fake3.jpeg',
+//                        'created_at' => '2021-01-01 00:00:00'
+//                    ]),
+//                ]),
+//            ],
+//            '重複レコード２つ３件' => [
+//                'prepare' => [
+//                    'getAllPhotos' => [
+//                        'return' => new Collection([
+//                            new Photo([
+//                                'id' => 'id01',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:03'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id02',
+//                                'file_name' => '2.fake2.jpeg',
+//                                'created_at' => '2021-01-05 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id03',
+//                                'file_name' => '3.fake3.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id04',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:01'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id05',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:02'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id06',
+//                                'file_name' => '2.fake2.jpeg',
+//                                'created_at' => '2021-01-04 00:00:01'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id07',
+//                                'file_name' => '2.fake2.jpeg',
+//                                'created_at' => '2021-01-02 00:00:02'
+//                            ]),
+//                        ]),
+//                    ],
+//                ],
+//                'expect' => new Collection([
+//                    new Photo([
+//                        'id' => 'id04',
+//                        'file_name' => '1.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:01'
+//                    ]),
+//                    new Photo([
+//                        'id' => 'id05',
+//                        'file_name' => '1.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:02'
+//                    ]),
+//                    new Photo([
+//                        'id' => 'id06',
+//                        'file_name' => '2.fake2.jpeg',
+//                        'created_at' => '2021-01-04 00:00:01'
+//                    ]),
+//                    new Photo([
+//                        'id' => 'id07',
+//                        'file_name' => '2.fake2.jpeg',
+//                        'created_at' => '2021-01-02 00:00:02'
+//                    ]),
+//                ]),
+//            ],
+//            'コレクションが空' => [
+//                'prepare' => [
+//                    'getAllPhotos' => [
+//                        'return' => new Collection([
+//                            new Photo([
+//                                'id' => 'id01',
+//                                'file_name' => '1.fake1.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id02',
+//                                'file_name' => '2.fake2.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                            new Photo([
+//                                'id' => 'id03',
+//                                'file_name' => '3.fake3.jpeg',
+//                                'created_at' => '2021-01-01 00:00:00'
+//                            ]),
+//                        ]),
+//                    ],
+//                    'error' => 'There is no duplicate file in the database.'
+//                ],
+//                'expect' => null,
+//            ]
         ];
     }
 
@@ -700,157 +700,157 @@ class PhotoServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider providerSearchDuplicatePhoto
-     * @param $prepare
-     * @param $expect
-     */
-    public function searchDuplicatePhoto($prepare, $expect)
-    {
-        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
-
-        if (isset($prepare['error'])) {
-            $this->expectException(\Error::class);
-            $this->expectExceptionMessage($prepare['error']);
-        }
-
-        $actual = $this->photoService->searchDuplicatePhoto($prepare['fileList'], $prepare['fileName']);
-
-        $this->assertEquals($expect, $actual);
-    }
-
-    public function providerSearchDuplicatePhoto(): array
-    {
-        return [
-            '重複レコード１つ２件' => [
-                'prepare' => [
-                    'fileList' => new Collection([
-                        new Photo([
-                            'id' => 'id01',
-                            'file_name' => 'id01.fake1.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id02',
-                            'file_name' => 'id02.fake2.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id03',
-                            'file_name' => 'id03.fake3.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id04',
-                            'file_name' => 'id04.fake1.jpeg',
-                            'created_at' => '2021-01-01 00:00:00'
-                        ])
-                    ]),
-                    'fileName' => 'fake1.jpeg'
-                ],
-                'expect' => new Collection([
-                    1 => new Photo([
-                        'id' => 'id04',
-                        'file_name' => 'id04.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:00'
-                    ])
-                ])
-            ],
-            '重複レコード１つ３件' => [
-                'prepare' => [
-                    'fileList' => new Collection([
-                        new Photo([
-                            'id' => 'id01',
-                            'file_name' => 'id01.fake1.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id02',
-                            'file_name' => 'id02.fake2.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id03',
-                            'file_name' => 'id03.fake3.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id04',
-                            'file_name' => 'id04.fake1.jpeg',
-                            'created_at' => '2021-01-01 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id05',
-                            'file_name' => 'id05.fake1.jpeg',
-                            'created_at' => '2020-12-31 00:00:00'
-                        ])
-                    ]),
-                    'fileName' => 'fake1.jpeg'
-                ],
-                'expect' => new Collection([
-                    1 => new Photo([
-                        'id' => 'id04',
-                        'file_name' => 'id04.fake1.jpeg',
-                        'created_at' => '2021-01-01 00:00:00'
-                    ]),
-                    2 => new Photo([
-                        'id' => 'id05',
-                        'file_name' => 'id05.fake1.jpeg',
-                        'created_at' => '2020-12-31 00:00:00'
-                    ])
-                ])
-            ],
-            'コレクション内１件のみ' => [
-                'prepare' => [
-                    'fileList' => new Collection([
-                        new Photo([
-                            'id' => 'id01',
-                            'file_name' => 'id01.fake1.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id02',
-                            'file_name' => 'id02.fake2.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id03',
-                            'file_name' => 'id03.fake3.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                    ]),
-                    'fileName' => 'fake1.jpeg',
-                    'error' => 'There is no duplicate file in the database.',
-                ],
-                'expect' => null,
-            ],
-            'コレクションが空' => [
-                'prepare' => [
-                    'fileList' => new Collection([
-                        new Photo([
-                            'id' => 'id01',
-                            'file_name' => 'id01.fake1.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id02',
-                            'file_name' => 'id02.fake2.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                        new Photo([
-                            'id' => 'id03',
-                            'file_name' => 'id03.fake3.jpeg',
-                            'created_at' => '2021-01-02 00:00:00'
-                        ]),
-                    ]),
-                    'fileName' => 'fake5.jpeg',
-                    'error' => 'There is no duplicate file in the database.',
-                ],
-                'expect' => null,
-            ],
-        ];
-    }
+//    /**
+//     * @test
+//     * @dataProvider providerSearchDuplicatePhoto
+//     * @param $prepare
+//     * @param $expect
+//     */
+//    public function searchDuplicatePhoto($prepare, $expect)
+//    {
+//        $this->photoService = Mockery::mock(PhotoService::class, [$this->photo])->makePartial();
+//
+//        if (isset($prepare['error'])) {
+//            $this->expectException(\Error::class);
+//            $this->expectExceptionMessage($prepare['error']);
+//        }
+//
+//        $actual = $this->photoService->searchDuplicatePhoto($prepare['fileList'], $prepare['fileName']);
+//
+//        $this->assertEquals($expect, $actual);
+//    }
+//
+//    public function providerSearchDuplicatePhoto(): array
+//    {
+//        return [
+//            '重複レコード１つ２件' => [
+//                'prepare' => [
+//                    'fileList' => new Collection([
+//                        new Photo([
+//                            'id' => 'id01',
+//                            'file_name' => 'id01.fake1.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id02',
+//                            'file_name' => 'id02.fake2.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id03',
+//                            'file_name' => 'id03.fake3.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id04',
+//                            'file_name' => 'id04.fake1.jpeg',
+//                            'created_at' => '2021-01-01 00:00:00'
+//                        ])
+//                    ]),
+//                    'fileName' => 'fake1.jpeg'
+//                ],
+//                'expect' => new Collection([
+//                    1 => new Photo([
+//                        'id' => 'id04',
+//                        'file_name' => 'id04.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:00'
+//                    ])
+//                ])
+//            ],
+//            '重複レコード１つ３件' => [
+//                'prepare' => [
+//                    'fileList' => new Collection([
+//                        new Photo([
+//                            'id' => 'id01',
+//                            'file_name' => 'id01.fake1.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id02',
+//                            'file_name' => 'id02.fake2.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id03',
+//                            'file_name' => 'id03.fake3.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id04',
+//                            'file_name' => 'id04.fake1.jpeg',
+//                            'created_at' => '2021-01-01 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id05',
+//                            'file_name' => 'id05.fake1.jpeg',
+//                            'created_at' => '2020-12-31 00:00:00'
+//                        ])
+//                    ]),
+//                    'fileName' => 'fake1.jpeg'
+//                ],
+//                'expect' => new Collection([
+//                    1 => new Photo([
+//                        'id' => 'id04',
+//                        'file_name' => 'id04.fake1.jpeg',
+//                        'created_at' => '2021-01-01 00:00:00'
+//                    ]),
+//                    2 => new Photo([
+//                        'id' => 'id05',
+//                        'file_name' => 'id05.fake1.jpeg',
+//                        'created_at' => '2020-12-31 00:00:00'
+//                    ])
+//                ])
+//            ],
+//            'コレクション内１件のみ' => [
+//                'prepare' => [
+//                    'fileList' => new Collection([
+//                        new Photo([
+//                            'id' => 'id01',
+//                            'file_name' => 'id01.fake1.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id02',
+//                            'file_name' => 'id02.fake2.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id03',
+//                            'file_name' => 'id03.fake3.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                    ]),
+//                    'fileName' => 'fake1.jpeg',
+//                    'error' => 'There is no duplicate file in the database.',
+//                ],
+//                'expect' => null,
+//            ],
+//            'コレクションが空' => [
+//                'prepare' => [
+//                    'fileList' => new Collection([
+//                        new Photo([
+//                            'id' => 'id01',
+//                            'file_name' => 'id01.fake1.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id02',
+//                            'file_name' => 'id02.fake2.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                        new Photo([
+//                            'id' => 'id03',
+//                            'file_name' => 'id03.fake3.jpeg',
+//                            'created_at' => '2021-01-02 00:00:00'
+//                        ]),
+//                    ]),
+//                    'fileName' => 'fake5.jpeg',
+//                    'error' => 'There is no duplicate file in the database.',
+//                ],
+//                'expect' => null,
+//            ],
+//        ];
+//    }
 
 
 }
