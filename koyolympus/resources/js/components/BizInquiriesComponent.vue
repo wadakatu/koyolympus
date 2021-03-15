@@ -147,7 +147,7 @@ export default {
 
 .params_textarea {
     resize: none;
-    height: 15vh;
+    height: 22vh;
 }
 
 .params_name {

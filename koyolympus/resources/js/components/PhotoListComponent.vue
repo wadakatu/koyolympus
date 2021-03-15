@@ -63,17 +63,11 @@ export default {
     watch: {
         $route: {
             async handler() {
-                let self = this;
-                try {
-                    await self.fetchPhotos().catch(e => {
-                        throw 'getPhoto error' + e.message
-                    });
-                } catch (err) {
-                    self.$store.commit('error/setCode', err.status);
-                    return;
-                }
+                await this.fetchPhotos().catch(e => {
+                    throw 'getPhoto error' + e.message
+                });
 
-                self.noPhoto = self.photos.length === 0;
+                this.noPhoto = this.photos.length === 0;
             },
             immediate: true,
         }

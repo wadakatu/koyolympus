@@ -11,5 +11,6 @@ $factory->define(Photo::class, function (Faker $faker) {
         'file_name' => 'factory.jpeg',
         'file_path' => '/photo/factory',
         'genre' => 1,
+        'created_at' => $faker->dateTime
     ];
 });
