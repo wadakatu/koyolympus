@@ -19,7 +19,7 @@
                 </li>
                 <li>
                     <a href="https://github.com/wadakatu/koyolympus"><img src="/images/github.png" alt="github"></a>
-                    <a href="https://github.com/wadakatu/koyolympus"><p>github</p></a>
+                    <a href="https://github.com/wadakatu/koyolympus"><p>GitHub</p></a>
                 </li>
                 <li>
                     <a href="https://koyolympus.thebase.in/"><img src="/images/photo.png" alt="purchase"></a>
