@@ -57,6 +57,13 @@ class Photo extends Model
             ->orderBy('created_at', 'desc')->paginate();
     }
 
+    public function getAllPhotoRandomly()
+    {
+        $query = Photo::query();
+
+        return $query->inRandomOrder()->get();
+    }
+
     public function createPhotoInfo(string $fileName, string $filePath, int $genre): string
     {
         $photo = new Photo();

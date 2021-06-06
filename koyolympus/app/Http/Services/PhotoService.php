@@ -19,9 +19,19 @@ class PhotoService
         $this->photo = $photo;
     }
 
+    /**
+     * DBから写真のパスを全て取得
+     * @param int|null $genre
+     * @return LengthAwarePaginator
+     */
     public function getAllPhoto(?int $genre): LengthAwarePaginator
     {
         return $this->photo->getAllPhoto($genre);
+    }
+
+    public function getAllPhotoRandomly(): Collection
+    {
+        return $this->photo->getAllPhotoRandomly();
     }
 
     public function uploadPhotoToS3(UploadedFile $file, string $fileName, int $genre): string
