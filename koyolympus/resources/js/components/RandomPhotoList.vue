@@ -13,11 +13,11 @@ import {OK} from '../util';
 import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 
-const loadimage = require('/public/images/1496.gif')
+const loadimage = require('/public/images/Spin-0.7s-154px.png')
 const errorimage = require('/public/images/20200501_noimage.png')
 
 Vue.use(VueLazyload, {
-    preLoad: 1.3,
+    preLoad: 1.1,
     loading: loadimage,
     error: errorimage,
     attempt: 1
@@ -76,7 +76,6 @@ export default {
     text-align: center;
     height: 50vh;
     margin-bottom: 5vh;
-    background-attachment: fixed;
 }
 
 h2 {
@@ -88,7 +87,7 @@ h2 {
 }
 
 img {
-    width: 9vw;
+    width: 10vw;
     height: 15vh;
     object-fit: cover;
     cursor: zoom-in;
@@ -97,7 +96,6 @@ img {
 
 .images {
     display: inline-block;
-    background-attachment: fixed;
 }
 
 @media screen and (max-width: 1350px) {
