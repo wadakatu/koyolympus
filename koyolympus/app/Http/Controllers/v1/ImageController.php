@@ -40,6 +40,10 @@ class ImageController extends Controller
         return $this->photoService->getAllPhoto($genre);
     }
 
+    /**
+     * S3内の写真のパスをランダムに全て取得する。
+     * @return Collection
+     */
     public function getRandomPhoto(): Collection
     {
         return $this->photoService->getAllPhotoRandomly();

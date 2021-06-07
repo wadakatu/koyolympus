@@ -64,6 +64,20 @@ class PhotoServiceTest extends TestCase
     /**
      * @test
      */
+    public function getAllPhotoRandomly()
+    {
+        $this->photo
+            ->shouldReceive('getAllPhotoRandomly')
+            ->once()
+            ->withNoArgs()
+            ->andReturn(Collect([]));
+
+        $this->photoService->getAllPhotoRandomly();
+    }
+
+    /**
+     * @test
+     */
     public function uploadPhotoToS3()
     {
         Storage::fake('s3');

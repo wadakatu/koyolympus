@@ -54,6 +54,20 @@ class ImageControllerTest extends TestCase
 
     /**
      * @test
+     */
+    public function getRandomPhoto()
+    {
+        $this->photoService
+            ->shouldReceive('getAllPhotoRandomly')
+            ->once()
+            ->withNoArgs()
+            ->andReturn(Collect([]));
+
+        $this->imageController->getRandomPhoto();
+    }
+
+    /**
+     * @test
      * @dataProvider providerDownloadPhoto
      * @param $path
      * @param $expectedStatus

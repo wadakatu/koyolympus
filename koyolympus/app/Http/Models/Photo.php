@@ -57,7 +57,7 @@ class Photo extends Model
             ->orderBy('created_at', 'desc')->paginate();
     }
 
-    public function getAllPhotoRandomly()
+    public function getAllPhotoRandomly(): Collection
     {
         $query = Photo::query();
 

@@ -29,11 +29,22 @@ class PhotoService
         return $this->photo->getAllPhoto($genre);
     }
 
+    /**
+     * DBから写真のパスをランダムで全て取得
+     * @return Collection
+     */
     public function getAllPhotoRandomly(): Collection
     {
         return $this->photo->getAllPhotoRandomly();
     }
 
+    /**
+     * 写真をS3バケットにアップロード
+     * @param UploadedFile $file
+     * @param string $fileName
+     * @param int $genre
+     * @return string
+     */
     public function uploadPhotoToS3(UploadedFile $file, string $fileName, int $genre): string
     {
         //保存するS3のファイルパスを取得
@@ -46,6 +57,11 @@ class PhotoService
         return $uniqueFileName;
     }
 
+    /**
+     * S3から写真のデータを削除
+     * @param string $fileName
+     * @param int $genre
+     */
     public function deletePhotoFromS3(string $fileName, int $genre): void
     {
         //ジャンルからファイルパスを取得
@@ -56,6 +72,10 @@ class PhotoService
         Storage::disk('s3')->delete($filePath . '/' . $fileName);
     }
 
+    /**
+     * DB内に重複している写真があれば、DBとS3から削除
+     * @return Collection
+     */
     public function deleteMultiplePhotosIfDuplicate(): Collection
     {
         //重複しているファイル一覧を取得
@@ -70,6 +90,10 @@ class PhotoService
         return $duplicatePhotoList;
     }
 
+    /**
+     * 写真一覧から重複している写真データを探索
+     * @return Collection
+     */
     public function searchMultipleDuplicatePhotos(): Collection
     {
         //写真一覧レコードを取得
@@ -107,6 +131,10 @@ class PhotoService
         return $photoList->values();
     }
 
+    /**
+     * @param string $fileName
+     * @return array
+     */
     public function deletePhotoIfDuplicate(string $fileName): array
     {
         //入力されたファイル名と一致する重複レコードを取得

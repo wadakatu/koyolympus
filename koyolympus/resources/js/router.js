@@ -111,6 +111,7 @@ const router = new VueRouter({
         {
             path: '/photo/random',
             component: () => import('./components/RandomPhotoList'),
+            name: 'photo.random',
         },
         {
             path: '/photo/landscape',
