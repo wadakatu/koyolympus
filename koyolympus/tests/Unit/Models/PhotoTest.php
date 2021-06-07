@@ -192,6 +192,6 @@ class PhotoTest extends TestCase
         $result1 = $this->photo->getAllPhotoRandomly();
         $result2 = $this->photo->getAllPhotoRandomly();
 
-        $this->assertNotEquals($result1, $result2);
+        $this->assertNotSame($result1, $result2);
     }
 }
