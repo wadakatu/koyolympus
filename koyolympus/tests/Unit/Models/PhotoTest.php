@@ -99,32 +99,32 @@ class PhotoTest extends TestCase
         $this->assertSame(3, count($recordsOfGenre3->items()));
     }
 
-    /**
-     * @test
-     */
-    public function getAllPhotoRandomly()
-    {
-        factory(Photo::class)->create([
-            'file_name' => 'test_1'
-        ]);
-        factory(Photo::class)->create([
-            'file_name' => 'test_2'
-        ]);
-        factory(Photo::class)->create([
-            'file_name' => 'test_3'
-        ]);
-        factory(Photo::class)->create([
-            'file_name' => 'test_4'
-        ]);
-        factory(Photo::class)->create([
-            'file_name' => 'test_5'
-        ]);
-
-        $result1 = $this->photo->getAllPhotoRandomly();
-        $result2 = $this->photo->getAllPhotoRandomly();
-
-        $this->assertNotSame($result1->toArray(), $result2->toArray());
-    }
+//    /**
+//     * @test
+//     */
+//    public function getAllPhotoRandomly()
+//    {
+//        factory(Photo::class)->create([
+//            'file_name' => 'test_1'
+//        ]);
+//        factory(Photo::class)->create([
+//            'file_name' => 'test_2'
+//        ]);
+//        factory(Photo::class)->create([
+//            'file_name' => 'test_3'
+//        ]);
+//        factory(Photo::class)->create([
+//            'file_name' => 'test_4'
+//        ]);
+//        factory(Photo::class)->create([
+//            'file_name' => 'test_5'
+//        ]);
+//
+//        $result1 = $this->photo->getAllPhotoRandomly();
+//        $result2 = $this->photo->getAllPhotoRandomly();
+//
+//        $this->assertNotSame($result1->toArray(), $result2->toArray());
+//    }
 
     /**
      * @test
